@@ -1,0 +1,749 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Carbon\Carbon;
+use ECUApp\SharedCode\Controllers\AlientechMainController;
+use ECUApp\SharedCode\Controllers\FilesMainController;
+use ECUApp\SharedCode\Controllers\NotificationsMainController;
+use ECUApp\SharedCode\Controllers\PaymentsMainController;
+use ECUApp\SharedCode\Models\AlientechFile;
+use ECUApp\SharedCode\Models\Combination;
+use ECUApp\SharedCode\Models\Comment;
+use ECUApp\SharedCode\Models\Credit;
+use ECUApp\SharedCode\Models\EmailReminder;
+use ECUApp\SharedCode\Models\EngineerFileNote;
+use ECUApp\SharedCode\Models\File;
+use ECUApp\SharedCode\Models\FileFeedback;
+use ECUApp\SharedCode\Models\FileService;
+use ECUApp\SharedCode\Models\FileUrl;
+use ECUApp\SharedCode\Models\Log;
+use ECUApp\SharedCode\Models\Price;
+use ECUApp\SharedCode\Models\ProcessedFile;
+use ECUApp\SharedCode\Models\RequestFile;
+use ECUApp\SharedCode\Models\Service;
+use ECUApp\SharedCode\Models\StagesOptionsCredit;
+use ECUApp\SharedCode\Models\TemporaryFile;
+use ECUApp\SharedCode\Models\Tool;
+use ECUApp\SharedCode\Models\User;
+use ECUApp\SharedCode\Models\Vehicle;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Pusher\Pusher;
+
+class FileController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    private $pusher;
+    private $filesMainObj;
+    private $paymentMainObj;
+    private $notificationsMainObj;
+    private $frontendID;
+    private $alientechMainObj;
+
+    public function __construct(){
+
+        $this->frontendID = 1;
+
+        $this->middleware('auth', [ 'except' => [ 'feedbackLink' ] ]);
+        $this->filesMainObj = new FilesMainController();
+        $this->paymentMainObj = new PaymentsMainController();
+        $this->notificationsMainObj = new NotificationsMainController();
+        $this->alientechMainObj = new AlientechMainController();
+
+        $this->pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER', 'mt1'),
+                'host' => env('PUSHER_HOST') ?: 'api-'.env('PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
+                'port' => env('PUSHER_PORT', 443),
+                'scheme' => env('PUSHER_SCHEME', 'https'),
+                'encrypted' => true,
+                'useTLS' => env('PUSHER_SCHEME', 'https') === 'https',
+            ],
+        );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
+    public function fileURL(Request $request)
+    {
+
+        $validated = $request->validate([
+            'file_url' => 'required'
+        ]);
+
+        $file = File::findOrFail($request->file_id);
+        $message = new FileUrl();
+        $message->file_url = $request->file_url;
+       
+        if($request->file('file_url_attachment')){
+            $attachment = $request->file('file_url_attachment');
+            $fileName = $attachment->getClientOriginalName();
+            $attachment->move(public_path($file->file_path),$fileName);
+            $message->file_url_attachment = $fileName;
+        }
+
+        $message->file_id = $request->file_id;
+        $message->save();
+        return redirect()->back()->with('success', 'Personal Note successfully Added!');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function addCustomerNote(Request $request)
+    {
+        $file = File::findOrFail($request->id);
+        $file->name = $request->name;
+        $file->phone = $request->phone;
+        $file->email = $request->email;
+        $file->customer_internal_notes = $request->customer_internal_notes;
+        $file->save();
+        return redirect()->back()->with('success', 'File successfully Edited!');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function fileEngineersNotes(Request $request)
+    {
+        $validated = $request->validate([
+            'egnineers_internal_notes' => 'required|max:1024'
+        ]);
+
+        $file = File::findOrFail($request->file_id);
+
+        $noteItSelf = $request->egnineers_internal_notes;
+
+        $reply = new EngineerFileNote();
+        $reply->egnineers_internal_notes = $request->egnineers_internal_notes;
+
+        if($request->file('engineers_attachement')){
+            $attachment = $request->file('engineers_attachement');
+            $fileName = $attachment->getClientOriginalName();
+            $attachment->move(public_path($file->file_path),$fileName);
+            $reply->engineers_attachement = $fileName;
+        }
+
+        $reply->file_id = $request->file_id;
+        $reply->request_file_id = $request->request_file_id;
+        $reply->sent_by = 'engineer';
+        $reply->save();
+
+        $file->support_status = "open";
+        $file->save();
+
+        $engPermissions = array(
+            0 => 'msg_cus_eng_email',
+            1 => 'msg_cus_eng_sms',
+            2 => 'msg_cus_eng_whatsapp'
+        );
+
+        $uploader = User::findOrFail($file->user_id);
+        $engineer = User::FindOrFail($file->assigned_to);
+        $subject = "ECUTech: Client support message!";
+        $this->notificationsMainObj->sendNotification($engineer, $file, $uploader, $this->frontendID, $subject, 'mess-to-eng', 'message_to_engineer', $engPermissions);
+
+        $adminPermissions = array(
+            0 => 'msg_cus_admin_email',
+            1 => 'msg_cus_admin_sms',
+            2 => 'msg_cus_admin_whatsapp'
+        );
+
+        $uploader = User::findOrFail($file->user_id);
+        $admin = get_admin();
+        $subject = "ECUTech: Client support message!";
+        $this->notificationsMainObj->sendNotification($admin, $file, $uploader, $this->frontendID, $subject, 'mess-to-eng', 'message_to_engineer', $adminPermissions);
+
+        return redirect()->back()->with('success', 'Engineer note successfully Added!');
+    }
+
+    public function rejectOffer(Request $request) {
+
+        $fileID = $request->file_id;
+        $file = File::findOrFail($fileID);
+        $user = Auth::user();
+
+        $this->filesMainObj->rejectOffer($file, $user);
+
+        $customerPermission = array(
+            0 => 'status_change_cus_email',
+            1 => 'status_change_cus_sms',
+            2 => 'status_change_cus_whatsapp'
+        );
+
+        $customer = Auth::user();
+        $subject = "ECUTech: File Status Changed!";
+        $this->notificationsMainObj->sendNotification($customer, $file, $customer, $this->frontendID, $subject, 'sta-cha', 'status_change', $customerPermission);
+
+        $adminPermission = array(
+            0 => 'status_change_admin_email',
+            1 => 'status_change_cus_sms',
+            2 => 'status_change_cus_whatsapp'
+        );
+
+        $admin = get_admin();
+        $customer = Auth::user();
+        $subject = "ECUTech: File Status Changed!";
+        $this->notificationsMainObj->sendNotification($admin, $file, $customer, $this->frontendID, $subject, 'sta-cha', 'status_change', $adminPermission);
+
+    }   
+
+    public function payCreditsOffer($id) {
+
+        $file = File::findOrfail($id);
+ 
+        $proposedCredits = $this->filesMainObj->getOfferedCredits($file);
+        $differece = $proposedCredits - $file->credits;
+        
+        $price = Price::where('label', 'credit_price')->first();
+ 
+        $user = Auth::user();
+ 
+        $factor = 0;
+        $tax = 0;
+ 
+        if($user->group){
+            if($user->group->tax > 0){
+                $tax = (float) $user->group->tax;
+            }
+
+            if($user->group->raise > 0){
+                $factor = (float)  ($user->group->raise / 100) * $price->value;
+            }
+
+            if($user->group->discount > 0){
+                $factor =  -1* (float) ($user->group->discount / 100) * $price->value;
+            }
+         }
+ 
+        return view( 'files.pay_credits_offer', [ 
+         'file_id' => $file->id, 
+         'file' => $file, 
+         'credits' => $differece, 
+         'price' => $price,
+         'factor' => $factor,
+         'tax' => $tax,
+         'group' =>  $user->group,
+         'user' =>  $user
+         ] );
+ 
+     }
+ 
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function fileFeedback(Request $request)
+    {
+        FileFeedback::where('request_file_id','=', $request->request_file_id)->delete();
+
+        $reminder = EmailReminder::where('file_id', $request->file_id)->where('request_file_id', $request->request_file_id)->where('user_id', Auth::user()->id)->first();
+       
+        if($reminder){
+            $reminder->delete();
+        }
+
+        $requestFile = new FileFeedback();
+        $requestFile->file_id = $request->file_id;
+        $requestFile->request_file_id = $request->request_file_id;
+        $requestFile->type = $request->type;
+        $requestFile->save();
+
+        return response()->json($requestFile);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function createNewrequest(Request $request)
+    {
+        $rules = $this->filesMainObj->getNewReqValidationRules();
+        $request->validate($rules);
+        $data = $request->all();
+        $file = $request->file('request_file');
+
+        return $this->filesMainObj->createNewRequest($data, $file);
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function EditMilage(Request $request)
+    {
+        
+        $file = File::findOrFail($request->id);
+        $file->vin_number = $request->vin_number;
+        $file->license_plate = $request->license_plate;
+        $file->first_registration = $request->first_registration;
+        $file->kilometrage = $request->kilometrage;
+        $file->vehicle_internal_notes = $request->vehicle_internal_notes;
+        $file->save();
+        return redirect()->back()->with('success', 'File successfully Edited!');
+
+    }
+
+    public function download($id,$fileName) {
+        
+        $file = File::findOrFail($id); 
+
+        $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
+        
+        if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
+
+            if($file->original_file_id == NULL){
+
+            $engFile = RequestFile::where('request_file', $fileName)->where('file_id', $file->id)->first();
+
+            if($engFile && $engFile->uploaded_successfully){
+
+            $notProcessedAlientechFile = AlientechFile::where('file_id', $file->id)
+            ->where('purpose', 'decoded')
+            ->where('type', 'download')
+            ->where('processed', 0)
+            ->first();
+
+            if($notProcessedAlientechFile){
+               
+                $fileNameEncoded = $this->alientechMainObj->downloadEncodedFile($id, $notProcessedAlientechFile, $fileName);
+                $notProcessedAlientechFile->processed = 1;
+                $notProcessedAlientechFile->save();
+                
+                $file_path = public_path($file->file_path).$fileNameEncoded;
+                return response()->download($file_path);
+            }
+            else{
+                $encodedFileNameToBe = $fileName.'_encoded_api';
+                $processedFile = ProcessedFile::where('name', $encodedFileNameToBe)->first();
+
+                if($processedFile){
+                    $finalFileName = $processedFile->name;
+                
+                }else{
+                    $finalFileName = $fileName;
+                }
+
+                $file_path = public_path($file->file_path).$finalFileName;
+                return response()->download($file_path);
+
+            }
+        }
+        else{
+            $file_path = public_path($file->file_path).$fileName;
+            return response()->download($file_path);
+        }
+    }
+
+    else{
+        $file_path = public_path($file->file_path).$fileName;
+        return response()->download($file_path);
+    }
+
+        }
+        else{
+            $file_path = public_path($file->file_path).$fileName;
+            return response()->download($file_path);
+        }
+    }
+
+    public function autoDownload(Request $request){
+
+        $file = File::findOrFail($request->id);
+        $user = Auth::user();
+
+        return view('files.auto_download', [ 'user' => $user, 'file' => $file ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showFile($id)
+    {
+        $user = Auth::user();
+        $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
+
+        $file = $this->filesMainObj->getFile($id, $user);
+        $vehicle = $this->filesMainObj->getVehicle($file);
+        
+        $slaveTools =  $user->tools_slave;
+        $masterTools =  $user->tools_master;
+
+        $comments = $this->filesMainObj->getCommentsOnFileShowing($file);
+
+        $selectedOptions = $this->filesMainObj->getSelectedOptions($file);
+
+        $showComments = $this->filesMainObj->getShowComments($selectedOptions, $comments);
+        
+        return view('files.show_file', ['user' => $user, 'showComments' => $showComments, 'comments' => $comments,'kess3Label' => $kess3Label,  'file' => $file, 'masterTools' => $masterTools,  'slaveTools' => $slaveTools, 'vehicle' => $vehicle ]);
+    }
+
+    public function addOfferToFile(Request $request) {
+
+        $fileID = $request->file_id;
+        $creditsToBuy = $request->credits;
+
+        $user = Auth::user();
+
+        $file = $this->filesMainObj->acceptOfferFinalise($user, $fileID, $creditsToBuy, $this->frontendID);
+
+        $customerPermission = array(
+            0 => 'status_change_cus_email',
+            1 => 'status_change_cus_sms',
+            2 => 'status_change_cus_whatsapp',
+        );
+
+        $customer = Auth::user();
+        $subject = "ECUTech: File Status Changed!";
+        $this->notificationsMainObj->sendNotification($customer, $file, $customer, $this->frontendID, $subject, 'sta-cha', 'status_change', $customerPermission);
+
+        $adminPermission = array(
+            0 => 'status_change_admin_email',
+            1 => 'status_change_cus_sms',
+            2 => 'status_change_cus_whatsapp',
+        );
+
+        $admin = get_admin();
+        $customer = Auth::user();
+        $subject = "ECUTech: File Status Changed!";
+        $this->notificationsMainObj->sendNotification($admin, $file, $customer, $this->frontendID, $subject, 'sta-cha', 'status_change', $adminPermission);
+
+        if($file->original_file_id){
+            return redirect(route('file', $file->original_file_id))->with(['success' => 'Engineer offer accepted!']);
+        }
+
+        else{
+            return redirect(route('file', $fileID))->with(['success' => 'Engineer offer accepted!']);
+        }
+    
+    }
+
+    public function saveFile(Request $request) {
+
+        $tempFileID = $request->file_id;
+        $credits = $request->credits;
+        
+        $user = Auth::user();
+        $file = $this->filesMainObj->saveFile($user, $tempFileID, $credits);
+
+        $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
+        if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
+            
+            $alientechFileFlag = AlientechFile::where('temporary_file_id', $tempFileID)->update( ['file_id' => $file->id, 'temporary_file_id' => 0 ]);
+
+            if( $alientechFileFlag ){
+                $alientechFile = AlientechFile::where('file_id', $file->id)->first();
+                $fileName = $this->alientechMainObj->process( $alientechFile->guid );
+                if($fileName){
+                    $file->checking_status = 'unchecked';
+                }
+            }
+        }
+
+        $headPermission = array(
+            0 => 'eng_assign_eng_email',
+            1 => 'eng_assign_eng_sms',
+            2 => 'eng_assign_eng_whatsapp',
+        );
+
+        $head = get_head();
+        $customer = User::findOrFail($file->user_id);
+        $subject = "ECUTech: File Uploaded!";
+        $this->notificationsMainObj->sendNotification($head, $file, $customer, $this->frontendID, $subject , 'file-up-cus', 'admin_assign', $headPermission);
+        
+        $adminPermission = array(
+            0 => 'file_upload_admin_email',
+            1 => 'file_upload_admin_sms',
+            2 => 'file_upload_admin_whatsapp',
+        );
+
+        $uploader = User::findOrFail($file->user_id);
+        $admin = get_admin();
+        $subject = "ECUTech: File Uploaded!";
+        $this->notificationsMainObj->sendNotification($admin, $file, $uploader, $this->frontendID, $subject, 'file-up-cus', 'fresh_file_upload', $adminPermission);
+
+        $count = File::where('checked_by', 'customer')->where('is_credited', 1)->count();
+
+        $this->pusher->trigger("private-chatify.".env('LIVE_CHAT_ID'), 'file-uploaded', [
+            'count' => $count
+        ]);
+
+        return redirect()->route('auto-download',['id' => $file->id]);
+        
+    }
+
+    public function postStages(Request $request) {
+
+        $stage = Service::FindOrFail($request->stage);
+        $stageName = $stage->name;
+
+        $rules = $this->filesMainObj->getStep3ValidationStage($stageName);
+
+        $request->validate($rules);
+        
+        $fileID = $request->file_id;
+        $DTCComments = $request->dtc_off_comments;
+        $vmaxComments = $request->vmax_off_comments;
+
+        $file = $this->filesMainObj->saveStagesInfo($fileID, $DTCComments, $vmaxComments);
+        
+        FileService::where('service_id', $stage->id)->where('temporary_file_id', $file->id)->delete();
+        
+        $servieCredits = 0;
+
+        $servieCredits += $this->filesMainObj->saveFileStages($file, $stage, $this->frontendID);
+
+        $options = $request->options;
+
+        $servieCredits += $this->filesMainObj->saveFileOptions($file, $stage, $options, $this->frontendID);
+
+        $price = $this->paymentMainObj->getPrice();
+
+        $user = Auth::user();
+
+        return view( 'files.pay_credits', [ 
+        'file' => $file, 
+        'credits' => $servieCredits, 
+        'price' => $price,
+        'factor' => 0,
+        'tax' => 0,
+        'group' =>  $user->group,
+        'user' =>  $user
+        ] );
+
+    }
+
+    public function termsAndConditions() {
+
+        $user = Auth::user();
+
+        return view('files.terms_and_conditions', ['user' => $user]);
+
+    }
+
+    public function norefundPolicy() {
+
+        $user = Auth::user();
+
+        return view('files.norefund_policy', ['user' => $user]);
+
+    }
+
+    public function getOptionsForStage(Request $request) {
+        
+
+        $stageID = $request->stage_id;
+        $optionsArray = $this->filesMainObj->getStagesAndOptions($stageID);
+
+        return json_encode($optionsArray);
+
+    }
+
+    public function getUploadComments(Request $request){
+        
+        $tempFileID = $request->file_id;
+        $serviceID = $request->service_id;
+
+        $comment = $this->filesMainObj->getStagePageComments($tempFileID, $serviceID);
+
+        return response()->json(['comment'=> $comment]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function step1(){
+
+        $user = Auth::user();
+
+        $masterTools = $this->filesMainObj->getMasterTools($user);
+        $slaveTools = $this->filesMainObj->getSlaveTools($user);
+
+        $brands = $this->filesMainObj->getBrands();
+
+        return view('files.step1', ['user' => $user, 'brands' => $brands,'masterTools' => $masterTools, 'slaveTools' => $slaveTools]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getModels(Request $request)
+    {
+        $brand = $request->brand;
+
+        $models = $this->filesMainObj->getModels($brand);
+        
+        return response()->json( [ 'models' => $models ] );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getVersions(Request $request)
+    {
+
+        $model = $request->model;
+        $brand = $request->brand;
+
+        $versions = $this->filesMainObj->getVersians($brand, $model);
+
+        return response()->json( [ 'versions' => $versions ] );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getEngines(Request $request)
+    {
+        $model = $request->model;
+        $brand = $request->brand;
+        $version = $request->version;
+
+        $engines = $this->filesMainObj->getEngines($brand, $model, $version);
+
+        return response()->json( [ 'engines' => $engines ] );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getECUs(Request $request)
+    {
+        $model = $request->model;
+        $brand = $request->brand;
+        $version = $request->version;
+        $engine = $request->engine;
+       
+        $ecusArray = $this->filesMainObj->getECUs($brand, $model, $version, $engine);
+        return response()->json( [ 'ecus' => $ecusArray ]);
+    }
+
+    public function getCombination(Request $request){
+
+        $serviceIDs = $request->service_ids;
+        
+        $combinationFound = $this->filesMainObj->getCombination($serviceIDs);
+
+        if($combinationFound){
+            return json_encode(['found' => true, 'combination' => $combinationFound]);
+        }
+        else{
+            return json_encode(['found' => false, 'combination' => $combinationFound]);
+        }   
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function step3(Request $request) {
+
+        $user = Auth::user();
+
+        $file = TemporaryFile::findOrFail($request->file_id);
+        $vehicle = $file->vehicle();
+        $vehicleType = $vehicle->type;
+
+        $stages = $this->filesMainObj->getStagesForStep3($this->frontendID, $vehicleType);
+        $options = $this->filesMainObj->getOptionsForStep3($this->frontendID, $vehicleType);
+
+        $firstStage = $stages[0];
+        
+        return view( 'files.set_stages', ['user' => $user, 'firstStage' => $firstStage, 'vehicleType' => $vehicleType,'file' => $file, 'stages' => $stages, 'options' => $options] );
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function step2(Request $request) {
+
+        $rules = $this->filesMainObj->getStep1ValidationTempfile();
+        $file = $request->validate($rules);
+
+        $data = $request->all();
+        
+        return $this->filesMainObj->addStep1InforIntoTempFile($data);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function createTempFile(Request $request) {
+
+        $user = Auth::user();
+        $file = $request->file('file');
+
+        $toolType = $request->tool_type_for_dropzone;
+        $toolID = $request->tool_for_dropzone;
+        
+        $tempFile = $this->filesMainObj->createTemporaryFile($user, $file, $toolType, $toolID, $this->frontendID);
+
+        $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
+
+        if($toolType == 'slave' && $tempFile->tool_id == $kess3Label->id){
+
+            $path = $this->filesMainObj->getPath($file);
+            $this->alientechMainObj->saveGUIDandSlotIDToDownloadLater($path , $tempFile->id);
+            
+        }
+
+        return response()->json(['tempFileID' => $tempFile->id]);
+
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function fileHistory()
+    {
+        $user = Auth::user();
+        $files = $this->filesMainObj->getFiles($user, $this->frontendID);
+
+        return view('files.file_history', [ 'files' => $files, 'user' => $user ]);
+    }
+}
