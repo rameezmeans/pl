@@ -79,9 +79,7 @@ class LoginController extends Controller
             // if (Auth::user()->subdealer_group_id == NULL && Auth::user()->is_admin() == false && Auth::user()->is_engineer() == false) {
             //     return $this->sendLoginResponse($request);
             // }
-
-            // dd(Auth::user());
-
+            
             if (Auth::user()->subdealer_group_id == NULL && (Auth::user()->front_end_id == 1 || Auth::user()->is_admin())  && Auth::user()->is_engineer() == false) {
                 
                 return $this->sendLoginResponse($request);
