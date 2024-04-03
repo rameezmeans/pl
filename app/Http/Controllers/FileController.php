@@ -119,20 +119,16 @@ class FileController extends Controller
                 'name' => $chatUser->name
             ]
         ]);
-        // check if user authenticated
-        if (Auth::check()) {
+        
+        return $this->pusher->socket_auth(
+            $request->channel_name,
+            $request->socket_id,
+            $authData
+        );
             
-                return $this->pusher->socket_auth(
-                    $request->channel_name,
-                    $request->socket_id,
-                    $authData
-                );
-            
-            // if not authorized
-            return response()->json(['message'=>'Unauthorized'], 401);
-        }
-        // if not authenticated
-        return response()->json(['message'=>'Not authenticated'], 403);
+        // if not authorized
+        return response()->json(['message'=>'Unauthorized'], 401);
+        
     }
 
     public function changeCheckingStatus(Request $request){
