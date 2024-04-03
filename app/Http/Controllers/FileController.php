@@ -110,7 +110,7 @@ class FileController extends Controller
 
     public function authPusher(Request $request){
 
-        $chatUser = User::findOrFail(env('CHAT_USER_ID'));
+        $chatUser = User::findOrFail(env('LIVE_CHAT_ID'));
 
         // Auth data
         $authData = json_encode([
