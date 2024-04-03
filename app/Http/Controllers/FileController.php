@@ -15,6 +15,7 @@ use ECUApp\SharedCode\Models\EmailReminder;
 use ECUApp\SharedCode\Models\EngineerFileNote;
 use ECUApp\SharedCode\Models\File;
 use ECUApp\SharedCode\Models\FileFeedback;
+use ECUApp\SharedCode\Models\FileInternalEvent;
 use ECUApp\SharedCode\Models\FileService;
 use ECUApp\SharedCode\Models\FileUrl;
 use ECUApp\SharedCode\Models\Log;
@@ -107,6 +108,32 @@ class FileController extends Controller
         return  response()->json( ['download_button' => $downloadButton] );
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function fileEventsNotes(Request $request)
+    {
+
+        $validated = $request->validate([
+            'events_internal_notes' => 'required|max:1024'
+        ]);
+
+        $file = new FileInternalEvent();
+        $file->events_internal_notes = $request->events_internal_notes;
+       
+        if($request->file('events_attachement')){
+            $attachment = $request->file('events_attachement');
+            $fileName = $attachment->getClientOriginalName();
+            $attachment->move( public_path($file->file_path) ,$fileName);
+            $file->events_attachement = $fileName;
+        }
+
+        $file->file_id = $request->file_id;
+        $file->save();
+        return redirect()->back()->with('success', 'Events note successfully Added!');
+    }
 
     public function authPusher(Request $request){
 
