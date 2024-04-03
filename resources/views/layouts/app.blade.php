@@ -261,7 +261,9 @@
 // Enable pusher logging - don't include this in production
 Pusher.logToConsole = true;
 
-var pusher = new Pusher("{{ config('chatify.pusher.key') }}", {
+var key = '{{env('PUSHER_APP_KEY')}}';
+
+var pusher = new Pusher(key, {
 encrypted: true,
 cluster: "ap2",
 authEndpoint: '{{route("pusher.auth")}}',
