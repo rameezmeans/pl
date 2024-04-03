@@ -72,6 +72,81 @@ class FileController extends Controller
         );
     }
 
+    public function getDownloadButton(Request $request){
+
+        $file = File::findOrFail($request->file_id);
+
+        if($file->no_longer_auto == 0){
+
+            $downloadButton = '<a class="btn" style="background: #f02429 !important;" href="'.route("download", [$file->id,$file->engineer_file->request_file]).'">
+            <i class="fa fa-download"></i> Download
+            </a>';
+        }
+        else{
+            
+            $downloadButton = "<p>Your file will be processed by our engineers, you will hear from them very soon.</p>";
+        }
+        
+        // $downloadButton = 
+        //         '
+        //         <p>Success, your file is ready for download.</p>
+        //         <button style="background: #f02429 !important;" class="btn btn-download" 
+        //         data-make="'.$file->brand.'" 
+        //         data-engine="'.$file->engine.'" 
+        //         data-ecu="'.$file->ecu.'" 
+        //         data-model="'.$file->model.'" 
+        //         data-generation="'.$file->version.'" 
+        //         data-file_id="'.$file->id.'" 
+        //         data-path="'.route("download", [$file->id, $file->engineer_file->request_file]).'"
+        //         >
+                    
+        //             <i class="fa fa-download"></i>
+        //             Download
+        //         </button>';
+
+        return  response()->json( ['download_button' => $downloadButton] );
+    }
+
+
+    public function authPusher(Request $request){
+
+        // Auth data
+        $authData = json_encode([
+            'user_id' => 24,
+            'user_info' => [
+                'name' => 'Live Chat'
+            ]
+        ]);
+        // check if user authenticated
+        if (Auth::check()) {
+            
+                return $this->pusher->socket_auth(
+                    $request->channel_name,
+                    $request->socket_id,
+                    $authData
+                );
+            
+            // if not authorized
+            return response()->json(['message'=>'Unauthorized'], 401);
+        }
+        // if not authenticated
+        return response()->json(['message'=>'Not authenticated'], 403);
+    }
+
+    public function changeCheckingStatus(Request $request){
+
+        $file = File::findOrFail($request->file_id);
+        if($file->checking_status == 'unchecked'){
+            $file->checking_status = 'fail';
+            $file->save();
+            return  response()->json( ['msg' => 'status set to fail', 'fail' => 1, 'file_id' => $file->id] );
+        }
+        if($file->checking_status == 'completed'){
+            return response()->json( ['msg' => 'status was completed', 'fail' => 2, 'file_id' => $file->id] );
+        }
+        return response()->json( ['msg' => 'status not set to fail', 'fail' => 0, 'file_id' => $file->id] );
+    }
+
     /**
      * Show the application dashboard.
      *
