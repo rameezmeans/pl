@@ -937,3 +937,173 @@ body  {
     </section>
 </main>
 @endsection
+
+@section('pagespecificscripts')
+<script src="https://js.pusher.com/7.0.3/pusher.min.js"></script>
+<script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var key = '{{env('PUSHER_APP_KEY')}}';
+
+    console.log('key:'+key);
+
+    var pusher = new Pusher(key, {
+    encrypted: true,
+    cluster: "ap2",
+    authEndpoint: '{{route("pusher.auth")}}',
+    auth: {
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }
+    });
+
+    console.log(pusher);
+
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function(event) {
+
+        let chat_id = '{{env("LIVE_CHAT_ID")}}';
+
+        const channelName = "private-chatify-download-portal-"+chat_id;
+        var channel = pusher.subscribe(`${channelName}`);
+        var clientSendChannel;
+        var clientListenChannel;
+        let file_id = '{{$file->id}}';
+
+        console.log('channel');
+        console.log(channel);
+        
+        setTimeout(
+        function(){
+           
+            $.ajax({
+                        url: '{{route("get-change-status")}}',
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            'file_id': file_id
+                        },
+                        success: function(d) {
+                            console.log(d);
+
+                            if(d.fail == 1 && d.file_id == file_id){
+                                $('#checking').addClass('hide');
+                                $('#download-area').addClass('hide');
+                                $('#not-found-area').removeClass('hide');
+                            }
+
+                            if(d.fail == 0 && d.file_id == file_id){
+                                $('#checking').addClass('hide');
+                                $('#download-area').addClass('hide');
+                                $('#not-found-area').removeClass('hide');
+                            }
+                        }
+                    });
+            
+        }, 90000);
+
+        channel.bind("download-button", function(data) {
+
+            console.log(data);
+
+            let page_file_id = '{{$file->id}}';
+            let file_id = data.file_id;
+
+            if(data.status == 'download'){
+
+                if(file_id == page_file_id){
+                    $.ajax({
+                        url: '{{route("get-download-button")}}',
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            'file_id': file_id
+                        },
+                        success: function(d) {
+
+                            console.log(d.download_button);
+                            $('#checking').addClass('hide');
+                            $('#download-area').removeClass('hide');
+                            $('#download-area').html(d.download_button);
+                            
+                        }
+                    });
+                }
+            }
+            else{
+                if(file_id == page_file_id){
+                    $('#not-found-area').removeClass('hide');
+                    $('#checking').addClass('hide');  
+                }
+            }
+        });
+
+        $(document).on('click', '.btn-download', function() {
+
+            $('#commentsPopup').modal('show');
+            $('.modal-content').css('visibility', 'visible');
+            $('.modal-loading').css("display", "none");
+            $('.modal-confirm').css("display", "block");
+
+            let ecu = $(this).data('ecu');
+            let make = $(this).data('make');
+            let generation = $(this).data('generation');
+            let engine = $(this).data('engine');
+            let file_id = $(this).data('file_id');
+            let model = $(this).data('model');
+
+            $('.download-path-original').attr("href", $(this).data('path'));
+
+            $.ajax({
+                url: "/get_comments",
+                type: "POST",
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'make': make,
+                    'model': model,
+                    'generation': generation,
+                    'ecu': ecu,
+                    'engine': engine,
+                    'file_id': file_id
+                },
+                success: function(d) {
+                    console.log(d);
+                    if (d.comments !== '') {
+                        $('.modal-comments').html(d.comments);
+                        $('.modal-loading').css("display", "none");
+                        $('.modal-confirm').css("display", "block");
+                    } else {
+                        $('.modal-loading').css("display", "none");
+                        $('.modal-information').css("display", "none");
+                        $('.modal-comments').css("display", "block");
+                        $('.modal-confirm').css("display", "block");
+                    }
+
+                }
+            });
+
+        });
+
+        $(document).on('click', '.close-modal', function() {
+
+            $('#commentsPopup').modal('hide');
+        });
+
+        $(document).on('click', '.modal-confirm', function() {
+
+            $('#commentsPopup').modal('hide');
+        });
+    });
+
+</script>
+@endsection
