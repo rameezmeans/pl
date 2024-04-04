@@ -20,8 +20,24 @@ if(!function_exists('translate')){
 
     function translate($str){
 
+        $translate = 1;
+
+        $myfile = fopen("gr.json", "r") or die("Unable to open file!");
+        $string = fread($myfile,filesize("gr.json"));
+        fclose($myfile);
+
+        $translationArray = json_decode($string, true);
         
-       
+        if(!isset($translationArray[$str])){
+            return $str;
+        }
+
+        if($translate){
+            return $translationArray[$str];
+        }
+        
+        return $str;
+
     }
 }
 

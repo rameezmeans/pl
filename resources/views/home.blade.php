@@ -54,7 +54,7 @@
         </div>
         @endif
         <div class="dashboard-header-block fix-header">
-            <h1>{{__('Welcome')}}, {{$user->name}}</h1>
+            <h1>{{translate('Welcome')}}, {{$user->name}}</h1>
         </div>  
         @if(!$user->is_admin())
         <div class="dashboard-content-box">
