@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use ECUApp\SharedCode\Models\Translation;
 use ECUApp\SharedCode\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Twilio\Rest\Client;
 
@@ -24,9 +25,25 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
 
-    dd(Auth::user()->translation);
+    // dd(Auth::user()->translation);
 
-    abort(404);
+    // $clientsRes = Http::withHeaders([
+
+    //     'authorization' => 'Token 32fd4c0b90ac267da4c548ea4410b126db2eaf53',
+
+    //     'x-elorus-organization' => '1357060486331368800',
+
+    //     // 'X-Elorus-Demo' => true,
+
+    // ])
+
+    // ->get('https://api.elorus.com/v1.1/contacts/?search='.$user->company_id.'&search_fields=vat_number');
+
+
+
+    // $client = json_decode($clientsRes->body());
+
+    // abort(404);
 
     // \Mail::to('xrkalix@gmail.com')->send(new \App\Mail\AllMails(['html' => "testing email", 'subject' => 'test email']));
     // dd('email sent');
