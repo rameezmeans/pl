@@ -16,6 +16,15 @@ if(!function_exists('get_tool_name')){
     }
 }
 
+if(!function_exists('translate')){
+
+    function translate($str){
+
+        
+       
+    }
+}
+
 if(!function_exists('get_dropdown_image')){
 
     function get_dropdown_image( $id ){

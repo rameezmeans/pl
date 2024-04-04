@@ -220,8 +220,6 @@ class PaymentsController extends Controller
 
     public function success(Request $request){
 
-        $frontendID =  2;
-
         $package = false;
         $offer = false;
         $fileFlag = false;
@@ -254,7 +252,7 @@ class PaymentsController extends Controller
             $creditsForFile = $request->creditsForFile;
             $credits = $request->creditsToBuy;
             $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
-            $file = $this->filesMainObj->acceptOfferFinalise($user, $fileID, $creditsForFile, $frontendID);
+            $file = $this->filesMainObj->acceptOfferFinalise($user, $fileID, $creditsForFile, $this->frontendID);
         }
 
         if($fileFlag){
