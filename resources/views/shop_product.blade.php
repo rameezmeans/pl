@@ -91,8 +91,8 @@
       <div class="container-fluid">
         <div class="bb-light fix-header">
                 <div class="header-block header-block-w-p">
-                    <h1>Credits Shop</h1>
-                    <p>Shop credits and packages.</p>
+                    <h1>{{translate('Credits Shop')}}</h1>
+                    <p>{{translate('Shop credits and packages')}}.</p>
                 </div>
         </div>
 
@@ -100,8 +100,8 @@
         <div class="row post-row">
           <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
               <div class="heading-column-box">
-                <h3>Single Credit</h3>
-                <p>Buy and single credit.</p>
+                <h3>{{translate('Single Credit')}}</h3>
+                <p>{{translate('Buy and single credit')}}.</p>
             </div>
           </div>
 
@@ -112,14 +112,14 @@
               
                 <div class="card" >
                 <div class="card-header">
-                  <strong>Single Credit</strong>
+                  <strong>{{translate('Single Credit')}}</strong>
                 </div>
                 <div class="card-content">
   
                   <h3>1 Credit</h3>
                   <strong>10Є</strong>
                 
-                  <p class="m-t-20">Using this service only once.</p>
+                  <p class="m-t-20">{{translate('Using this service only once')}}.</p>
                   <button class="btn btn-cart" id="addToCart"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
   
   
@@ -136,8 +136,8 @@
         <div class="row post-row">
           <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
               <div class="heading-column-box">
-              <h3>Packages</h3>
-              <p>Buy package of credits.</p>
+              <h3>{{translate('Packages')}}</h3>
+              <p>{{translate('Buy package of credits')}}.</p>
           </div>
           </div>
 
@@ -158,7 +158,7 @@
                         <input type="hidden" name="package" value="{{$package->id}}">
                         <input type="hidden" name="price" value="{{$package->discounted_price}}">
                         <input type="hidden" name="credits" value="{{$package->credits}}">
-                        <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart"></i> Buy</button>
+                        <button type="submit" class="btn btn-cart"><i class="fa fa-shopping-cart"></i> {{translate('Buy')}}</button>
                       </form>
                     </div>
                   </div>
