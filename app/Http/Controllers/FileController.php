@@ -259,7 +259,7 @@ class FileController extends Controller
         $uploader = User::findOrFail($file->user_id);
         $engineer = User::FindOrFail($file->assigned_to);
         $subject = "ECUTech: Client support message!";
-        $this->notificationsMainObj->sendNotification($engineer, $file, $uploader, $this->frontendID, $subject, 'mess-to-eng', 'message_to_engineer', $engPermissions);
+        $this->notificationsMainObj->sendNotification($engineer, $file, $uploader, $this->frontendID, $subject, 'mess-to-eng', 'message_to_engineer', $engPermissions, $request->egnineers_internal_notes);
 
         $adminPermissions = array(
             0 => 'msg_cus_admin_email',
@@ -270,7 +270,7 @@ class FileController extends Controller
         $uploader = User::findOrFail($file->user_id);
         $admin = get_admin();
         $subject = "ECUTech: Client support message!";
-        $this->notificationsMainObj->sendNotification($admin, $file, $uploader, $this->frontendID, $subject, 'mess-to-eng', 'message_to_engineer', $adminPermissions);
+        $this->notificationsMainObj->sendNotification($admin, $file, $uploader, $this->frontendID, $subject, 'mess-to-eng', 'message_to_engineer', $adminPermissions, $request->egnineers_internal_notes);
 
         return redirect()->back()->with('success', 'Engineer note successfully Added!');
     }
