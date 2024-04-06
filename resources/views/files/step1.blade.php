@@ -96,7 +96,7 @@
       <div class="container-fluid">
         <div class="bb-light fix-header">
             <div class="header-block header-block-w-p">
-                <h1 class="m-t-40">{{__('File Upload')}}</h1>
+                <h1 class="m-t-40">{{translate('File Upload')}}</h1>
                 <p id="step">Step 1/4</p>
           </div>
         </div>
@@ -108,15 +108,15 @@
             @endif
           <div class="col-xl-3 col-lg-3 col-md-3 heading-column master-tools @if($errors->any()) hide @endif">
               <div class="heading-column-box">
-                <h3>{{__('Reading Tool')}}</h3>
-                <p>{{__('To edit reading tool list click')}} <a style="color: #b01321;" target="_blank" href="{{route('account', ['tab' => 'tools'])}}">{{__('here')}}</a>.</p>
+                <h3>{{translate('Reading Tool')}}</h3>
+                <p>{{translate('To edit reading tool list click')}} <a style="color: #b01321;" target="_blank" href="{{route('account', ['tab' => 'tools'])}}">{{translate('here')}}</a>.</p>
             </div>
           </div>
           <div class="col-xl-9 col-lg-9 col-md-9 master-tools  @if($errors->any()) hide @endif">
             
             @if(!empty($masterTools))
 
-              <label class="account-label">{{__('Master')}}</label>
+              <label class="account-label">{{translate('Master')}}</label>
               <div class="row">
                   @foreach($masterTools as $row)
                     <div class="col-xl-4 col-lg-4 col-md-4">
@@ -137,7 +137,7 @@
 
             @if(!empty($slaveTools))
 
-              <label class="account-label m-t-40">{{__('Slave')}}</label>
+              <label class="account-label m-t-40">{{translate('Slave')}}</label>
               <div class="row">
                
                   @foreach($slaveTools as $row)
@@ -277,7 +277,7 @@
                             <div class="col-xl-4 col-lg-4 col-md-4">
                                 <div class="form-group">
                                   <label for="exampleInputCompanyModelYear1">Model Year</label>
-                                  <input type="text" id="model_year" name="model_year" class="@error('model_year') is-invalid @enderror form-control" placeholder="{{__('Model Year')}} " value="{{ old('model_year') }}">
+                                  <input type="text" id="model_year" name="model_year" class="@error('model_year') is-invalid @enderror form-control" placeholder="{{translate('Model Year')}} " value="{{ old('model_year') }}">
                                     @error('model_year')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -289,7 +289,7 @@
                               <div class="col-xl-4 col-lg-4 col-md-4">
                                 <div class="form-group">
                                   <label for="exampleInputCompanyLP1">License Plate *</label>
-                                  <input type="text" required id="license_plate" name="license_plate" class="@error('license_plate') is-invalid @enderror form-control" placeholder="{{__('License Year')}} " value="{{ old('license_plate') }}">
+                                  <input type="text" required id="license_plate" name="license_plate" class="@error('license_plate') is-invalid @enderror form-control" placeholder="{{translate('License Year')}} " value="{{ old('license_plate') }}">
                                     @error('license_plate')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -301,7 +301,7 @@
                               <div class="col-xl-4 col-lg-4 col-md-4">
                                 <div class="form-group">
                                   <label for="exampleInputCompanyLP1">Vin Number</label>
-                                  <input type="text" id="vin_number" name="vin_number" class="@error('vin_number') is-invalid @enderror form-control" placeholder="{{__('Vin Number')}} " value="{{ old('model_year') }}">
+                                  <input type="text" id="vin_number" name="vin_number" class="@error('vin_number') is-invalid @enderror form-control" placeholder="{{translate('Vin Number')}} " value="{{ old('model_year') }}">
                                     @error('vin_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -316,7 +316,7 @@
                                   
                                     <select name="brand" id="brand" class="select-dropdown form-control">
                                         @if(!old('brand'))
-                                        <option selected value="brand">{{__('Brand')}}</option>
+                                        <option selected value="brand">{{translate('Brand')}}</option>
                                         @endif
                                         @foreach ($brands as $b)
                                             <option @if(old('brand')==$b) selected @endif value="{{ $b }}">{{$b}}</option>
@@ -331,7 +331,7 @@
                                   <label for="exampleInputCompanyLP1">Model *</label>
                                   
                                 <select name="model" id="model" class="select-dropdown form-control" disabled>
-                                    <option value="model" @if(!old('model')) selected @endif disabled>{{__('Model')}}</option>
+                                    <option value="model" @if(!old('model')) selected @endif disabled>{{translate('Model')}}</option>
                                 </select>
                                 
                                 </div>
@@ -342,7 +342,7 @@
                                   <label for="exampleInputCompanyLP1">Version *</label>
                                   
                                 <select name="version" id="version" class="select-dropdown form-control" disabled>
-                                    <option value="version" @if(!old('version')) selected @endif disabled>{{__('Version')}}</option>
+                                    <option value="version" @if(!old('version')) selected @endif disabled>{{translate('Version')}}</option>
                                 </select>
                                 
                                 </div>
@@ -353,7 +353,7 @@
                                   <label for="exampleInputCompanyLP1">Engine *</label>
                                   
                                 <select name="engine" id="engine" class="select-dropdown form-control" disabled>
-                                    <option value="engine" @if(!old('engine')) selected @endif disabled>{{__('Engine')}}</option>
+                                    <option value="engine" @if(!old('engine')) selected @endif disabled>{{translate('Engine')}}</option>
                                 </select>
                                 
                                 </div>
@@ -364,7 +364,7 @@
                                   <label for="exampleInputCompanyLP1">ECU Type *</label>
                                   
                                 <select name="ecu" id="ecu" class="select-dropdown form-control" disabled>
-                                    <option value="ecu" @if(!old('ecu')) selected @endif disabled>{{__('ECU')}}</option>
+                                    <option value="ecu" @if(!old('ecu')) selected @endif disabled>{{translate('ECU')}}</option>
                                 </select>
                                 
                                 </div>
@@ -376,8 +376,8 @@
                                   
                                   <select name="gear_box" class="select-dropdown form-control">
                                     <option value="gear_box" @if(!old('gear_box')) selected @endif disabled>Gear box</option>
-                                    <option value="auto_gear_box" @if(!old('gear_box')) @endif>{{__('Automatic Gearbox')}}</option>
-                                    <option value="manual_gear_box" @if(!old('gear_box')) selected @endif>{{__('Manual Gearbox')}}</option>
+                                    <option value="auto_gear_box" @if(!old('gear_box')) @endif>{{translate('Automatic Gearbox')}}</option>
+                                    <option value="manual_gear_box" @if(!old('gear_box')) selected @endif>{{translate('Manual Gearbox')}}</option>
             
                                 </select>
                                 
@@ -404,7 +404,7 @@
                             <div class="col-xl-12 col-lg-12 col-md-12">
                                 <div class="form-group">
                                     <label for="exampleInputCompanyAC1">Additional Comment</label>
-                                    <textarea type="text" id="additional_comments" rows="3" name="additional_comments" class="materialize-textarea form-control @error('additional_comments') is-invalid @enderror" placeholder="{{__('Additional Comments')}} ">{{ old('additional_comments') }}</textarea>
+                                    <textarea type="text" id="additional_comments" rows="3" name="additional_comments" class="materialize-textarea form-control @error('additional_comments') is-invalid @enderror" placeholder="{{translate('Additional Comments')}} ">{{ old('additional_comments') }}</textarea>
                                     @error('additional_comments')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -433,30 +433,30 @@
                         <input type="checkbox" class="cgv-checkbox" id="cgv">
                         <label for="cgv">
 
-                            {{__('I understand and agree to')}} <a class="modal-trigger" target="_blank" href="{{route('terms-and-conditions')}}" style="z-index: 1003;"><strong>{{__('the terms and conditions of sales')}}</strong></a> and <a class="modal-trigger" target="_blank" href="{{route('norefund-policy')}}" style="z-index: 1003;"><strong>{{__('norefund policy')}}</strong></a>.
+                            {{translate('I understand and agree to')}} <a class="modal-trigger" target="_blank" href="{{route('terms-and-conditions')}}" style="z-index: 1003;"><strong>{{translate('the terms and conditions of sales')}}</strong></a> and <a class="modal-trigger" target="_blank" href="{{route('norefund-policy')}}" style="z-index: 1003;"><strong>{{translate('norefund policy')}}</strong></a>.
                         </label>
                     </p>
                     <p>
                         <input type="checkbox" class="cgv-checkbox" id="professional">
                         <label for="professional">
-                            {{__('Hereby, I declare that I am a professional')}}
+                            {{translate('Hereby, I declare that I am a professional')}}
                         </label>
                     </p>
                     <p>
                         
                         <label for="track"><input type="checkbox" class="cgv-checkbox" id="track">
-                            {{__('I acknowledge that I am fully aware that the tuned software are dedicated to vehicles intended exclusively for use on race track')}}
+                            {{translate('I acknowledge that I am fully aware that the tuned software are dedicated to vehicles intended exclusively for use on race track')}}
 
                         </label>
                     </p>
                     <p id="create_vehicle_form_checkbox-error-custom" class="input-field" style="display: none;">
-                        <span class="invalid">{{__('You must accept the different conditions above to be able to submit your request.')}}</span>
+                        <span class="invalid">{{translate('You must accept the different conditions above to be able to submit your request.')}}</span>
                     </p>
                 </div>
 
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6">
-                        <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{__('Next')}}</button>
+                        <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{translate('Next')}}</button>
                     </div>
                 </div>
 
@@ -473,8 +473,8 @@
         <div class="row m-t-40 bt hide" style="margin-bottom: 100px;" id="upload-area">
           <div class="col-xl-3 col-lg-3 col-md-3 m-t-40 heading-column">
               <div class="heading-column-box">
-                <h3>Upload File</h3>
-                <p>Drop your file or click to select a file from your device.</p>
+                <h3>{{translate('Upload File')}}</h3>
+                <p>{{translate('Drop your file or click to select a file from your device')}}.</p>
             </div>
           </div>
           <div class="col-xl-8 col-lg-8 col-md-8 m-t-20">
@@ -483,7 +483,7 @@
               <input type="hidden" name="tool_type_for_dropzone" id="tool_type_for_dropzone">
               <input type="hidden" name="tool_for_dropzone" id="tool_for_dropzone">
               <div>
-                  <h5>{{__('Please Drop and file here by Click')}}</h5>
+                  <h5>{{translate('Please Drop and file here by Click. (Zip or RAR are not allowed.)')}}</h5>
               </div>
             </form>
           </div>

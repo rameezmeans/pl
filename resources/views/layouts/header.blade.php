@@ -27,14 +27,14 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="m-r-8">
-          <button data-redirect="{{route('upload')}}" class="btn btn-info redirect-click"><i class="fa fa-cloud-upload"></i> <span>{{__('File Upload')}}</span></button>
+          <button data-redirect="{{route('upload')}}" class="btn btn-info redirect-click"><i class="fa fa-cloud-upload"></i> <span>{{translate('File Upload')}}</span></button>
       </li>
       <li class="m-r-8">
-            <button data-redirect="{{route('shop-product')}}" class="btn btn-success redirect-click"><i class="fa fa-cart-shopping"></i> <span>{{__('Buy Credits')}}</span></button>     
+            <button data-redirect="{{route('shop-product')}}" class="btn btn-success redirect-click"><i class="fa fa-cart-shopping"></i> <span>{{translate('Buy Credits')}}</span></button>     
       </li>    
       <li class="mobile-hide">    
           <span style="display: inline-grid; position: absolute; width:200px;">
-              <span class="m-l-26" style="">Credit Balance</span>
+              <span class="m-l-26" style="">{{translate('Credit Balance')}}</span>
               <span class="m-l-26" ><b style="font-size:16px">{{Auth::user()->credits->sum('credits')}} Credits</b></span>
           </span>
           @if(Auth::user()->is_evc_customer())
@@ -65,12 +65,12 @@
     <ul class="nav navbar-nav">
       @if(!Auth::user()->is_admin())
         <li class="m-r-8">
-            <button class="btn btn-warning redirect-click" data-redirect="{{route('cart')}}"> <span style="background: #4cae4c; color: white; padding: 2px 0px 2px 5px; border-radius: 5px; margin-right: 5px;"> {{\Cart::getTotalQuantity()}} </span> <i class="fa fa-cart-shopping"></i> Cart</button>
+            <button class="btn btn-warning redirect-click" data-redirect="{{route('cart')}}"> <span style="background: #4cae4c; color: white; padding: 2px 0px 2px 5px; border-radius: 5px; margin-right: 5px;"> {{\Cart::getTotalQuantity()}} </span> <i class="fa fa-cart-shopping"></i>{{translate('Cart')}}</button>
         </li>
         @endif
         <li>
             {{-- <button class="btn btn-warning"><a href="{{ route('logout'); }}" ><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></button> --}}
-            <form id="logout-form" action="{{ route('logout'); }}" method="POST" class="d-none">@csrf  <button class="btn btn-warning" type='submit'><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></form>
+            <form id="logout-form" action="{{ route('logout'); }}" method="POST" class="d-none">@csrf  <button class="btn btn-warning" type='submit'><i class="fa fa-sign-out" aria-hidden="true"></i>{{translate('Logout')}}</button></form>
         </li>
     </ul>
   </div>
