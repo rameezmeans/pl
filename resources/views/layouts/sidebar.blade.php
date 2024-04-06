@@ -139,12 +139,12 @@
 		</ul>
 		<div class="time-box">
 		  {{__('Working Hours')}}:
-		  <p style="font-size: 12px; margin-top: 10px; margin-bottom:0px;">Monday to Friday</p>
+		  <p style="font-size: 12px; margin-top: 10px; margin-bottom:0px;">{{translate('Monday - Friday') }}</p>
 		  <span style="font-size: 14px; margin-top:">{{ date('h:i A', strtotime($workHours[0]->start))}} - {{ date('h:i A', strtotime($workHours[0]->end))}}</span>
-		  <p style="font-size: 12px; margin-top: 10px; 0px; margin-bottom:0px;">Saturday</p>
+		  <p style="font-size: 12px; margin-top: 10px; 0px; margin-bottom:0px;">{{translate('Saturday')}}</p>
 		  <span style="font-size: 14px; margin:0px; margin-top: 0px;">{{ date('h:i A', strtotime($workHours[1]->start))}} - {{ date('h:i A', strtotime($workHours[1]->end))}}</span>
-		  <p style="font-size: 12px; margin-top: 10px; margin-bottom:0px; padding: 0px;">Sunday</p>
-		  <span style="font-size: 14px; margin-top: 0px;">Closed</span>
+		  <p style="font-size: 12px; margin-top: 10px; margin-bottom:0px; padding: 0px;">{{translate('Sunday')}}</p>
+		  <span style="font-size: 14px; margin-top: 0px;">{{translate('Closed')}}</span>
 
 		</div>
 	</div>

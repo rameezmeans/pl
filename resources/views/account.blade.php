@@ -813,11 +813,11 @@ select {
           <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 100px;">
 
                   <ul class="nav nav-tabs account-nav-tabs" style="border-top: #ddd 1px solid;">
-                    <li class="@if(request()->get('tab') != 'tools') active @endif"><a data-toggle="tab" href="#profile">Profile</a></li>
-                    <li><a data-toggle="tab" href="#password">Password Change</a></li>
-                    <li class="@if(request()->get('tab') == 'tools') active @endif"><a data-toggle="tab" href="#ecu">ECU Tools</a></li>
-                    <li><a data-toggle="tab" href="#logs">Credit Logs</a></li>
-                    <li><a data-toggle="tab" href="#evclogs">EVC Credits Logs</a></li>
+                    <li class="@if(request()->get('tab') != 'tools') active @endif"><a data-toggle="tab" href="#profile">{{translate('Profile')}}</a></li>
+                    <li><a data-toggle="tab" href="#password">{{translate('Password Change')}}</a></li>
+                    <li class="@if(request()->get('tab') == 'tools') active @endif"><a data-toggle="tab" href="#ecu">{{translate('ECU Tools')}}</a></li>
+                    <li><a data-toggle="tab" href="#logs">{{translate('Credit Log')}}</a></li>
+                    <li><a data-toggle="tab" href="#evclogs">{{translate('EVC Credits Logs')}}</a></li>
                   </ul>
                 
                   <div class="tab-content account-tab-content">
@@ -826,15 +826,15 @@ select {
                       <div class="row m-b-45" style="border-bottom: 1px solid #ddd;">
                             <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                                 <div class="heading-column-box">
-                                    <h3>Personal Information</h3>
-                                    <p>Use a personal address where you can receive email.</p>
+                                    <h3>{{translate('Personal Information')}}</h3>
+                                    <p>{{translate('Use a personal address where you can receive email')}}.</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
                               <div class="row">
                                   <div class="col-xl-12 col-lg-12 col-md-12">
                                     <div class="form-group" style="margin-bottom:19px">
-                                        <label for="exampleInputType1">Account Type</label>
+                                        <label for="exampleInputType1">{{translate('Account Type')}}</label>
                                             <div>
                                                 <span class="m-r-10"><input type="radio" @if($user->status == 'company') checked @endif @disabled(true)> Company</span>
                                                 <span class="m-r-10"><input type="radio" @if($user->status == 'private') checked @endif  @disabled(true)> Private</span>
@@ -848,7 +848,7 @@ select {
                                 <div class="row">
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Company Name </label>
+                                      <label for="exampleInputCompanyName1">{{translate('Company Name')}}</label>
                                       <input type="text" name="company_name" class="form-control" value="{{$user->company_name}}">
                                       @error('company_name')
                                         <span class="invalid-feedback" role="alert">
@@ -859,7 +859,7 @@ select {
                                   </div>
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Company Trade Registration ID </label>
+                                      <label for="exampleInputCompanyName1">{{translate('Company Trade Registration ID')}}</label>
                                       <input type="text" name="company_id" class="form-control" value="{{$user->company_id}}">
                                       @error('company_id')
                                         <span class="invalid-feedback" role="alert">
@@ -873,7 +873,7 @@ select {
                                 <div class="row">
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Full Name *</label>
+                                      <label for="exampleInputCompanyName1">{{translate('Full Name')}} *</label>
                                       <input type="text" name="name" class="form-control" required="required" value="{{$user->name}}">
                                       @error('name')
                                       <span class="invalid-feedback" role="alert">
@@ -884,7 +884,7 @@ select {
                                   </div>
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Email</label>
+                                      <label for="exampleInputCompanyName1">{{translate('Email')}}</label>
                                       <input disabled type="text" name="email" class="form-control" value="{{$user->email}}">
                                       @error('name')
                                       <span class="invalid-feedback" role="alert">
@@ -895,7 +895,7 @@ select {
                                   </div>
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Phone *</label>
+                                      <label for="exampleInputCompanyName1">{{translate('Phone')}} *</label>
                                       <input type="text" name="phone" class="form-control" value="{{$user->phone}}">
                                       @error('phone')
                                       <span class="invalid-feedback" role="alert">
@@ -909,25 +909,25 @@ select {
                                 <div class="row">
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Country</label>
+                                      <label for="exampleInputCompanyName1">{{translate('Country')}}</label>
                                       <input disabled type="text" name="country" class="form-control" required="required" disabled value="{{code_to_country($user->country)}}">
                                     </div>
                                   </div>
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Address</label>
+                                      <label for="exampleInputCompanyName1">{{translate('Address')}}</label>
                                       <input disabled type="text" name="address" class="form-control" value="{{$user->address}}">
                                     </div>
                                   </div>
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">City</label>
+                                      <label for="exampleInputCompanyName1">{{translate('City')}}</label>
                                       <input disabled type="text" name="company_name" class="form-control" value="{{$user->city}}">
                                     </div>
                                   </div>
                                   <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="form-group">
-                                      <label for="exampleInputCompanyName1">Zip</label>
+                                      <label for="exampleInputCompanyName1">{{translate('Zip')}}</label>
                                       <input disabled type="text" name="company_name" class="form-control" value="{{$user->zip}}">
                                     </div>
                                   </div>
@@ -944,7 +944,7 @@ select {
                                   </div>
                                   <div class="form-group">
                                     
-                                    <input type="submit" class="btn btn-success m-l-20" value="Update">
+                                    <input type="submit" class="btn btn-success m-l-20" value="{{translate('Update')}}">
                                   </div>
                                 </div>
                                 </form>
@@ -982,8 +982,8 @@ select {
                       <div class="row">
                         <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                             <div class="heading-column-box">
-                                <h3>Password Change</h3>
-                                <p>Update your password associated with your account.</p>
+                                <h3>{{translate('Password Change')}}</h3>
+                                <p>{{translate('Update your password associated with your account')}}.</p>
                             </div>    
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6">
@@ -1003,18 +1003,18 @@ select {
                           <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="form-group">
-                              <label class="">{{__('New Password')}}</label>
+                              <label class="">{{translate('New Password')}}</label>
                               <input type="password" name="new_password" class="form-control">
                             </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="form-group">
-                              <label class="">{{__('Confirm Password')}}</label>
+                              <label class="">{{translate('Confirm Password')}}</label>
                               <input type="password" name="confirm_password" class="form-control">
                             </div>
                             </div>
                             <div class="form-group">
-                            <button type="submit" id="language_create_form_Save" class="btn btn-info m-l-20">{{__('Save Changed')}}</button>
+                            <button type="submit" id="language_create_form_Save" class="btn btn-info m-l-20">{{translate('Save Changed')}}</button>
                             </div>
                           
                           </div>
@@ -1027,8 +1027,8 @@ select {
                       <div class="row">
                         <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                             <div class="heading-column-box">    
-                                <h3>ECU Tools</h3>
-                                <p>Edit your reading list.</p>
+                                <h3>{{translate('ECU Tools')}}</h3>
+                                <p>{{translate('Edit your reading list')}}.</p>
                             </div>
                       </div>
                         <div class="col-xl-6 col-lg-6 col-md-6">
@@ -1036,7 +1036,7 @@ select {
                             @csrf
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <div class="form-group m-b-30">
-                                <label class="account-label">Master Tools</label>
+                                <label class="account-label">{{translate('Master Tools')}}</label>
                                 <div class="input-field col s12">
                                     
                                         <select name="master_tools[]" id="master_tools" class="form-control select-dropdown-multi" multiple>
@@ -1053,7 +1053,7 @@ select {
     
                             <div class="form-group m-t-20">
 
-                            <label class="account-label">Slave Tools</label>
+                            <label class="account-label">{{translate('Slave Tools')}}</label>
                             
 
                                   <select name="slave_tools[]" id="slave_tools" class="select-dropdown-multi form-control" multiple>
@@ -1067,7 +1067,7 @@ select {
                             </div>
                     
     
-                        <button type="submit" class="btn btn-info waves-effect waves-light m-sm">{{__('Save Changes')}}</button>
+                        <button type="submit" class="btn btn-info waves-effect waves-light m-sm">{{translate('Save Changes')}}</button>
                       </form>
                         </div>
                       </div>
