@@ -334,7 +334,7 @@ p.tuning-resume {
         <div class="container-fluid">
             <div class="bb-light fix-header">
             <div class="header-block header-block-w-p">
-                <h1>Services</h1>
+                <h1>{{translate('Services')}}</h1>
                 <p>3/4</p>
         </div>
         </div>
@@ -348,8 +348,8 @@ p.tuning-resume {
              <div class="row post-row">
                 <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                     <div class="heading-column-box">  
-                        <h3>Tuning</h3>
-                        <p>These are tuning stages.</p>
+                        <h3>{{translate('Tunings')}}</h3>
+                        <p>{{translate('These are tuning stages')}}.</p>
                     </div>
               </div>
 
@@ -366,13 +366,13 @@ p.tuning-resume {
                         <span class="text-stage">
 
                           <span style="display: inline-grid;">
-                            <strong>{{$stage['name']}}</strong>
+                            <strong>{{translate($stage['name'])}}</strong>
                             
                               <span class="text-danger"> {{$stage['credits']}} Credits </span>
                             
                           </span>
 
-                          <button type="button" data-tooltip-location="left" data-tooltip="{{__(trim($stage['description']))}}"  class="btn btn-transparent" style="font-size: 16px;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
+                          <button type="button" data-tooltip-location="left" data-tooltip="{{translate(trim($stage['description']))}}"  class="btn btn-transparent" style="font-size: 16px;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
                           
                         </span>
                       </div>
@@ -393,7 +393,7 @@ p.tuning-resume {
                 <div id="rows-for-credits" class="red-scroll" style="">
                 </div>
                 <div class="total-box">
-                    <span style="font-size: 16px;">Total</span>
+                    <span style="font-size: 16px;">{{translate('Total')}}</span>
                     <span style="float: right;" >
                         <small>
                             <span id="without-discount-total-credits" class="hide" style="color: gray;text-decoration: line-through;"></span>
@@ -417,8 +417,8 @@ p.tuning-resume {
             <div class="row post-row">
               <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                 <div class="heading-column-box">
-                  <h3>Options</h3>
-                  <p>These are tuning options.</p>
+                  <h3>{{translate('Options')}}</h3>
+                  <p>{{translate('These are tuning options')}}.</p>
                 </div>
               </div>
 
@@ -442,14 +442,14 @@ p.tuning-resume {
                         <span class="text-stage">
 
                           <span style="display: inline-grid;">
-                            <strong>{{$option['name']}}</strong>
+                            <strong>{{translate($option['name'])}}</strong>
                             
                             
                               <span class="text-danger"> <span id="option-credits-{{$option['id']}}">{{$option['credits']}}</span> Credits </span>
                             
                           </span>
 
-                          <button type="button" data-tooltip-location="left" data-tooltip="{{__(trim($option['description']))}}"  class="btn btn-transparent" style="font-size: 16px; float: right;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
+                          <button type="button" data-tooltip-location="left" data-tooltip="{{translate(trim($option['description']))}}"  class="btn btn-transparent" style="font-size: 16px; float: right;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
                           
                         </span>
                       </div>
@@ -613,7 +613,7 @@ p.tuning-resume {
 
                       $('#btn-final-submit').attr("disabled", false); 
                       
-                      let note = '{{__('Please Read Very Carefully')}}!!';
+                      let note = '{{translate('Please Read Very Carefully')}}!!';
 
                       console.log(response.comment.comments);
                       let comment = response.comment.comments
