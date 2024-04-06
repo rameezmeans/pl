@@ -235,8 +235,8 @@ strong {
             <div class="header-block header-block-w-p">
               <input type="hidden" id="type" value="@if($type == 'slave'){{'slave'}}@else{{'master'}}@endif">
               <div>
-              <h1>Price List</h1>
-              <p>All the details of Stages and Options are here. </p>
+              <h1>{{translate('Price List')}}</h1>
+              <p>{{translate('Here are detailed pricelist of our services')}}. </p>
               </div>
               {{-- <div class="text-center">
                 <a href="?type=master" class="btn @if($type == 'master' || $type == null) btn-info @else btn-white @endif">Master</a>
@@ -258,8 +258,8 @@ strong {
             <div class="row post-row">
               <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                 <div class="heading-column-box">  
-                  <h3>Tuning</h3>
-                  <p>These are tuning stages.</p>
+                  <h3>{{translate('Tuning')}}</h3>
+                  <p>{{translate('These are tuning stages')}}.</p>
                 </div>
               </div>
 
@@ -276,11 +276,11 @@ strong {
                         <span class="text-stage">
 
                           <span style="display: inline-grid;">
-                            <strong>{{$stage['name']}} @if(isset($vehicleType)){{' ('.ucfirst($vehicleType).')'}}@endif </strong>
+                            <strong>{{translate($stage['name'])}} @if(isset($vehicleType)){{' ('.ucfirst($vehicleType).')'}}@endif </strong>
                             <span class="text-danger">  {{$stage['credits']}} Credits </span>
                           </span>
 
-                          <button type="button" data-tooltip-location="left" data-tooltip="{{__(trim($stage['description']))}}"  class="btn btn-transparent" style="font-size: 16px; float: right;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
+                          <button type="button" data-tooltip-location="left" data-tooltip="{{translate(trim($stage['description']))}}"  class="btn btn-transparent" style="font-size: 16px; float: right;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
                           
                         </span>
                       </div>
@@ -294,13 +294,13 @@ strong {
               <div class="loader hide"></div>
               <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                 <div class="heading-column-box">
-                    <h3>Options</h3>
-                    <p>These are tuning options.</p>
+                    <h3>{{translate('Options')}}</h3>
+                    <p>{{translate('These are tuning options')}}.</p>
                 </div>
               </div>
 
               <div class="col-xl-8 col-lg-8 col-md-8">
-                <label class="account-label">Options</label>
+                <label class="account-label">{{translate('Options')}}</label>
                 <div class="row">
                   @foreach ($options as $option)
                     <div class="col-xl-6 col-lg-6 col-md-6">
@@ -311,11 +311,11 @@ strong {
                         <span class="text-stage">
 
                           <span style="display: inline-grid;">
-                            <strong>{{$option['name']}} @if(isset($vehicleType)){{' ('.ucfirst($vehicleType).')'}}@endif</strong>
+                            <strong>{{translate($option['name'])}} @if(isset($vehicleType)){{' ('.ucfirst($vehicleType).')'}}@endif</strong>
                             <span class="text-danger"> <span id="option-credits-{{$option['id']}}"> {{$option['credits']}} </span> Credits </span>
                           </span>
 
-                          <button type="button" data-tooltip-location="left" data-tooltip="{{__(trim($option['description']))}}"  class="btn btn-transparent" style="font-size: 16px; float: right;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
+                          <button type="button" data-tooltip-location="left" data-tooltip="{{translate(trim($option['description']))}}"  class="btn btn-transparent" style="font-size: 16px; float: right;"><i style="font-size: 18px;" class="fa fa-info-circle"></i> Info</button>
                           
                         </span>
                       </div>

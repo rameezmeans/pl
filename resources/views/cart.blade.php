@@ -51,7 +51,7 @@ input.qty-input {
           <span style="display: inline-flex;" class="m-t-20">
             <button  class="btn btn-white redirect-click" data-redirect="{{route('shop-product')}}"><i class="fa fa fa-angle-left"></i></button>
             <h3 class="m-t-5 m-l-5">
-              Checkout
+              {{translate('Checkout')}}
             </h3>
           </span>
 
@@ -62,7 +62,7 @@ input.qty-input {
 
             <div class="card" >
               <div class="card-header">
-                <h4>Billing Information</h4>
+                <h4>{{translate('Billing Information')}}</h4>
               </div>
               <div class="card-content">
                 <div class="details-box">
@@ -110,7 +110,7 @@ input.qty-input {
 
             <div class="card" >
               <div class="card-header">
-                <h4>Payment Method</h4>
+                <h4>{{translate('Payment Method')}}</h4>
               </div>
               <div class="card-content">
                 <p>When validating your payment you will automatically be redirected to the Stripe or Paypal website where you will be able to pay the amount due very easily.</p>
@@ -135,7 +135,7 @@ input.qty-input {
 
               <div class="card" >
                 <div class="card-header">
-                  <h4>Cart</h4>
+                  <h4>{{translate('Cart')}}</h4>
                   <input type="hidden" id="price_per_unit" value="{{$price->value}}" />
                   <input type="hidden" id="factor" value="{{$factor}}" />
                   <input type="hidden" id="tax" value="{{$tax}}" />
@@ -174,19 +174,19 @@ input.qty-input {
                   <table class="table">
                     <tbody>
                       <tr>
-                        <td><p>{{__('Subtotal')}} :</p></td>
+                        <td><p>{{translate('Subtotal')}} :</p></td>
                         <td>€<span id="subTotal"></span></td>
                       </tr>
                       <tr>
-                        <td><p>{{__('Adjustment')}} :</p></td>
+                        <td><p>{{translate('Adjustment')}} :</p></td>
                         <td>€<span id="vatSubTotal"></span></td>
                       </tr>
                                       <tr>
-                        <td><p>{{__('Tax')}} :</p></td>
+                        <td><p>{{translate('Tax')}} :</p></td>
                         <td>€<span id="taxValue"></span></td>
                       </tr>
                       <tr>
-                        <td><h4>{{__('Total Order')}} :</h4></td>
+                        <td><h4>{{translate('Total Order')}} :</h4></td>
                         <td><h4>€<span id="total"></span></h4></td>
                       </tr>
                     </tbody>
@@ -197,7 +197,7 @@ input.qty-input {
                     <input type="hidden" name="total_for_checkout" value="" class="total_for_checkout">
                     <input type="hidden" name="credits_for_checkout" value="" class="credits_for_checkout">
                     <input type="hidden" name="unit_price_for_checkout" value="" class="unit_price_for_checkout">
-                <button class="btn btn-red btn-red-full" type="submit">{{__('Pay with Card')}}</button>
+                <button class="btn btn-red btn-red-full" type="submit">{{translate('Pay with Card')}}</button>
                 </form>
                      
                   {{-- <form action="{{route('checkout.paypal')}}" method="POST">

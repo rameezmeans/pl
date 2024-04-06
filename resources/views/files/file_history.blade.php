@@ -26,7 +26,7 @@
       <div class="container-fluid">
           <div class="bb-light fix-header">
             <div class="header-block header-block-w-p">
-                <h1>File History</h1>
+                <h1>{{translate('File History')}}</h1>
             </div>
         </div>
         <div class="i-content-block price-level">

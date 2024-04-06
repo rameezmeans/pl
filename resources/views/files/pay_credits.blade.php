@@ -37,7 +37,7 @@
         <div class="container-fluid">
             <div class="bb-light fix-header">
                 <div class="header-block header-block-w-p">
-                    <h1>Checkout Overview</h1>
+                    <h1>{{translate('Checkout Overview')}}</h1>
                     <p>Step 4/4</p>
                 </div>
             </div>
@@ -46,19 +46,19 @@
                 <div class="row post-row">
                 <div class="col-xl-3 col-lg-3 col-md-3  heading-column">
                     <div class="heading-column-box">  
-                        <h3>Items Breakdown</h3>
-                        <p>Fill your contact information.</p>
+                        <h3>{{translate('Items Breakdown')}}</h3>
+                        <p>{{translate('Fill your contact information')}}.</p>
                     </div>
                 </div>
 
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="credits-box">
-                        <strong class="flex-row-total totals text-red">{{__('Credits Required')}} <strong id="total-credits" style="float: right;">{{$credits}} credits</strong> </strong>
-                            <strong class="totals"><strong class="">{{__('Account Credits')}}<strong><strong style="float: right;" id="account-credits">{{ $user->credits->sum('credits') }} credits</strong> </strong></strong></strong>
+                        <strong class="flex-row-total totals text-red">{{translate('Credits Required')}} <strong id="total-credits" style="float: right;">{{$credits}} credits</strong> </strong>
+                            <strong class="totals"><strong class="">{{translate('Account Credits')}}<strong><strong style="float: right;" id="account-credits">{{ $user->credits->sum('credits') }} credits</strong> </strong></strong></strong>
                             @if($user->credits->sum('credits') > $credits)
-                                <strong class="totals"><strong class="flex-row-total ">{{__('Credits Remained')}}<strong><strong style="float: right;" id="required-credits1">{{ $user->credits->sum('credits') - $credits  }} credits</strong> </strong></strong></strong>
+                                <strong class="totals"><strong class="flex-row-total ">{{translate('Credits Remained')}}<strong><strong style="float: right;" id="required-credits1">{{ $user->credits->sum('credits') - $credits  }} credits</strong> </strong></strong></strong>
                             @else
-                                <strong class="totals"><strong class="flex-row-total ">{{__('Credits To Buy')}}<strong style="float: right;"><strong id="to-buy-credits">@if($user->credits->sum('credits') > $credits){{ $user->credits->sum('credits') - $credits  }}@else {{ $credits -  $user->credits->sum('credits') }} @endif</strong> credits</strong></strong></strong>
+                                <strong class="totals"><strong class="flex-row-total ">{{translate('Credits To Buy')}}<strong style="float: right;"><strong id="to-buy-credits">@if($user->credits->sum('credits') > $credits){{ $user->credits->sum('credits') - $credits  }}@else {{ $credits -  $user->credits->sum('credits') }} @endif</strong> credits</strong></strong></strong>
                             @endif
                     </div>
                         <div class="m-t-20 text-center">
@@ -68,7 +68,7 @@
                             <input type="hidden" name="credits" value={{ $credits }}>
                             <input type="hidden" name="file_id" value={{ $file->id }}>
                             <button  class="btn btn-success" style="background: #237E02 0% 0% no-repeat padding-box;" type="submit">
-                                {{__('Submit File')}}
+                                {{translate('Submit File')}}
                             </button>
                         </form>
                     @else 
@@ -78,7 +78,7 @@
                                 <input type="hidden" name="credits" value={{ $credits }}>
                                 <input type="hidden" name="file_id" value={{ $file->id }}>
                                 <button  class="btn btn-success " type="submit">
-                                    {{__('Submit File')}}
+                                    {{translate('Submit File')}}
                                 </button>
                             </form>
                         @endif
@@ -100,7 +100,7 @@
                                 
                                 
                                 <strong class="price-title-new">Price </strong><strong style="float: right;">{{($credits - $user->credits->sum('credits'))*($price->value+$factor)}} €</strong>
-                                <span class="price-title-description">({{__('Original Price')}})</span>
+                                <span class="price-title-description">({{translate('Original Price')}})</span>
                             </div>
                             <div class="card-footer text-center">
                                 <form method="POST" action="{{route('checkout-file')}}" >
@@ -112,7 +112,7 @@
                                     <input type="hidden" name="credits_to_buy" value="{{$credits - $user->credits->sum('credits')}}" />
                                     <input type="hidden" name="credits_for_file" value="{{$credits}}" />
                                     <button type="submit" class="btn btn-red waves-effect waves-light m-sm">
-                                        {{__('Buy')}}
+                                        {{translate('Buy')}}
                                     </button>
                                 </form>
                             </div>
