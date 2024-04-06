@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Athens',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,6 +83,15 @@ return [
     */
 
     'locale' => 'en',
+    
+    // 'locales' => [
+    //     'gr' => 'https://backend.ecutech.gr/gr.json'
+    // ],
+
+    // 'available_locales' => [
+    //     'English' => 'en',
+    //     'Greek' => 'gr'
+    //   ],
 
     /*
     |--------------------------------------------------------------------------
@@ -181,6 +190,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -189,11 +199,17 @@ return [
         /*
          * Application Service Providers...
          */
+
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        // App\Providers\TelescopeServiceProvider::class,
+
+        // App\Providers\ChatifyServiceProvider::class,
 
     ],
 
@@ -210,6 +226,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        // 'Chatify1' => App\Chatify\ChatifyMessenger::class
     ])->toArray(),
 
 ];
