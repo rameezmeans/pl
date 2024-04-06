@@ -6,8 +6,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="url" content="{{env('APP_URL')}}" data-user="{{Auth::user()->id}}">
-    <meta name="id" content="{{env('LIVE_CHAT_ID')}}">
+    {{-- <meta name="url" content="{{env('APP_URL')}}" data-user="{{Auth::user()->id}}"> --}}
+    {{-- <meta name="id" content="{{env('LIVE_CHAT_ID')}}">web --}}
     <meta name="type" content="user">
 
     <title>{{ config('app.name', 'DEV | Tuning-X | Performance Excellence') }}</title>
