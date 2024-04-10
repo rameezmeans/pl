@@ -64,33 +64,33 @@
     
                 <div class="card">
                   <div class="card-header">
-                    <div style="display: inline-flex;"><h4>Files Completed</h4><span class="m-l-10">Last 24 hours</span></div>
+                    <div style="display: inline-flex;"><h4>{{ translate('Files Completed')}}</h4><span class="m-l-10">{{ translate('Last 24 hours')}}</span></div>
                   </div>
                   <div class="card-content">
                     <div class="boxes">
                     <div class="small-box small-box-grey">
-                      <span>This Week</span>
+                      <span>{{ translate('This Week')}}</span>
                       <h3>{{$thisWeeksFilesCount}}</h3>
                     </div>
                     <div class="small-box small-box-pale">
-                      <span>This Month</span>
+                      <span>{{ translate('This Month')}}</span>
                       <h3>{{$thisMonthsFilesCount}}</h3>
                     </div>
                     <div class="small-box small-box-green">
-                      <span>This Year</span>
+                      <span>{{ translate('This Year')}}</span>
                       <h3>{{$thisYearsFilesCount}}</h3>
                     </div>
                   </div>
                   </div>
                   <hr>
                   <div class="card-footer">
-                    <a href="{{route('history')}}"><i class="fa-solid fa-arrow-up-right-from-square"></i> View File History</a>
+                    <a href="{{route('history')}}"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{ translate('View File History')}}</a>
                   </div>
                 </div>
     
                 <div class="card">
                   <div class="card-header">
-                    <div style="display: inline-flex;"><h4>Recent Credits Transactions</h4></div>
+                    <div style="display: inline-flex;"><h4>{{ translate('Recent Credits Transactions')}}</h4></div>
                   </div>
                   <div class="card-content" style="height: 300px; overflow-x: scroll;">
                     <table class="table table-hover">
@@ -116,7 +116,7 @@
                   </div>
                   <hr>
                   <div class="card-footer">
-                    <a href="{{route('invoices')}}"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Invoices</a>
+                    <a href="{{route('invoices')}}"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{ translate('View Invoices')}}</a>
                   </div>
                 </div>
                 
@@ -125,14 +125,14 @@
     
                 <div class="card" >
                   <div class="card-header">
-                    <div style="display: inline-flex;"><h4>Recent Files</h4></div>
+                    <div style="display: inline-flex;"><h4>{{ translate('Recent Files') }}</h4></div>
                   </div>
                   <div class="card-content">
     
                     <ul class="nav nav-tabs">
-                      <li class="active"><a data-toggle="tab" href="#home">This Week</a></li>
-                      <li><a data-toggle="tab" href="#menu1">This Month</a></li>
-                      <li><a data-toggle="tab" href="#menu2">This Year</a></li>
+                      <li class="active"><a data-toggle="tab" href="#home">{{ translate('This Week')}}</a></li>
+                      <li><a data-toggle="tab" href="#menu1">{{ translate('This Month')}}</a></li>
+                      <li><a data-toggle="tab" href="#menu2">{{ translate('This Year')}}</a></li>
                     </ul>
                   
                     <div class="tab-content">
@@ -159,7 +159,7 @@
                   </div>
                   <hr>
                   <div class="card-footer">
-                    <a href="{{route('history')}}"><i class="fa-solid fa-arrow-up-right-from-square"></i> View File History</a>
+                    <a href="{{route('history')}}"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{ translate('View File History')}}</a>
                   </div>
     
                 </div>
