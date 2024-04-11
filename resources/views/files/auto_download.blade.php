@@ -805,13 +805,13 @@ body  {
                             @if(!$file->engineer_file)
                             <div id="checking">
                                 
-                                <strong style="float: left; display: block;">Searching file in our database</strong><br>
+                                <strong style="float: left; display: block;">{{translate('Searching file in our database')}}</strong><br>
                                 
 
                                 <div  class="ring">
                                     <span class="loading"></span>
                                 </div>
-                                <p style="display: block; margin-top: 50px; float: left; margin-left: 50px;">Please wait while we try to prepare your file for instant download.</p>
+                                <p style="display: block; margin-top: 30px; float: left; margin-left: 50px;">{{translate('Please wait while we try to prepare your file for instant download')}}</p>
                             </div>
 
                                 <div id="download-area" class="hide">
@@ -820,7 +820,7 @@ body  {
 
                                 <div id="not-found-area" class="hide">
                                     <br>
-                                    <p>Your file will be processed by our engineers, you will hear from them very soon.</p>
+                                    <p>{{translate('Your file will be processed by our engineers, you will hear from them very soon')}}.</p>
                                     
                                 </div>
                             @else
@@ -846,7 +846,7 @@ body  {
                                 </a>
                                 
                                 @else
-                                    <p>Your file will be processed by our engineers, you will hear from them very soon.</p>
+                                    <p>{{translate('Your file will be processed by our engineers, you will hear from them very soon')}}.</p>
                                 @endif
 
                             @endif
@@ -855,7 +855,7 @@ body  {
 
                                 <div id="options-area" class="m-t-10 bb-light bt" style="line-height: 2.7; margin-bottom: 10px; padding-bottom: 10px; margin-top:100px;">
                                     <p class="push-bit" style="">
-                                        Your request is being recieved with following options:
+                                        {{translate('Your request is being recieved with following options')}}:
                                     </p>
     
                                     @if($file->stages_services)
