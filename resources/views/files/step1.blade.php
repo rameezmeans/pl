@@ -312,7 +312,7 @@
 
                               <div class="col-xl-12 col-lg-12 col-md-12">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">Brand *</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Brand')}} *</label>
                                   
                                     <select name="brand" id="brand" class="select-dropdown form-control">
                                         @if(!old('brand'))
@@ -328,7 +328,7 @@
 
                               <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">Model *</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Model')}} *</label>
                                   
                                 <select name="model" id="model" class="select-dropdown form-control" disabled>
                                     <option value="model" @if(!old('model')) selected @endif disabled>{{translate('Model')}}</option>
@@ -339,7 +339,7 @@
 
                               <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">Version *</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Version')}} *</label>
                                   
                                 <select name="version" id="version" class="select-dropdown form-control" disabled>
                                     <option value="version" @if(!old('version')) selected @endif disabled>{{translate('Version')}}</option>
@@ -350,7 +350,7 @@
 
                               <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">Engine *</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Engine')}} *</label>
                                   
                                 <select name="engine" id="engine" class="select-dropdown form-control" disabled>
                                     <option value="engine" @if(!old('engine')) selected @endif disabled>{{translate('Engine')}}</option>
@@ -372,7 +372,7 @@
 
                               <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">Gearbox</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Gearbox')}}</label>
                                   
                                   <select name="gear_box" class="select-dropdown form-control">
                                     <option value="gear_box" @if(!old('gear_box')) selected @endif disabled>Gear box</option>
@@ -386,12 +386,12 @@
 
                               <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="form-group rd-gp">
-                                  <label for="exampleInputCompanyLP1">Is it an Original file? * </label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Is it an Original file')}}? * </label>
                                     <div>
                                       <input type="radio" id="yes" name="is_original" value="yes">
-                                      <label for="yes">Yes</label>
+                                      <label for="yes">{{translate('Yes')}}</label>
                                       <input type="radio" id="no" name="is_original" value="no">
-                                      <label for="no">No</label><br>
+                                      <label for="no">{{translate('No')}}</label><br>
                                     </div>
                                     @error('is_original')
                                     <span class="invalid-feedback" role="alert">
@@ -403,7 +403,7 @@
 
                             <div class="col-xl-12 col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleInputCompanyAC1">Additional Comment</label>
+                                    <label for="exampleInputCompanyAC1">{{translate('Additional Comment')}}</label>
                                     <textarea type="text" id="additional_comments" rows="3" name="additional_comments" class="materialize-textarea form-control @error('additional_comments') is-invalid @enderror" placeholder="{{translate('Additional Comments')}} ">{{ old('additional_comments') }}</textarea>
                                     @error('additional_comments')
                                     <span class="invalid-feedback" role="alert">
