@@ -161,8 +161,9 @@
           </div>
 
           <div id="posting-file" class="@if($errors->any()) show @else hide @endif">
-            <form method="POST" action="{{ route('step2') }}">
+            <form method="POST" action="{{ route('step2') }}" enctype="multipart/form-data">
                 <input type="hidden" name="temporary_file_id" id="temporary_file_id" value="{{ old('temporary_file_id') }}">
+                {{-- <input type="hidden" name="acm_file_name" id="acm_file_name" value="{{ old('acm_file_name') }}"> --}}
                 @csrf
 
                     <div class="row post-row">
@@ -213,6 +214,28 @@
                         </div>
                         </div>
                 </div>
+
+                <div class="row post-row">
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
+                      <div class="heading-column-box">
+                          <h3>Upload ACM File</h3>
+                          <p>Please upload ACM file here. In Case of Form Failed, Please upload it again.</p>
+                      </div>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-8 type-column">
+                      <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 ">
+                              
+                            <input type="file" name="acm_file" id="acm_file" value="{{ old('acm_file') }}">
+                             
+                          </div>
+                      </div>
+                      
+                  </div>
+
+              </div>
 
                 <div class="row post-row">
 
@@ -537,6 +560,47 @@
         $('#gear_box').attr('disabled', 'disabled');
     }
 
+    function secondDropZone(){
+
+        Dropzone.autoDiscover = false;
+        var dropzoneACM = new Dropzone('#uploadACMfile', {
+            thumbnailWidth: 200,
+            maxFilesize: 10,
+            //   acceptedFiles: "'',.cod,.bin",
+
+            success: function(file, response) {
+                console.log(response);
+                $('#acm_file_name').val(response.fileName);
+                
+            },
+            error: function(file) {
+                
+            },
+            accept: function(file, done) {
+                console.log(file);
+                let fileName = file.name;
+                let ext = fileName.substr(fileName.length - 3);
+                console.log(ext);
+
+                if (ext == 'zip' || ext == 'rar' ||file.type == "application/zip" || file.type == "application/x-rar") {
+                    
+                    console.log('failed');  
+
+                    if (window.confirm('You can not upload zip or rar files!')){
+                        location.reload();
+                    }
+                    else{
+                        location.reload();
+                    }             
+                }
+                else{
+                    done();
+                }
+                
+            }
+        });
+    }
+
     Dropzone.autoDiscover = false;
 
     var dropzone = new Dropzone('#uploadfile', {
@@ -555,6 +619,8 @@
             $('.master-tools').addClass('hide');
             $('.slave-tools').addClass('hide');
             $('.i-content-block').addClass('level2');
+
+            secondDropZone();
         },
         error: function(file) {
             
@@ -584,6 +650,8 @@
     });
 
     $(document).ready(function(event) {
+    
+    
 
         $(document).on('change', '#brand', function(e) {
             let brand = $(this).val();
