@@ -73,6 +73,13 @@ class FileController extends Controller
         );
     }
 
+    // public function uploadACMFile(Request $request){
+    //     $file = $request->file('file');
+    //     $fileName = $this->filesMainObj->uploadACMFile($file);
+
+    //     return response()->json(['fileName' => $fileName]);
+    // }
+
     public function getDownloadButton(Request $request){
 
         $file = File::findOrFail($request->file_id);
@@ -861,13 +868,14 @@ class FileController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function step2(Request $request) {
-
+        
+        $fileUploaded = $request->file('acm_file');
         $rules = $this->filesMainObj->getStep1ValidationTempfile();
         $file = $request->validate($rules);
 
         $data = $request->all();
         
-        return $this->filesMainObj->addStep1InforIntoTempFile($data);
+        return $this->filesMainObj->addStep1InforIntoTempFile($data, $fileUploaded);
     }
 
     /**
