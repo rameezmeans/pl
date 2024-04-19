@@ -1347,7 +1347,7 @@ div.file-type-buttons label > input + img {
                   
                   
                   <span style="display: inline-grid;margin-bottom: 20px;" >
-                    <strong>ACM File Name:</strong>
+                    <strong>ACM MCM/ECM File Name:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
                       <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
