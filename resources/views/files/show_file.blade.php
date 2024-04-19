@@ -1037,7 +1037,7 @@ div.file-type-buttons label > input + img {
                   
                   
                   <span style="display: inline-grid;margin-bottom: 20px;" >
-                    <strong>ACM MCM/ECM File Name:</strong>
+                    <strong>ACM File Name:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
                       <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
@@ -1318,7 +1318,7 @@ div.file-type-buttons label > input + img {
 
               <span class="file-name-box" style="margin-bottom: 20px;">
                 <span style="display: inline-grid;" >
-                  <strong>File Name:</strong>
+                  <strong>ECU File Name:</strong>
                   <span class="f-name">{{$row->request_file}}</span>
                 </span>
 
@@ -1342,17 +1342,13 @@ div.file-type-buttons label > input + img {
               </span>
 
               @if($file->acm_file)
-              @foreach($file->acm_files as $acm)
+              @foreach($row->acm_files as $acm)
                 <div class="bt m-t-20 p-t-10">
-                  
-                  
                   <span style="display: inline-grid;margin-bottom: 20px;" >
-                    <strong>ACM MCM/ECM File Name:</strong>
+                    <strong>ACM File Name:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
                       <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
-                    
-                  
                 </div>
               @endforeach
               @endif
@@ -1635,7 +1631,7 @@ div.file-type-buttons label > input + img {
                   <span class="file-name-box">
                     
                     <span style="display: inline-grid;">
-                      <strong>File Name:</strong>
+                      <strong>ECU File Name:</strong>
                       <span class="f-name">{{$file->file_attached}}</span>
                     </span>
                   <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
@@ -1835,7 +1831,7 @@ div.file-type-buttons label > input + img {
 
                 <span>
                   <span style="display: inline-grid;">
-                    <strong>File Name:</strong>
+                    <strong>ECU File Name:</strong>
                     <span>{{$row->request_file}}</span>
                   </span>
 
