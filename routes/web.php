@@ -116,6 +116,7 @@ Route::post('get_change_status', [App\Http\Controllers\FileController::class, 'c
 Route::post('get_auto_download_button', [App\Http\Controllers\FileController::class, 'getDownloadButton'])->name('get-download-button');
 Route::post('auth_pusher', [App\Http\Controllers\FileController::class, 'authPusher'])->name('pusher.auth');
 Route::post('get_comments', [App\Http\Controllers\FileController::class, 'getComments'])->name('get-comments');
+
 // Route::post('upload_acm_file', [App\Http\Controllers\FileController::class, 'uploadACMFile'])->name('upload-acm-file');
 
 Route::post('/new_request', [App\Http\Controllers\FileController::class, 'createNewrequest'])->name('request-file');
@@ -132,6 +133,9 @@ Route::get('pay_offer_credits/{id}', [App\Http\Controllers\FileController::class
 Route::post('add_offer_file', [App\Http\Controllers\FileController::class, 'addOfferToFile'])->name('add-offer-to-file');
 Route::post('offer_checkout', [App\Http\Controllers\PaymentsController::class, 'offerCheckout'])->name('offer-checkout');
 Route::post('buy_offer', [App\Http\Controllers\PaymentsController::class, 'buyOffer'])->name('buy.offer');
+
+Route::post('search_zohobooks/{id}', [App\Http\Controllers\PaymentsController::class, 'searchZohobooks'])->name('search-zohobooks');
+// Route::post('create_zohoboos_invoice', [App\Http\Controllers\FileController::class, 'getComments'])->name('get-comments');
 
 Route::get('/bosch-ecu', [App\Http\Controllers\AccountController::class, 'boschECU'])->name('bosch-ecu');
 
