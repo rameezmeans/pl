@@ -10,6 +10,7 @@ use ECUApp\SharedCode\Controllers\ZohoMainController;
 use ECUApp\SharedCode\Models\Group;
 use ECUApp\SharedCode\Models\Package;
 use ECUApp\SharedCode\Models\Product;
+use ECUApp\SharedCode\Models\User;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
@@ -39,6 +40,14 @@ class PaymentsController extends Controller
         $this->filesMainObj = new FilesMainController();
         $this->zohoMainObj = new ZohoMainController();
         $this->elorusMainObj = new ElorusMainController();
+    }
+
+    public function searchZohobooks($id) {
+
+        $user = User::findOrFail($id);
+
+        dd($user);
+
     }
 
     public function offerCheckout(Request $request) {
