@@ -19,6 +19,10 @@ use Twilio\Rest\Client;
 |
 */
 
+Route::get('/info', function () {
+    phpinfo();
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
