@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4b998ef55e336eb2b5646101cd34a17",
+    "content-hash": "1f35e9d0eb73d59e7bb72b83e37709c7",
     "packages": [
         {
             "name": "asad/oauth2-zoho",
@@ -964,89 +964,6 @@
                 "source": "https://github.com/darryldecode/laravelshoppingcart/tree/4.2.4"
             },
             "time": "2023-09-12T10:14:57+00:00"
-        },
-        {
-            "name": "deyjandi/laravel-viva-wallet",
-            "version": "v0.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Deyjandi/laravel-viva-wallet.git",
-                "reference": "b039e36f7660a9234e327aa7490b5d71d55674ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Deyjandi/laravel-viva-wallet/zipball/b039e36f7660a9234e327aa7490b5d71d55674ba",
-                "reference": "b039e36f7660a9234e327aa7490b5d71d55674ba",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.4",
-                "illuminate/contracts": "^9.0",
-                "php": "^8.1.0",
-                "spatie/laravel-package-tools": "^1.9.2"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.8",
-                "nunomaduro/collision": "^6.0",
-                "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^7.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Deyjandi\\VivaWallet\\VivaWalletServiceProvider"
-                    ],
-                    "aliases": {
-                        "VivaWallet": "Deyjandi\\VivaWallet\\Facades\\VivaWallet"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Deyjandi\\VivaWallet\\": "src",
-                    "Deyjandi\\VivaWallet\\Database\\Factories\\": "database/factories"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pavlos Kafritsas",
-                    "email": "pavkfr@hotmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Implementation of Viva Wallet's API for laravel projects",
-            "homepage": "https://github.com/deyjandi/laravel-viva-wallet",
-            "keywords": [
-                "Deyjandi",
-                "VivaWallet",
-                "laravel",
-                "laravel-viva-wallet",
-                "viva wallet",
-                "viva-wallet"
-            ],
-            "support": {
-                "issues": "https://github.com/Deyjandi/laravel-viva-wallet/issues",
-                "source": "https://github.com/Deyjandi/laravel-viva-wallet/tree/v0.9.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/Deyjandi",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-03-31T08:21:01+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -6322,66 +6239,6 @@
             "time": "2023-01-03T19:28:04+00:00"
         },
         {
-            "name": "spatie/laravel-package-tools",
-            "version": "1.16.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53",
-                "reference": "ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^9.28|^10.0|^11.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^7.7|^8.0",
-                "pestphp/pest": "^1.22",
-                "phpunit/phpunit": "^9.5.24",
-                "spatie/pest-plugin-test-time": "^1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelPackageTools\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tools for creating Laravel packages",
-            "homepage": "https://github.com/spatie/laravel-package-tools",
-            "keywords": [
-                "laravel-package-tools",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-03-20T07:29:11+00:00"
-        },
-        {
             "name": "stripe/stripe-php",
             "version": "v10.21.0",
             "source": {
@@ -11523,7 +11380,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.0.30"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
