@@ -199,6 +199,13 @@ input.qty-input {
                     <input type="hidden" name="unit_price_for_checkout" value="" class="unit_price_for_checkout">
                 <button class="btn btn-red btn-red-full" type="submit">{{translate('Pay with Card')}}</button>
                 </form>
+
+                <form action="{{route('checkout.viva')}}" method="POST">
+                  @csrf
+                  <input type="hidden" name="amount" value="" class="total_for_checkout">
+                  
+              <button class="btn btn-red btn-red-full" type="submit">{{translate('Viva Payment')}}</button>
+              </form>
                      
                   {{-- <form action="{{route('checkout.paypal')}}" method="POST">
                     @csrf
