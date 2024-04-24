@@ -200,14 +200,13 @@ input.qty-input {
                 <button class="btn btn-red btn-red-full" type="submit">{{translate('Pay with Card')}}</button>
                 </form>
 
-                {{-- @if(Auth::user()->test ==1)
-                <form action="{{route('checkout.viva')}}" method="POST">
+                
+                <form action="{{route('checkout.viva')}}" method="POST" class="m-t-20">
                   @csrf
                   <input type="hidden" name="amount" value="" class="total_for_checkout">
-                  
-              <button class="btn btn-red btn-red-full" type="submit">{{translate('Viva Payment')}}</button>
-              </form>
-              @endif --}}
+                  <button class="btn btn-red btn-red-full" type="submit"><img data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline"></button>
+                </form>
+             
                      
                   {{-- <form action="{{route('checkout.paypal')}}" method="POST">
                     @csrf
