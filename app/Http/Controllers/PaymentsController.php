@@ -17,6 +17,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+use Deyjandi\VivaWallet\Facades\VivaWallet;
+use Deyjandi\VivaWallet\Payment;
+
+
+
 class PaymentsController extends Controller
 {
     private $paymenttMainObj;
@@ -40,15 +45,39 @@ class PaymentsController extends Controller
         $this->filesMainObj = new FilesMainController();
         $this->zohoMainObj = new ZohoMainController();
         $this->elorusMainObj = new ElorusMainController();
-    }
-
-    public function searchZohobooks($id) {
-
-        $user = User::findOrFail($id);
-
-        dd($user);
 
     }
+
+    public function vivaCreds(){
+        $vivaAccount = Auth::user()->viva_payment_account();
+        
+        config(['viva-wallet.env' => $vivaAccount->env]);
+        config(['viva-wallet.api_key' => $vivaAccount->key]);
+        config(['viva-wallet.client_id' => $vivaAccount->viva_client_id]);
+        config(['viva-wallet.client_secret' => $vivaAccount->secret]);
+        config(['viva-wallet.merchant_id' => $vivaAccount->viva_merchant_id]);
+        config(['viva-wallet.payment.source_code' => $vivaAccount->source_code]);
+    }
+
+    public function redirectViva(Request $request) {
+
+        $money = (float)$request->amount * 100;
+
+        $this->vivaCreds();
+
+        $payment = new Payment($amount = $money);
+        $checkoutUrl = VivaWallet::createPaymentOrder($payment);
+
+        return redirect()->away($checkoutUrl);
+    }
+
+    // public function searchZohobooks($id) {
+
+    //     $user = User::findOrFail($id);
+
+    //     dd($user);
+
+    // }
 
     public function offerCheckout(Request $request) {
 
@@ -229,13 +258,20 @@ class PaymentsController extends Controller
 
     public function success(Request $request){
 
+        $this->vivaCreds();
+
         $package = false;
         $offer = false;
         $fileFlag = false;
+        $viva = false;
 
         if(isset($request->purpose) && $request->purpose == 'offer'){
             $offer = true;
             $fileID = $request->file_id;
+        }
+
+        if(isset($request->eventId)){
+            $viva = true;
         }
 
         if(!$offer) {
@@ -253,7 +289,7 @@ class PaymentsController extends Controller
         if($type == 'stripe'){
             $sessionID = $request->get('session_id');
         }
-        else{
+        else if($type == 'paypal'){
             $sessionID = $request->get('paymentId');
         }
 
@@ -275,19 +311,31 @@ class PaymentsController extends Controller
 
         else{
 
-            if($request->packageID == 0){
-
-                $credits = $request->credits;
+            if($viva){
+                $type = 'viva';
+                $sessionID = $request->get('t');
+                $transaction = VivaWallet::retrieveTransaction($request->get('t'));
+                $price = $this->paymenttMainObj->getPrice()->value;
+                $credits = (int) $transaction['amount']/$price;
                 $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
+                
             }
             else{
 
-                $package = true;
-                $packageID = $request->packageID;
-                $package = Package::findOrFail($packageID);
-                $credits = $package->credits;
-                $invoice = $this->paymenttMainObj->addCreditsPackage($user, $sessionID, $package, $type);
-                
+                if($request->packageID == 0){
+
+                    $credits = $request->credits;
+                    $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
+                }
+                else{
+
+                    $package = true;
+                    $packageID = $request->packageID;
+                    $package = Package::findOrFail($packageID);
+                    $credits = $package->credits;
+                    $invoice = $this->paymenttMainObj->addCreditsPackage($user, $sessionID, $package, $type);
+                    
+                }
             }
         }
 
@@ -307,6 +355,10 @@ class PaymentsController extends Controller
 
         if($type == 'stripe'){
             $account = $user->stripe_payment_account();
+            
+        }
+        else if($type == 'viva'){
+            $account = $user->viva_payment_account();
             
         }
         else{

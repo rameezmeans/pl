@@ -7,6 +7,19 @@ use ECUApp\SharedCode\Models\Tool;
 use ECUApp\SharedCode\Models\Vehicle;
 use Illuminate\Http\Client\ConnectionException;
 
+if(!function_exists('setEnv')){
+    function setEnv($name, $value)
+    {
+        $value = '"'.$value.'"';
+        $path = base_path('.env');
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                $name . '=' . env($name), $name . '=' . $value, file_get_contents($path)
+            ));
+        }
+    }
+}
+
 if(!function_exists('get_tool_name')){
 
     function get_tool_name( $id ){
