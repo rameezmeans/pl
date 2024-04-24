@@ -153,6 +153,9 @@ Route::post('/cart_quantity', [App\Http\Controllers\PaymentsController::class, '
 Route::get('/cart', [App\Http\Controllers\PaymentsController::class, 'cart'])->name('cart');
 Route::post('checkout_packages', [App\Http\Controllers\PaymentsController::class, 'checkoutPackagesStripe'])->name('checkout.packages.stripe');
 
+// Route::get('/test_viva', [App\Http\Controllers\PaymentsController::class, 'testViva'])->name('test_viva');
+Route::post('/viva_payment', [App\Http\Controllers\PaymentsController::class, 'redirectViva'])->name('checkout.viva');
+
 Route::post('/checkout_stripe', [App\Http\Controllers\PaymentsController::class, 'stripeCheckout'])->name('checkout.stripe');
 Route::get('/success', [App\Http\Controllers\PaymentsController::class, 'success'])->name('checkout.success');
 Route::get('/success_package', [App\Http\Controllers\PaymentsController::class, 'successPackage'])->name('checkout.success.package');
