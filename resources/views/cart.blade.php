@@ -200,12 +200,14 @@ input.qty-input {
                 <button class="btn btn-red btn-red-full" type="submit">{{translate('Pay with Card')}}</button>
                 </form>
 
+                @if(Auth::user()->test ==1)
                 <form action="{{route('checkout.viva')}}" method="POST">
                   @csrf
                   <input type="hidden" name="amount" value="" class="total_for_checkout">
                   
               <button class="btn btn-red btn-red-full" type="submit">{{translate('Viva Payment')}}</button>
               </form>
+              @endif
                      
                   {{-- <form action="{{route('checkout.paypal')}}" method="POST">
                     @csrf
