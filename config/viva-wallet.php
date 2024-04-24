@@ -105,21 +105,21 @@ return [
     | @see https://developer.vivawallet.com/apis-for-payments/payment-api/#tag/Payments
     | @see https://developer.vivawallet.com/smart-checkout/smart-checkout-implementation/
     */
-    // 'payment' => [
+    'payment' => [
 
-    //     'preauth' => (bool) env('VIVA_WALLET_PAYMENT_PREAUTH', false),
+        'preauth' => (bool) env('VIVA_WALLET_PAYMENT_PREAUTH', false),
 
-    //     'timeout' => (int) env('VIVA_WALLET_PAYMENT_TIMEOUT', 1800),
+        'timeout' => (int) env('VIVA_WALLET_PAYMENT_TIMEOUT', 1800),
 
-    //     'disable_cash' => (bool) env('VIVA_WALLET_PAYMENT_DISABLE_CASH', true),
+        'disable_cash' => (bool) env('VIVA_WALLET_PAYMENT_DISABLE_CASH', true),
 
-    //     'disable_wallet' => (bool) env('VIVA_WALLET_DISABLE_WALLET', true),
+        'disable_wallet' => (bool) env('VIVA_WALLET_DISABLE_WALLET', true),
 
-    //     'source_code' => env('VIVA_WALLET_PAYMENT_SOURCE_CODE'),
+        'source_code' => env('VIVA_WALLET_PAYMENT_SOURCE_CODE'),
 
-    //     'brand_color' => env('VIVA_WALLET_PAYMENT_BRAND_COLOR', '06abc1'),
+        'brand_color' => env('VIVA_WALLET_PAYMENT_BRAND_COLOR', '06abc1'),
 
-    //     'preselected_method' => env('VIVA_WALLET_PAYMENT_PRESELECTED_METHOD', PaymentMethod::CreditCard)
+        'preselected_method' => env('VIVA_WALLET_PAYMENT_PRESELECTED_METHOD', PaymentMethod::CreditCard)
 
-    // ],
+    ],
 ];

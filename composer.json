@@ -17,6 +17,7 @@
         "cba85/eu-vat-validation": "dev-master",
         "danielebarbaro/laravel-vat-eu-validator": "^1.1",
         "darryldecode/cart": "^4.2",
+        "deyjandi/laravel-viva-wallet": "^0.9.0",
         "drahosistvan/vatvalidation": "^1.0",
         "guzzlehttp/guzzle": "^7.0",
         "jamesmills/laravel-timezone": "^1.11",
