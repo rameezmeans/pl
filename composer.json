@@ -1,6 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
+    "platform-check": false,
     "description": "The Laravel Framework.",
     "keywords": [
         "framework",
@@ -8,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1.27",
+        "php": "^8.0.30",
         "asciisd/zoho": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "biscolab/laravel-recaptcha": "^6.0",
