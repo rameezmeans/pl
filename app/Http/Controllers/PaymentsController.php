@@ -49,6 +49,7 @@ class PaymentsController extends Controller
     }
 
     public function vivaCreds(){
+
         $vivaAccount = Auth::user()->viva_payment_account();
         
         config(['viva-wallet.env' => $vivaAccount->env]);
@@ -60,6 +61,13 @@ class PaymentsController extends Controller
     }
 
     public function redirectViva(Request $request) {
+
+        $amount = (int)$request->amount;
+
+        if($amount <= 0){
+            return redirect()->back()->with('success', 'Please pick 1 or more credits!');
+            
+        }
 
         $money = (float)$request->amount * 100;
 
