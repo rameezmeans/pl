@@ -250,7 +250,6 @@ class PaymentsController extends Controller
         if($user->group->discount > 0){
             $factor =  -1* (float) ($user->group->discount / 100) * $price->value;
         }
-
         
         return view('cart', ['packages' => $packages, 'price' => $price, 'tax' => $tax, 'factor' => $factor, 'group' => $user->group, 'user' => $user] );
 
@@ -316,7 +315,7 @@ class PaymentsController extends Controller
                 $sessionID = $request->get('t');
                 $transaction = VivaWallet::retrieveTransaction($request->get('t'));
                 $price = $this->paymenttMainObj->getPrice()->value;
-                $credits = (int) $transaction['amount']/$price;
+                $credits = (int) $transaction['amount'] / $price;
                 $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
                 
             }
@@ -340,7 +339,6 @@ class PaymentsController extends Controller
         }
 
         if($user->zohobooks_id == NULL){
-
             $this->zohoMainObj->createZohoAccount($user);
         }
 
