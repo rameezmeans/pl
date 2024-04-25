@@ -73,7 +73,7 @@ class PaymentsController extends Controller
 
         $this->vivaCreds();
 
-        $jsonMessage = json_encode(['credits' => 2]);
+        $jsonMessage = json_encode(['credits' => $request->credits]);
 
         $payment = new Payment();
         $payment->setAmount($money)
@@ -270,8 +270,6 @@ class PaymentsController extends Controller
     }
 
     public function success(Request $request){
-
-        // dd($request->all());
 
         $this->vivaCreds();
 
