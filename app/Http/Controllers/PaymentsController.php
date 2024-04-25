@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-use Deyjandi\VivaWallet\Facades\VivaWallet;
+use Deyjandi\VivaWallet\VivaWallet;
 use Deyjandi\VivaWallet\Payment;
 
 
