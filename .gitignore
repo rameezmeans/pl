@@ -19,4 +19,4 @@ yarn-error.log
 /.idea
 /.vscode
 /public
-/resources/lang/gr.json
+resources/lang/gr.json
