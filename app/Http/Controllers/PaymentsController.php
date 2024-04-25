@@ -66,14 +66,20 @@ class PaymentsController extends Controller
 
         if($amount <= 0){
             return redirect()->back()->with('success', 'Please pick 1 or more credits!');
-            
+
         }
 
         $money = (float)$request->amount * 100;
 
         $this->vivaCreds();
 
-        $payment = new Payment($amount = $money);
+        $jsonMessage = json_encode(['credits' => 2]);
+
+        $payment = new Payment();
+        $payment->setAmount($money)
+        ->setMerchantTrns($jsonMessage)
+        ->setBrandColor('273759');
+
         $checkoutUrl = VivaWallet::createPaymentOrder($payment);
 
         return redirect()->away($checkoutUrl);
@@ -265,6 +271,8 @@ class PaymentsController extends Controller
 
     public function success(Request $request){
 
+        // dd($request->all());
+
         $this->vivaCreds();
 
         $package = false;
@@ -322,8 +330,9 @@ class PaymentsController extends Controller
                 $type = 'viva';
                 $sessionID = $request->get('t');
                 $transaction = VivaWallet::retrieveTransaction($request->get('t'));
+                $merchantTrns = json_decode($transaction['merchantTrns']);
                 $price = $this->paymenttMainObj->getPrice()->value;
-                $credits = (int) $transaction['amount'] / $price;
+                $credits = $merchantTrns->credits;
                 $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
                 
             }
