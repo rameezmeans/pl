@@ -136,6 +136,7 @@ Route::post('reject_offer', [App\Http\Controllers\FileController::class, 'reject
 Route::get('pay_offer_credits/{id}', [App\Http\Controllers\FileController::class, 'payCreditsOffer'])->name('pay-credits-offer');
 Route::post('add_offer_file', [App\Http\Controllers\FileController::class, 'addOfferToFile'])->name('add-offer-to-file');
 Route::post('offer_checkout', [App\Http\Controllers\PaymentsController::class, 'offerCheckout'])->name('offer-checkout');
+Route::post('offer_checkout_viva', [App\Http\Controllers\PaymentsController::class, 'offerCheckoutViva'])->name('buy.offer.viva');
 Route::post('buy_offer', [App\Http\Controllers\PaymentsController::class, 'buyOffer'])->name('buy.offer');
 
 Route::post('search_zohobooks/{id}', [App\Http\Controllers\PaymentsController::class, 'searchZohobooks'])->name('search-zohobooks');
@@ -155,6 +156,8 @@ Route::post('checkout_packages', [App\Http\Controllers\PaymentsController::class
 
 // Route::get('/test_viva', [App\Http\Controllers\PaymentsController::class, 'testViva'])->name('test_viva');
 Route::post('/viva_payment', [App\Http\Controllers\PaymentsController::class, 'redirectViva'])->name('checkout.viva');
+Route::post('/viva_payment_packages', [App\Http\Controllers\PaymentsController::class, 'redirectVivaPackages'])->name('checkout.packages.viva');
+Route::post('/viva_payment_file', [App\Http\Controllers\PaymentsController::class, 'redirectVivaFile'])->name('checkout.file.viva');
 
 Route::post('/checkout_stripe', [App\Http\Controllers\PaymentsController::class, 'stripeCheckout'])->name('checkout.stripe');
 Route::get('/success', [App\Http\Controllers\PaymentsController::class, 'success'])->name('checkout.success');

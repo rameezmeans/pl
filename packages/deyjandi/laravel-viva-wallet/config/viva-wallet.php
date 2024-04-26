@@ -13,7 +13,7 @@ return [
     |
     | Available values: "demo" / "live".
     */
-    'env' => env('VIVA_WALLET_ENV', 'demo'),
+    'env' => env('VIVA_WALLET_ENV', 'live'),
 
     /*
     |--------------------------------------------------------------------------

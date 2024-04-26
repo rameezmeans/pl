@@ -17,10 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-use Deyjandi\VivaWallet\Facades\VivaWallet;
+use Deyjandi\VivaWallet\VivaWallet;
 use Deyjandi\VivaWallet\Payment;
-
-
 
 class PaymentsController extends Controller
 {
@@ -49,6 +47,7 @@ class PaymentsController extends Controller
     }
 
     public function vivaCreds(){
+
         $vivaAccount = Auth::user()->viva_payment_account();
         
         config(['viva-wallet.env' => $vivaAccount->env]);
@@ -59,13 +58,124 @@ class PaymentsController extends Controller
         config(['viva-wallet.payment.source_code' => $vivaAccount->source_code]);
     }
 
+    public function redirectVivaFile(Request $request) {
+
+        $user = Auth::user();
+        $creditsToBuy = $request->creditsToBuy;
+        $creditsForFile = $request->creditsForFile;
+        $fileID = $request->file_id;
+
+        $unitPrice =  $this->paymenttMainObj->getPrice()->value;
+
+        $taxPer = 0;
+
+        if($user->group->tax > 0){
+            $taxPer = (float) $user->group->tax;
+        }
+
+        $tax = ($taxPer * $unitPrice)/100;
+
+        $unitPrice = $unitPrice + $tax;
+
+        $money = $unitPrice * $creditsToBuy;
+
+        $this->vivaCreds();
+
+        $jsonMessage = json_encode([
+            'file_id' => $fileID,
+            'credits_for_file' => $creditsForFile,
+            'credits_to_buy' => $creditsToBuy,
+        ]);
+
+        $payment = new Payment();
+        $payment->setAmount($money*100)
+        ->setMerchantTrns($jsonMessage)
+        ->setBrandColor('273759');
+
+        $checkoutUrl = VivaWallet::createPaymentOrder($payment);
+
+        return redirect()->away($checkoutUrl);
+    }
+
+    public function redirectVivaPackages(Request $request) {
+
+        $money = (float)$request->price * 100;
+
+        $this->vivaCreds();
+
+        $jsonMessage = json_encode(['package_id' => $request->package_id]);
+
+        $payment = new Payment();
+        $payment->setAmount($money)
+        ->setMerchantTrns($jsonMessage)
+        ->setBrandColor('273759');
+
+        $checkoutUrl = VivaWallet::createPaymentOrder($payment);
+
+        return redirect()->away($checkoutUrl);
+
+    }
+
+    public function offerCheckoutViva(Request $request) {
+
+        $user = Auth::user();
+        $creditsToBuy = $request->total_credits_to_submit;
+        $creditsForFile = $request->credits_for_checkout;
+        $fileID = $request->file_id;
+
+        $unitPrice =  $this->paymenttMainObj->getPrice()->value;
+
+        $taxPer = 0;
+
+        if($user->group->tax > 0){
+            $taxPer = (float) $user->group->tax;
+        }
+
+        $tax = ($taxPer * $unitPrice)/100;
+
+        $unitPrice = $unitPrice + $tax;
+
+        $money = $unitPrice * $creditsToBuy;
+
+        $this->vivaCreds();
+
+        $jsonMessage = json_encode([
+            'type' => 'offer',
+            'file_id' => $fileID,
+            'credits_for_file' => $creditsForFile,
+            'credits_to_buy' => $creditsToBuy,
+        ]);
+
+        $payment = new Payment();
+        $payment->setAmount($money*100)
+        ->setMerchantTrns($jsonMessage)
+        ->setBrandColor('273759');
+
+        $checkoutUrl = VivaWallet::createPaymentOrder($payment);
+
+        return redirect()->away($checkoutUrl);
+    }
+
     public function redirectViva(Request $request) {
+
+        $amount = (int)$request->amount;
+
+        if($amount <= 0){
+            return redirect()->back()->with('success', 'Please pick 1 or more credits!');
+
+        }
 
         $money = (float)$request->amount * 100;
 
         $this->vivaCreds();
 
-        $payment = new Payment($amount = $money);
+        $jsonMessage = json_encode(['credits' => $request->credits]);
+
+        $payment = new Payment();
+        $payment->setAmount($money)
+        ->setMerchantTrns($jsonMessage)
+        ->setBrandColor('273759');
+
         $checkoutUrl = VivaWallet::createPaymentOrder($payment);
 
         return redirect()->away($checkoutUrl);
@@ -250,7 +360,6 @@ class PaymentsController extends Controller
         if($user->group->discount > 0){
             $factor =  -1* (float) ($user->group->discount / 100) * $price->value;
         }
-
         
         return view('cart', ['packages' => $packages, 'price' => $price, 'tax' => $tax, 'factor' => $factor, 'group' => $user->group, 'user' => $user] );
 
@@ -264,6 +373,7 @@ class PaymentsController extends Controller
         $offer = false;
         $fileFlag = false;
         $viva = false;
+        $packageID = 0;
 
         if(isset($request->purpose) && $request->purpose == 'offer'){
             $offer = true;
@@ -312,12 +422,61 @@ class PaymentsController extends Controller
         else{
 
             if($viva){
+
                 $type = 'viva';
                 $sessionID = $request->get('t');
                 $transaction = VivaWallet::retrieveTransaction($request->get('t'));
-                $price = $this->paymenttMainObj->getPrice()->value;
-                $credits = (int) $transaction['amount']/$price;
-                $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
+
+                $merchantTrns = json_decode($transaction['merchantTrns']);
+
+                if(isset($merchantTrns->package_id)) {
+
+                    $package = true;
+                    $packageObj = Package::findOrFail($merchantTrns->package_id);
+                    $packageID = $packageObj->id;
+                    $credits = $packageObj->credits;
+                    $invoice = $this->paymenttMainObj->addCreditsPackage($user, $sessionID, $packageObj, $type);
+
+                }
+                else if(isset($merchantTrns->file_id)){
+
+                    if(isset($merchantTrns->type) && $merchantTrns->type == 'offer'){
+
+                        $offer = true;
+                        $creditsForFile = $merchantTrns->credits_for_file;
+                        $credits = $merchantTrns->credits_to_buy;
+                        $fileID = $merchantTrns->file_id;
+                        $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
+                        $file = $this->filesMainObj->acceptOfferFinalise($user, $fileID, $creditsForFile, $this->frontendID);
+
+                    }
+                    else{
+                    
+                        $fileFlag = true;
+                        $fileID = $merchantTrns->file_id;
+                        $creditsForFile = $merchantTrns->credits_for_file;
+                        $credits = $merchantTrns->credits_to_buy;
+
+                        $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
+                        $file = $this->filesMainObj->saveFile($user, $fileID, $creditsForFile);
+                    }
+
+                }
+                else{
+                    $amount = $transaction['amount'];
+                    $price = $this->paymenttMainObj->getPrice()->value;
+                    $tax = (float) $user->group->tax;
+                    $amountWithoutTax =  $amount;
+                    $taxAmount = 0;
+
+                    if($tax>0){
+                        $taxAmount = $amount * $tax/100;
+                        $amountWithoutTax = $amount - $taxAmount;
+                    }
+
+                    $credits = (float) $amountWithoutTax / $price;
+                    $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
+                }
                 
             }
             else{
@@ -340,12 +499,11 @@ class PaymentsController extends Controller
         }
 
         if($user->zohobooks_id == NULL){
-
             $this->zohoMainObj->createZohoAccount($user);
         }
 
         if($user->zohobooks_id){
-            $this->zohoMainObj->createZohobooksInvoice($user, $invoice, $package, $type, $request->packageID);
+            $this->zohoMainObj->createZohobooksInvoice($user, $invoice, $package, $type, $packageID);
         }
 
         if($user->zohobooks_id == NULL){

@@ -37,6 +37,10 @@ input.qty-input {
     color: #111;
 }
 
+.btn-viva {
+  background-colour: transparent;
+}
+
 </style>
 
 @endsection
@@ -191,7 +195,7 @@ input.qty-input {
                       </tr>
                     </tbody>
                   </table>
-
+                  @if(Auth::user()->group->stripe_active == 1)
                   <form action="{{route('checkout.stripe')}}" method="POST">
                     @csrf
                     <input type="hidden" name="total_for_checkout" value="" class="total_for_checkout">
@@ -199,15 +203,19 @@ input.qty-input {
                     <input type="hidden" name="unit_price_for_checkout" value="" class="unit_price_for_checkout">
                 <button class="btn btn-red btn-red-full" type="submit">{{translate('Pay with Card')}}</button>
                 </form>
+                @endif
 
-                @if(Auth::user()->test ==1)
-                <form action="{{route('checkout.viva')}}" method="POST">
+                @if(Auth::user()->group->viva_active == 1)
+                <form action="{{route('checkout.viva')}}" method="POST" class="m-t-20">
                   @csrf
+                  {{-- <input type="hidden" name="credits" value="" class="credits_for_checkout"> --}}
                   <input type="hidden" name="amount" value="" class="total_for_checkout">
-                  
-              <button class="btn btn-red btn-red-full" type="submit">{{translate('Viva Payment')}}</button>
-              </form>
-              @endif
+                  <button class="btn btn-viva btn-red-full" type="submit">
+                    <img width="33%" data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline">
+                  </button>
+                </form>
+                @endif
+             
                      
                   {{-- <form action="{{route('checkout.paypal')}}" method="POST">
                     @csrf
