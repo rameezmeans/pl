@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Log;
 
 use Deyjandi\VivaWallet\VivaWallet;
 use Deyjandi\VivaWallet\Payment;
-use PDO;
 
 class PaymentsController extends Controller
 {
