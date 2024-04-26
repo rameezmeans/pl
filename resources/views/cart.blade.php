@@ -207,9 +207,11 @@ input.qty-input {
                 
                 <form action="{{route('checkout.viva')}}" method="POST" class="m-t-20">
                   @csrf
-                  <input type="hidden" name="credits" value="" class="credits_for_checkout">
+                  {{-- <input type="hidden" name="credits" value="" class="credits_for_checkout"> --}}
                   <input type="hidden" name="amount" value="" class="total_for_checkout">
-                  <button class="btn btn-viva btn-red-full" type="submit"><img data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline"></button>
+                  <button class="btn btn-viva btn-red-full" type="submit">
+                    <img data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline">
+                  </button>
                 </form>
              
                      
