@@ -183,6 +183,7 @@ input.qty-input {
                     </tbody>
                   </table>
 
+                  @if(Auth::user()->group->stripe_active == 1)
                 <form action="{{route('checkout.file')}}" method="POST">
                     @csrf
                     
@@ -193,7 +194,9 @@ input.qty-input {
                     
                     <button class="btn btn-red btn-red-full" type="submit">{{__('Pay with Card')}}</button>
                 </form>
+                @endif
 
+                @if(Auth::user()->group->viva_active == 1)
                 <form action="{{route('checkout.file.viva')}}" method="POST" class="m-t-20">
                   @csrf
                   <input type="hidden" name="file_id" value="{{$file_id}}" >
@@ -205,6 +208,7 @@ input.qty-input {
                     <img width="33%" data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline">
                   </button>
               </form>
+              @endif
                      
                   {{-- <form action="{{route('checkout.file')}}" method="POST">
                       @csrf
