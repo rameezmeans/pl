@@ -189,6 +189,15 @@ input.qty-input {
 
                     <button class="btn btn-red btn-red-full" type="submit">{{__('Pay with Card')}}</button>
                 </form>
+
+                <form action="{{route('checkout.packages.viva')}}" method="POST" class="m-t-20">
+                  @csrf
+                  <input type="hidden" name="price" value="{{($price*$tax)/100+$price}}" >
+                  <input type="hidden" name="package_id" value="{{$package}}" >
+                  <button class="btn btn-red-full" type="submit">
+                    <img data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline">
+                  </button>
+              </form>
                      
                   {{-- <form action="{{route('checkout.packages.paypal')}}" method="POST">
                       @csrf
