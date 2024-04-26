@@ -183,6 +183,7 @@ input.qty-input {
                     </tbody>
                   </table>
 
+                  @if(Auth::user()->group->stripe_active == 1)
                 <form action="{{route('buy.offer')}}" method="POST">
                     @csrf
                     {{-- <input type="hidden" name="total_for_checkout" value="{{ $credits_to_buy*$price->value +  $credits_to_buy*($tax/100)*$price->value }}" > --}}
@@ -193,7 +194,9 @@ input.qty-input {
                     {{-- <input type="hidden" name="unit_price_for_checkout" value="{{$price->value + ($tax/100)*$price->value}}" > --}}
                     <button class="btn btn-red btn-red-full" type="submit">{{__('Pay with Card')}}</button>
                 </form>
+                @endif
 
+                @if(Auth::user()->group->viva_active == 1)
                 <form action="{{route('buy.offer.viva')}}" method="POST" class="m-t-20">
                   @csrf
                   <input type="hidden" name="file_id" value="{{$file_id}}" >
@@ -204,6 +207,7 @@ input.qty-input {
                     <img width="33%" data-testid="logo-img" src="https://downloads.intercomcdn.com/i/o/464635/50deae94aaf455091e46faee/4d1ca330ee42856a5f3683b9aff84c61.png" alt="Viva.com Support" class="max-h-8 contrast-80 inline">
                   </button>
                 </form>
+                @endif
                      
                   {{-- <form action="{{route('buy.offer')}}" method="POST">
                       @csrf
