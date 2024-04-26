@@ -61,7 +61,7 @@ enum Environment: string
     public function checkout(string $order_code): string
     {
         return match ($this) {
-            self::Demo => "https://demo.vivapayments.com/web/checkout?ref=$order_code",
+            self::Demo => "https://demo.vivapayments.com/web/checkout?test=1&ref=$order_code",
             self::Live => "https://www.vivapayments.com/web/checkout?ref=$order_code",
         };
     }
