@@ -30,6 +30,7 @@ use ECUApp\SharedCode\Models\User;
 use ECUApp\SharedCode\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Pusher\Pusher;
 
 class FileController extends Controller
 {
@@ -145,6 +146,20 @@ class FileController extends Controller
 
     public function authPusher(Request $request){
 
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER', 'mt1'),
+                'host' => env('PUSHER_HOST') ?: 'api-'.env('PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
+                'port' => env('PUSHER_PORT', 443),
+                'scheme' => env('PUSHER_SCHEME', 'https'),
+                'encrypted' => true,
+                'useTLS' => env('PUSHER_SCHEME', 'https') === 'https',
+            ],
+        );
+
         $chatUser = User::findOrFail(env('LIVE_CHAT_ID'));
 
         // Auth data
@@ -155,7 +170,7 @@ class FileController extends Controller
             ]
         ]);
         
-        return $this->pusher->socket_auth(
+        return $pusher->socket_auth(
             $request->channel_name,
             $request->socket_id,
             $authData
