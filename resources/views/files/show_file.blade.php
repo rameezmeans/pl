@@ -503,7 +503,11 @@ div.file-type-buttons label > input + img {
           
           <div class="col-xl-6 col-lg-6 col-md-6 m-t-40" >
             <button class="btn btn-white" id="new-request"><i class="fa fa-code-pull-request"></i> <strong>New Request</strong></button>
-            {{-- <button class="btn btn-white" id="new-support"><i class="fa fa-code-pull-request"></i> <strong>New Support Message</strong></button> --}}
+            
+            @if(!$file->acm_file)
+              <button class="btn btn-white" id="acm-file"><i class="fa fa-cloud-upload"></i> <strong>ACM File</strong></button>
+            @endif
+
             <button class="btn btn-white" id="note-button"><i class="fa fa-cloud-upload"></i> <strong>Add Personal Note</strong></button>
             
             <div class="main-file-box m-t-40 hide" id="new-request-box">
@@ -616,9 +620,40 @@ div.file-type-buttons label > input + img {
               </div>
             </div>
 
-            {{-- <div class="main-file-box m-t-40 hide" id="new-support-box">
+            <div class="main-file-box m-t-40 hide" id="acm-file-box">
 
-            </div> --}}
+              <div class="card m-t-10">
+                <div class="card-header">
+                  <div style="margin-bottom: 20px;">
+                    <span style="">
+                      <h4 style="margin-bottom: 10px;">ACM File</h4>
+                      <strong>Pleaes upload ACM File and Engineer will get it.</strong>
+                      <p>
+                        <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        <span style="color: darkgray;"></span>
+                      </p>
+                      <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12">
+                      <form method="POST" action="{{ route('acm-file-upload') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="file_id" value="{{$file->id}}">
+                          <div class="form-group">
+                            <label for="exampleInputName1">Attachment</label>
+                          <input type="file" name="acm_file" class="form-control" id="acm_file">
+                          </div>
+
+                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                        
+                      </form>
+                        </div>
+                      </div>
+                      
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
 
             <div class="main-file-box m-t-40 hide" id="note-box">
               <div class="card m-t-10">
@@ -697,6 +732,15 @@ div.file-type-buttons label > input + img {
                       </span>
                     <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
                     </span>
+
+                    <div class="bt m-t-20 p-t-10">
+                      <span style="display: inline-grid;margin-bottom: 20px;" >
+                        <strong>ACM File Name:</strong>
+                        <span class="f-name">{{$file->acm_file}}</span>
+                      </span>
+                          <a class="btn btn-info" href="{{route('download', [$file->id,$file->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                    </div>
+
                     <div class="bt m-t-10 p-t-10">
                       <span><strong>Stages and Options:</strong></span>
                     </div>
@@ -879,14 +923,11 @@ div.file-type-buttons label > input + img {
               File Support
             </h3>
 
-            
-              
             <div style="padding-left: 60px;" class="card-dt">
               <div class="card m-t-10">
                 <div class="card-header">
                   <div style="margin-bottom: 20px;">
                     
-
                     @foreach($file->messages_and_logs() as $engineersMessage)
                       <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                         <div>
@@ -1035,15 +1076,11 @@ div.file-type-buttons label > input + img {
                 @if($row->acm_files)
               @foreach($row->acm_files as $acm)
                 <div class="bt m-t-20 p-t-10">
-                  
-                  
                   <span style="display: inline-grid;margin-bottom: 20px;" >
                     <strong>ACM File Name:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
                       <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
-                    
-                  
                 </div>
               @endforeach
               @endif
@@ -2544,44 +2581,69 @@ div.file-type-buttons label > input + img {
 
     $(document).on('click', '#new-request', function() {
 
-      if($('#new-request-box').hasClass('hide')){
         $('#new-request-box').removeClass('hide');
         $(this).removeClass('btn-white');
         $(this).addClass('btn-grey');
-      }
-      else{
-        $('#new-request-box').addClass('hide');
-        $(this).removeClass('btn-grey');
-        $(this).addClass('btn-white');
-      }
+
+        $('#note-box').addClass('hide');
+        $('#note-button').removeClass('btn-grey');
+        $('#note-button').addClass('btn-white');
+
+        $('#acm-file-box').addClass('hide');
+      $('#acm-file').removeClass('btn-grey');
+      $('#acm-file').addClass('btn-white');
+      
     });
 
-    // $(document).on('click', '#new-support', function() {
+    
 
-    //   if($('#new-support-box').hasClass('hide')){
-    //     $('#new-request-box').removeClass('hide');
-    //     $(this).removeClass('btn-white');
-    //     $(this).addClass('btn-grey');
-    //   }
-    //   else{
-    //     $('#new-request-box').addClass('hide');
-    //     $(this).removeClass('btn-grey');
-    //     $(this).addClass('btn-white');
-    //   }
-    //   });
+    $(document).on('click', '#acm-file', function() {
+
+      $('#acm-file-box').removeClass('hide');
+      $(this).removeClass('btn-white');
+      $(this).addClass('btn-grey');
+
+      $('#note-box').addClass('hide');
+      $('#note-button').removeClass('btn-grey');
+      $('#note-button').addClass('btn-white');
+
+      $('#new-request-box').addClass('hide');
+      $('#new-request').removeClass('btn-grey');
+      $('#new-request').addClass('btn-white');
+
+    });
+
+    
+
+    $(document).on('click', '#new-request', function() {
+
+      $('#new-request-box').removeClass('hide');
+      $(this).removeClass('btn-white');
+      $(this).addClass('btn-grey');
+
+      $('#note-box').addClass('hide');
+      $('#note-button').removeClass('btn-grey');
+      $('#note-button').addClass('btn-white');
+
+      $('#acm-file-box').addClass('hide');
+      $('#acm-file').removeClass('btn-grey');
+      $('#acm-file').addClass('btn-white');
+
+    });
 
       $(document).on('click', '#note-button', function() {
-
-      if($('#note-box').hasClass('hide')){
         $('#note-box').removeClass('hide');
         $(this).removeClass('btn-white');
         $(this).addClass('btn-grey');
-      }
-      else{
-        $('#note-box').addClass('hide');
-        $(this).removeClass('btn-grey');
-        $(this).addClass('btn-white');
-      }
+
+        $('#new-request-box').addClass('hide');
+        $('#new-request').removeClass('btn-grey');
+        $('#new-request').addClass('btn-white');
+
+        $('#acm-file-box').addClass('hide');
+      $('#acm-file').removeClass('btn-grey');
+      $('#acm-file').addClass('btn-white');
+      
       });
       
       $(document).on('click', '.feedback li', function() {
