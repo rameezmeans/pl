@@ -80,6 +80,23 @@ class FileController extends Controller
     //     return response()->json(['fileName' => $fileName]);
     // }
 
+    public function acmFileUpload(Request $request){
+
+        $file = File::findOrFail($request->file_id);
+
+        $fileUploaded = $request->file('acm_file');
+        $fileName = $fileUploaded->getClientOriginalName();
+        $fileName = $this->filesMainObj->getFilename($fileName);
+        $fileUploaded->move(public_path($file->file_path),$fileName);
+
+       
+        $file->acm_file = $fileName;
+        $file->save();
+
+        return redirect()->back()->with('success', 'ACM file successfully Added!');
+
+    }
+
     public function getDownloadButton(Request $request){
 
         $file = File::findOrFail($request->file_id);
