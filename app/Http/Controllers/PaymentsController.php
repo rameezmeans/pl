@@ -468,15 +468,16 @@ class PaymentsController extends Controller
                     $amount = $transaction['amount'];
                     $price = $this->paymenttMainObj->getPrice()->value;
                     $tax = (float) $user->group->tax;
+
                     $amountWithoutTax =  $amount;
                     $taxAmount = 0;
 
                     if($tax>0){
-                        $taxAmount = $amount * $tax/100;
+                        $taxAmount = number_format($amount * $tax/100, 1);
                         $amountWithoutTax = $amount - $taxAmount;
                     }
 
-                    $credits = (float) $amountWithoutTax / $price;
+                    $credits = (int) ceil( $amountWithoutTax / $price);
                     $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
                 }
                 
@@ -527,20 +528,20 @@ class PaymentsController extends Controller
 
         if($account->elorus){
 
-                    $clientID = null;
+            $clientID = null;
 
-                    if($user->elorus_id){
-                        $clientID = $user->elorus_id;
-                    }
-                    else{
-                        $clientID = $this->elorusMainObj->createElorusCustomer($user);
-                    }
-                    
-                    if(country_to_continent($user->country) == 'Europe'){
+            if($user->elorus_id){
+                $clientID = $user->elorus_id;
+            }
+            else{
+                $clientID = $this->elorusMainObj->createElorusCustomer($user);
+            }
 
-                        $this->elorusMainObj->createElorusInvoice($invoice, $clientID, $user, $package);
+            if(country_to_continent($user->country) == 'Europe'){
 
-                    }
+                $this->elorusMainObj->createElorusInvoice($invoice, $clientID, $user, $package);
+
+            }
         }
 
         \Cart::remove(101);
