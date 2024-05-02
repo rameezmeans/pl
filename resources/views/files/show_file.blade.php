@@ -558,10 +558,10 @@ div.file-type-buttons label > input + img {
                                             <option value="status" selected disabled>{{__('Request Type')}} </option>
                                             <option value="new_upload">{{__('New upload')}}</option>
                                             <option value="tuning_evolution">{{__('Tuning Evolution - I want to make a new tuning request.')}}</option>
-                                            <option value="back_to_tuned">{{__('Back to tuned - The car has been updated by the dealer, please renew the tuning.')}}</option>
+                                            {{-- <option value="back_to_tuned">{{__('Back to tuned - The car has been updated by the dealer, please renew the tuning.')}}</option>
                                             <option value="back_to_stock">{{__('Back to stock - Send me back the original version.')}}</option>
                                             <option value="back_to_stock_with_virtual_read">{{__('Back to stock with virtual read - Its a virtual read, can you send me this file back to flash the car in stock mode?')}}</option>
-                                            <option value="problem_RMA">{{__('Problem - RMA - Ive an issue with this file, can you check?')}}</option>
+                                            <option value="problem_RMA">{{__('Problem - RMA - Ive an issue with this file, can you check?')}}</option> --}}
                                         </select>
                                     </div>
                                     <div class="form-group hide" id="gearbox_file_select">
