@@ -949,7 +949,7 @@ div.file-type-buttons label > input + img {
                           @endif
                         <p>
                           @if(isset($engineersMessage->egnineers_internal_notes))
-                            <p>{{$engineersMessage->egnineers_internal_notes}}</p>
+                            <p>{!!$engineersMessage->egnineers_internal_notes!!}</p>
                           @else
                             <p>{{$engineersMessage->events_internal_notes}}</p>
                           @endif
@@ -1145,7 +1145,7 @@ div.file-type-buttons label > input + img {
                           @endif
                         <p>
                           @if(isset($engineersMessage->egnineers_internal_notes))
-                            <p>{{$engineersMessage->egnineers_internal_notes}}</p>
+                            <p>{!!$engineersMessage->egnineers_internal_notes!!}</p>
                           @else
                             <p>{{$engineersMessage->events_internal_notes}}</p>
                           @endif
@@ -1458,7 +1458,7 @@ div.file-type-buttons label > input + img {
                         @endif
                       <p>
                         @if(isset($engineersMessage->egnineers_internal_notes))
-                          <p>{{$engineersMessage->egnineers_internal_notes}}</p>
+                          <p>{!!$engineersMessage->egnineers_internal_notes!!}</p>
                         @else
                           <p>{{$engineersMessage->events_internal_notes}}</p>
                         @endif
@@ -1955,7 +1955,7 @@ div.file-type-buttons label > input + img {
                           @endif
                         <p>
                           @if(isset($engineersMessage->egnineers_internal_notes))
-                            <p>{{$engineersMessage->egnineers_internal_notes}}</p>
+                            <p>{!!$engineersMessage->egnineers_internal_notes!!}</p>
                           @else
                             <p>{{$engineersMessage->events_internal_notes}}</p>
                           @endif
