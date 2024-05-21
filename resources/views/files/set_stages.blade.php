@@ -454,7 +454,26 @@ p.tuning-resume {
                         </span>
                       </div>
 
-                        @if($option['name'] == 'DTC OFF')
+                      @if($option['customers_comments_active'] == 1)
+                        @if($option['ustomers_comments_vehicle_type'] == NULL)
+                          <div class="comments-area-{{$option['id']}} hide">
+                                <div class="col-xl-12 col-md-12 " style="padding: 5px;">
+                                    <textarea placeholder="{{$option['customers_comments_placeholder_text']}}" name="option_comments[{{$option['id']}}]" style="background: white;  height:100%; width:100%;"></textarea>
+                                </div>
+                          </div>
+                          @else
+
+                            @if($option['ustomers_comments_vehicle_type'] == $file->vehicle()->type)
+                              <div class="comments-area-{{$option['id']}} hide">
+                                <div class="col-xl-12 col-md-12 " style="padding: 5px;">
+                                    <textarea placeholder="{{$option['customers_comments_placeholder_text']}}" name="option_comments[{{$option['id']}}]" style="background: white;  height:100%; width:100%;"></textarea>
+                                </div>
+                              </div>
+                            @endif
+                          @endif
+                      @endif
+
+                        {{-- @if($option['name'] == 'DTC OFF')
                           <div class="stage-option-container dtc-off-textarea hide">
                                 <div class="col-xl-12 col-md-12 " style="padding: 5px;">
                                     <textarea placeholder="Please write DTF OFF comment here." name="dtc_off_comments" style="background: white;  height:100%; width:100%;"></textarea>
@@ -469,7 +488,7 @@ p.tuning-resume {
                                   </div>
                               </div>
                           @endif
-                        @endif
+                        @endif --}}
   
                     </div>
                   @endforeach
@@ -592,11 +611,13 @@ p.tuning-resume {
           let checked = $(this).is(':checked');
 
           let locale = '{{Session::get('locale') }}';
+
+          let file_id = $('#file_id').val();
+          let service_id = $(this).val();
           
           if(checked){
 
-              let file_id = $('#file_id').val();
-              let service_id = $(this).val();
+            $('.comments-area-'+service_id).removeClass('hide');
 
               $('#btn-final-submit').attr("disabled", true);
 
@@ -646,21 +667,24 @@ p.tuning-resume {
                   } 
               });
           }
-      });
-
-      $(document).on('change', '#dtc_off', function(){
-
-          console.log("dtc_off changed");
-
-          let checked = $('#dtc_off').is(':checked');
-          if(checked){
-              $('.dtc-off-textarea').removeClass('hide');
-          }
           else{
-              $('.dtc-off-textarea').addClass('hide');
+            $('.comments-area-'+service_id).addClass('hide');
           }
-
       });
+
+      // $(document).on('change', '#dtc_off', function(){
+
+      //     console.log("dtc_off changed");
+
+      //     let checked = $('#dtc_off').is(':checked');
+      //     if(checked){
+      //         $('.dtc-off-textarea').removeClass('hide');
+      //     }
+      //     else{
+      //         $('.dtc-off-textarea').addClass('hide');
+      //     }
+
+      // });
 
 
       $(document).on('change', '#vmax_off', function(){
