@@ -1616,7 +1616,6 @@ div.file-type-buttons label > input + img {
               </div>
             </div>
           </div>
-
           @if(!$file->messages_and_logs()->isEmpty())
 
           <div class="main-file-box m-t-40">
