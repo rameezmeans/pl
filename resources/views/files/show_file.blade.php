@@ -1119,7 +1119,7 @@ div.file-type-buttons label > input + img {
                   </div>
                 </div>
                 
-                @if(!$file->messages_and_logs()->isEmpty())
+                @if(!$row->messages_and_logs()->isEmpty())
 
           <div class="main-file-box m-t-40">
             <span>
@@ -1134,7 +1134,7 @@ div.file-type-buttons label > input + img {
                 <div class="card-header">
                   <div style="margin-bottom: 20px;">
                     
-                    @foreach($file->messages_and_logs() as $engineersMessage)
+                    @foreach($row->messages_and_logs() as $engineersMessage)
                       <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                         <div>
                           @if($engineersMessage->engineer)
@@ -2045,7 +2045,7 @@ div.file-type-buttons label > input + img {
                   </div>
                 </div>
                 
-                @if(!$row->messages_and_logs()->isEmpty())
+                {{-- @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
                   <h4 style="margin-top: 20px;"><i class="fa @if(Session::has('success')) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
                 </div>
@@ -2095,7 +2095,7 @@ div.file-type-buttons label > input + img {
                     
                   </div>
                 @endif
-                
+                 --}}
 
                 <div class="m-t-20 bt">
                   <ul class="nav nav-tabs fl-nav" style="border-bottom: 0px; padding: 10px 0;">
