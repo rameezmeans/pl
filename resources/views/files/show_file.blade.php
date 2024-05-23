@@ -1721,9 +1721,9 @@ div.file-type-buttons label > input + img {
             </div>
 
             @endif
-            
+
            {{-- here are are --}}
-           
+           {{-- done --}}
            {{-- again--}}
 
             @if(!$file->messages_and_logs()->isEmpty())
