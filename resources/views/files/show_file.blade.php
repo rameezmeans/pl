@@ -1838,7 +1838,7 @@ div.file-type-buttons label > input + img {
 
            {{-- again--}}
 
-            @if(!$file->messages_and_logs()->isEmpty())
+            
 
             <div class="main-file-box m-t-40">
               <span>
@@ -1847,7 +1847,7 @@ div.file-type-buttons label > input + img {
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
                 File Support
               </h3>
-  
+              @if(!$file->messages_and_logs()->isEmpty())
               <div style="padding-left: 60px;" class="card-dt">
                 <div class="card m-t-10">
                   <div class="card-header">
@@ -1943,9 +1943,10 @@ div.file-type-buttons label > input + img {
                   </div>
                 </div>
             </div>
+            @endif
             </div>
   
-            @endif
+           
 
             @if($file->status == 'rejected')
             <div class="main-file-box m-t-40">
