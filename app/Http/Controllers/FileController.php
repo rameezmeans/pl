@@ -440,6 +440,8 @@ class FileController extends Controller
         $data = $request->all();
         $file = $request->file('request_file');
 
+        // dd($file);
+
         return $this->filesMainObj->createNewRequest($data, $file);
 
         
