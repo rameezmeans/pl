@@ -502,7 +502,9 @@ div.file-type-buttons label > input + img {
         <div class="row bt file-mb">
           
           <div class="col-xl-6 col-lg-6 col-md-6 m-t-40" >
+            @if($file->status != "rejected")
             <button class="btn btn-white" id="new-request"><i class="fa fa-code-pull-request"></i> <strong>New Request</strong></button>
+            @endif
             
             @if(!$file->acm_file)
               <button class="btn btn-white" id="acm-file"><i class="fa fa-cloud-upload"></i> <strong>ACM File</strong></button>
@@ -510,6 +512,7 @@ div.file-type-buttons label > input + img {
 
             <button class="btn btn-white" id="note-button"><i class="fa fa-cloud-upload"></i> <strong>Add Personal Note</strong></button>
             
+            @if($file->status != "rejected")
             <div class="main-file-box m-t-40 hide" id="new-request-box">
               <div class="card m-t-10">
                 <div class="card-header">
@@ -619,6 +622,9 @@ div.file-type-buttons label > input + img {
                 </div>
               </div>
             </div>
+
+
+            @endif
 
             <div class="main-file-box m-t-40 hide" id="acm-file-box">
 
