@@ -466,12 +466,13 @@ class FileController extends Controller
 
     public function download($id,$fileName) {
         
-        $file = File::findOrFail($id); 
+        $file = File::findOrFail($id);
 
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
         
         if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
 
+            
             // if($file->original_file_id == NULL){
 
             $engFile = RequestFile::where('request_file', $fileName)->where('file_id', $file->id)->first();
