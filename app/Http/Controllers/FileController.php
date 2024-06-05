@@ -468,6 +468,8 @@ class FileController extends Controller
         
         $file = File::findOrFail($id); 
 
+        dd($file);
+
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
         
         if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
