@@ -1031,7 +1031,9 @@ div.file-type-buttons label > input + img {
 
             @if($row->is_kess3_slave)
 
-                    @if($row->uploaded_successfully)
+            @if($row->uploaded_successfully)
+
+            @if($file->no_longer_auto == 0)
 
             <div class="main-file-box m-t-40">
               <span>
@@ -1544,6 +1546,7 @@ div.file-type-buttons label > input + img {
         </div>
 
 
+          @endif
           @endif
 
           @endforeach
