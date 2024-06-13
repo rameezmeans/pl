@@ -617,13 +617,13 @@ class FileController extends Controller
         $slaveTools =  $user->tools_slave;
         $masterTools =  $user->tools_master;
 
-        $comments = $this->filesMainObj->getCommentsOnFileShowing($file);
+        // $comments = $this->filesMainObj->getCommentsOnFileShowing($file);
 
-        $selectedOptions = $this->filesMainObj->getSelectedOptions($file);
+        // $selectedOptions = $this->filesMainObj->getSelectedOptions($file);
 
-        $showComments = $this->filesMainObj->getShowComments($selectedOptions, $comments);
+        // $showComments = $this->filesMainObj->getShowComments($selectedOptions, $comments);
         
-        return view('files.show_file', ['user' => $user, 'showComments' => $showComments, 'comments' => $comments,'kess3Label' => $kess3Label,  'file' => $file, 'masterTools' => $masterTools,  'slaveTools' => $slaveTools, 'vehicle' => $vehicle ]);
+        return view('files.show_file', ['user' => $user, 'kess3Label' => $kess3Label,  'file' => $file, 'masterTools' => $masterTools,  'slaveTools' => $slaveTools, 'vehicle' => $vehicle ]);
     }
 
     public function addOfferToFile(Request $request) {
