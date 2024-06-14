@@ -463,7 +463,7 @@ p.tuning-resume {
                           </div>
                           @else
 
-                            @if(in_array($file->vehicle()->type, implode($option['customers_comments_vehicle_type'])))
+                            @if(in_array($file->vehicle()->type, implode(',',$option['customers_comments_vehicle_type'])))
                               <div class="comments-area-{{$option['id']}} hide">
                                 <div class="col-xl-12 col-md-12 " style="padding: 5px;">
                                     <textarea placeholder="{{$option['customers_comments_placeholder_text']}}" name="option_comments[{{$option['id']}}]" style="background: white;  height:100%; width:100%;"></textarea>
