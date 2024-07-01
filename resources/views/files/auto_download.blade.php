@@ -1006,7 +1006,7 @@ body  {
                         }
                     });
             
-        }, 90000);
+        }, 600000);
 
         channel.bind("download-button", function(data) {
 
