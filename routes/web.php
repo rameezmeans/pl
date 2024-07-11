@@ -24,7 +24,7 @@ Route::get('/info', function () {
 });
 
 Route::get('/', function () {
-    return route('login');
+    return redirect()->route('login');
 });
 
 Route::get('/test', function () {
