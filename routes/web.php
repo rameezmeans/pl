@@ -24,7 +24,7 @@ Route::get('/info', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get('/test', function () {
