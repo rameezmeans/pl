@@ -530,13 +530,14 @@ class PaymentsController extends Controller
 
             $clientID = null;
 
-            if($user->elorus_id){
-                $clientID = $user->elorus_id;
-            }
-            else{
+            if($user->elorus_id == null){
+                
                 $clientID = $this->elorusMainObj->createElorusCustomer($user);
             }
-
+            else{
+                $clientID = $user->elorus_id;
+            }
+            
             if(country_to_continent($user->country) == 'Europe'){
 
                 $this->elorusMainObj->createElorusInvoice($invoice, $clientID, $user, $package);
