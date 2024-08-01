@@ -1508,8 +1508,8 @@
     "DPF: DPF pressure and temperature sensors must be disconnected.": "DPF: Πρέπει να αποσυνδεθεί ο αισθητήρας διαφορικής πίεσης και ο αισθητήρας θερμοκρασίας καυσαερίων.",
     "This option deactivates the AdBlue with Adblue pump and all sensors connected": "Αυτή η επιλογή απενεργοποιεί το AdBlue σε οχήματα EURO6 με την αντλία Adblue και όλους τους αισθητήρες συνδεδεμένους",
     "EGR: EGR plug must be disconnected.": "EGR: Πρέπει να αποσυνδεθεί το βύσμα της EGR.",
-    "test": "test",
     "The purpose of the engine management analysis by OLSx is to give you an opinion on the modifications made to the file sent. If you decide to entrust us with this file for a new engine management, we will deduct the two credits related to the analysis to you. Please note, only a real (non-virtual) reading can be analysed. If the file is considered by our system to be original, the ticket will be closed.": null,
     "Testing.": "testing.",
-    "AdBlue: Plug from AdBlue module must be disconnected.": "AdBlue: Πρέπει να αφαιρέσετε το βύσμα από το Adblue."
+    "AdBlue: Plug from AdBlue module must be disconnected.": "AdBlue: Πρέπει να αφαιρέσετε το βύσμα από το Adblue.",
+    "test": "test"
 }
