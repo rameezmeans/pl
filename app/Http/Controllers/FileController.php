@@ -516,6 +516,8 @@ class FileController extends Controller
             }
         }
         else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
+
+            dd($flexLabel);
             
 
             $magicFile = MagicEncryptedFile::where('file_id', $file->id)
