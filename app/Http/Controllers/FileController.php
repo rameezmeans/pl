@@ -474,6 +474,8 @@ class FileController extends Controller
 
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
         $flexLabel = Tool::where('label', 'Flex')->where('type', 'slave')->first();
+
+        dd($flexLabel);
         
         if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
 
