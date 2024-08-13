@@ -474,8 +474,6 @@ class FileController extends Controller
 
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
         $flexLabel = Tool::where('label', 'Flex')->where('type', 'slave')->first();
-
-        dd($flexLabel);
         
         if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
 
@@ -516,22 +514,20 @@ class FileController extends Controller
                 return response()->download($file_path);
 
             }
-        }
-        else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
-
-            dd($flexLabel);
-            
-
-            $magicFile = MagicEncryptedFile::where('file_id', $file->id)
-            ->where('name', $fileName.'_magic_encrypted.mmf')
-            ->where('downloadable', 1)
-            ->first();
-
-            $file_path = public_path($file->file_path).$magicFile->name;
-            return response()->download($file_path);
-
-        }
+        } 
         else{
+
+            if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
+                $magicFile = MagicEncryptedFile::where('file_id', $file->id)
+                ->where('name', $fileName.'_magic_encrypted.mmf')
+                ->where('downloadable', 1)
+                ->first();
+    
+                $file_path = public_path($file->file_path).$magicFile->name;
+                return response()->download($file_path);
+    
+            }
+
             $file_path = public_path($file->file_path).$fileName;
             return response()->download($file_path);
         }
