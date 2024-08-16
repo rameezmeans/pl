@@ -21,3 +21,4 @@ yarn-error.log
 /public
 resources/lang/gr.json
 /resources/lang/gr.json
+composer.lock
