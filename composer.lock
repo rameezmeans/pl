@@ -2663,16 +2663,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "ac815920de0eff6de947eac0a6a94e5ed0fb147c"
+                "reference": "df09d5b6a4188f8f3c3ab2e43a109076a5eeb767"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/ac815920de0eff6de947eac0a6a94e5ed0fb147c",
-                "reference": "ac815920de0eff6de947eac0a6a94e5ed0fb147c",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/df09d5b6a4188f8f3c3ab2e43a109076a5eeb767",
+                "reference": "df09d5b6a4188f8f3c3ab2e43a109076a5eeb767",
                 "shasum": ""
             },
             "require": {
@@ -2765,7 +2765,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-24T12:52:09+00:00"
+            "time": "2024-08-14T10:56:57+00:00"
         },
         {
             "name": "league/config",
@@ -5491,12 +5491,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:rameezmeans/ecutech-shared-code.git",
-                "reference": "b744bc5b6355d7bdfd4e2678d559c71ca61664a4"
+                "reference": "640f69d949d6c0447c5ebf0259991eaeafbc8681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rameezmeans/ecutech-shared-code/zipball/b744bc5b6355d7bdfd4e2678d559c71ca61664a4",
-                "reference": "b744bc5b6355d7bdfd4e2678d559c71ca61664a4",
+                "url": "https://api.github.com/repos/rameezmeans/ecutech-shared-code/zipball/640f69d949d6c0447c5ebf0259991eaeafbc8681",
+                "reference": "640f69d949d6c0447c5ebf0259991eaeafbc8681",
                 "shasum": ""
             },
             "default-branch": true,
@@ -5520,7 +5520,7 @@
                 "source": "https://github.com/rameezmeans/ecutech-shared-code/tree/main",
                 "issues": "https://github.com/rameezmeans/ecutech-shared-code/issues"
             },
-            "time": "2024-08-13T16:15:17+00:00"
+            "time": "2024-08-15T20:10:45+00:00"
         },
         {
             "name": "ramsey/collection",
