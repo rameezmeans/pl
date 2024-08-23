@@ -529,8 +529,15 @@ class FileController extends Controller
         ->where('downloadable', 1)
         ->first();
 
-        $file_path = public_path($file->file_path).$magicFile->name;
-        return response()->download($file_path);
+        if($magicFile){
+
+            $file_path = public_path($file->file_path).$magicFile->name;
+            return response()->download($file_path);
+        }
+        else{
+            $file_path = public_path($file->file_path).$fileName;
+            return response()->download($file_path);
+        }
 
     }
 
