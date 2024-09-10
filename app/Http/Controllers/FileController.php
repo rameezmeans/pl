@@ -717,7 +717,7 @@ class FileController extends Controller
             foreach($request->options as $option){
                 $service = Service::findOrFail($option);
                 if($service->mandatory == 1 && $request->option_comments[$option] == NULL){
-                    return redirect()->back()->withErrors(['option_comments' => "fill options comments"])->withInput();
+                    return redirect()->back()->withErrors(['option_comments' => $service->name." comment can not be empty. Please fill it."])->withInput();
 
                 }
             }
