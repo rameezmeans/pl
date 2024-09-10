@@ -709,15 +709,22 @@ class FileController extends Controller
 
         $stage = Service::FindOrFail($request->stage);
         $stageName = $stage->name;
-
+        
         $rules = $this->filesMainObj->getStep3ValidationStage($stageName);
-
         $request->validate($rules);
+
+        if($request->options != NULL){
+            foreach($request->options as $option){
+                $service = Service::findOrFail($option);
+                if($service->mandatory == 1 && $request->option_comments[$option] == NULL){
+                    return redirect()->back()->withErrors(['option_comments' => "fill options comments"])->withInput();
+
+                }
+            }
+        }
         
         $fileID = $request->file_id;
-        // $DTCComments = $request->dtc_off_comments;
-        // $vmaxComments = $request->vmax_off_comments;
-
+        
         $optionComments = $request->option_comments;
 
         $file = $this->filesMainObj->saveStagesInfo($fileID, $optionComments);

@@ -340,10 +340,22 @@ p.tuning-resume {
         </div>
         <div class="i-content-block price-level">
 
+          
+
         <form method="POST" action="{{ route('post-stages') }}"  enctype="application/x-www-form-urlencoded" name="file_upload_tuning" id="file-upload-tuning-form" autocomplete="off">
             <input type="hidden" value="{{ $file->id }}" name="file_id" id="file_id">
             <input type="hidden" id="file_tool_type" value="{{$file->tool_type}}">
             @csrf
+
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
 
              <div class="row post-row">
                 <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
