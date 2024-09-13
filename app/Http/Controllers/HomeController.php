@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use ECUApp\SharedCode\Controllers\AuthMainController;
 use ECUApp\SharedCode\Models\Credit;
+use ECUApp\SharedCode\Models\DTCLookup;
 use ECUApp\SharedCode\Models\File;
 use ECUApp\SharedCode\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,18 @@ class HomeController extends Controller {
     private $authMainObj;
 
     public function __construct(){
+        
         $this->middleware('auth');
         $this->frontendID = 1;
         $this->authMainObj = new AuthMainController;
+    }
+
+    public function dtcLookup() {
+
+        $dtcLookupRecords = DTCLookup::all();
+
+        return view('home', [
+            'dtcLookupRecords' => $dtcLookupRecords ]);
     }
 
     public function index() {
