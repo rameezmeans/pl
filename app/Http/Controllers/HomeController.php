@@ -19,7 +19,7 @@ class HomeController extends Controller {
     private $authMainObj;
 
     public function __construct(){
-        
+
         $this->middleware('auth');
         $this->frontendID = 1;
         $this->authMainObj = new AuthMainController;
@@ -27,10 +27,11 @@ class HomeController extends Controller {
 
     public function dtcLookup() {
 
+        $user = Auth::user();
         $dtcLookupRecords = DTCLookup::all();
 
         return view('home', [
-            'dtcLookupRecords' => $dtcLookupRecords ]);
+            'dtcLookupRecords' => $dtcLookupRecords, 'user' => $user]);
     }
 
     public function index() {
