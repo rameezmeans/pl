@@ -30,7 +30,7 @@ class HomeController extends Controller {
         $user = Auth::user();
         $dtcLookupRecords = DTCLookup::all();
 
-        return view('home', [
+        return view('dtc_lookup', [
             'dtcLookupRecords' => $dtcLookupRecords, 'user' => $user]);
     }
 
