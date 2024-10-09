@@ -543,9 +543,7 @@ class FileController extends Controller
     }
 
         else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
-        
-            
-        
+                
                 $magicFile = MagicEncryptedFile::where('file_id', $file->id)
                 ->where('name', $fileName.'_magic_encrypted.mmf')
                 ->where('downloadable', 1)
