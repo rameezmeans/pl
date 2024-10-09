@@ -33,6 +33,7 @@ use ECUApp\SharedCode\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
+use Spatie\FlareClient\Flare;
 
 //check this out
 
@@ -519,6 +520,9 @@ class FileController extends Controller
                 return response()->download($file_path);
 
                 }
+                else{
+                    abort(505);
+                }
 
                 // }else{
                 //     $finalFileName = $fileName;
@@ -542,22 +546,22 @@ class FileController extends Controller
     
     }
 
-        else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
-                
-                $magicFile = MagicEncryptedFile::where('file_id', $file->id)
-                ->where('name', $fileName.'_magic_encrypted.mmf')
-                ->where('downloadable', 1)
-                ->first();
+    else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
+            
+            $magicFile = MagicEncryptedFile::where('file_id', $file->id)
+            ->where('name', $fileName.'_magic_encrypted.mmf')
+            ->where('downloadable', 1)
+            ->first();
 
-                if($magicFile){
-        
-                    $file_path = public_path($file->file_path).$magicFile->name;
-                    return response()->download($file_path);
-                }
-                else{
-                    $file_path = public_path($file->file_path).$fileName; // quick fix. need to work a bit more.
-                    return response()->download($file_path);
-                }
+            if($magicFile){
+    
+                $file_path = public_path($file->file_path).$magicFile->name;
+                return response()->download($file_path);
+            }
+            else{
+                $file_path = public_path($file->file_path).$fileName; // quick fix. need to work a bit more.
+                return response()->download($file_path);
+            }
         }
 
         else{
