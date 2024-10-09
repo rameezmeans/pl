@@ -1029,15 +1029,7 @@ div.file-type-buttons label > input + img {
 
             @foreach($file->files as $row)
 
-            @php
-            dd($row);
-
-            
-            @endphp
-
             @if($row->is_kess3_slave || $row->is_flex_file)
-
-           
 
             @if($row->uploaded_successfully == 1)
 
