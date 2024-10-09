@@ -504,7 +504,7 @@ class FileController extends Controller
             }
             else{
                 $encodedFileNameToBe = $fileName.'_encoded_api';
-                $processedFile = ProcessedFile::where('name', $encodedFileNameToBe)->where('processed', 1)->first();
+                $processedFile = ProcessedFile::where('name', $encodedFileNameToBe)->where('type', 'encoded')->first();
 
                 if($processedFile){
 
@@ -544,13 +544,20 @@ class FileController extends Controller
 
         else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
         
-            $magicFile = MagicEncryptedFile::where('file_id', $file->id)
-            ->where('name', $fileName.'_magic_encrypted.mmf')
-            ->where('downloadable', 1)
-            ->first();
-    
-            $file_path = public_path($file->file_path).$magicFile->name;
-            return response()->download($file_path);
+            if($file->is_original == 1){
+        
+                $magicFile = MagicEncryptedFile::where('file_id', $file->id)
+                ->where('name', $fileName.'_magic_encrypted.mmf')
+                ->where('downloadable', 1)
+                ->first();
+        
+                $file_path = public_path($file->file_path).$magicFile->name;
+                return response()->download($file_path);
+            }
+            else{
+                $file_path = public_path($file->file_path).$fileName;
+                return response()->download($file_path);
+            }
     
         }
 
