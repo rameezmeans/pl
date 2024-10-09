@@ -904,7 +904,22 @@ select {
                                     @enderror
                                     </div>
                                   </div>
+                                  
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                      <div class="form-group" style="margin-bottom:19px">
+                                          <label for="exampleInputType1">{{translate('Language')}}</label>
+                                              
+                                                <select class="form-control" name="language">
+                                                    <option @if($user->language == 'english') selected=selected @endif value="english">English</option>
+                                                    <option @if($user->language == 'greek') selected=selected @endif value="greek">Greek</option>
+                                                  </select>
+                                              
+                                      </div>
+                                    </div>
+                                  </div>
 
                                 <div class="row">
                                   <div class="col-xl-6 col-lg-6 col-md-6">
