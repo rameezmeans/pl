@@ -6,6 +6,7 @@ use ECUApp\SharedCode\Models\Service;
 use ECUApp\SharedCode\Models\Tool;
 use ECUApp\SharedCode\Models\Vehicle;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Facades\Auth;
 
 if(!function_exists('setEnv')){
     function setEnv($name, $value)
@@ -33,7 +34,14 @@ if(!function_exists('translate')){
 
     function translate($str){
 
-        $translate = 1;
+        $user = Auth::user();
+
+        if($user->language == 'greek'){
+            $translate = 1;
+        }
+        else{
+            $translate = 0;
+        }
 
         $myfile = fopen("gr.json", "r") or die("Unable to open file!");
         $string = fread($myfile,filesize("gr.json"));

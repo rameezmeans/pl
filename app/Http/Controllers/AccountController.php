@@ -107,6 +107,8 @@ class AccountController extends Controller
         $user->name = $request->name;
         $user->phone = $request->phone;
         
+        $user->language = $request->language;
+        
         $user->evc_customer_id = $request->evc_customer_id;
         $user->save();
 
