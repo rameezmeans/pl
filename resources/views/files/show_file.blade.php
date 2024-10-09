@@ -1031,6 +1031,10 @@ div.file-type-buttons label > input + img {
 
             @if($row->is_kess3_slave || $row->is_flex_file)
 
+            @php
+              dd($row);
+            @endphp
+
             @if($row->uploaded_successfully == 1)
 
             {{-- @if($file->no_longer_auto == 0) --}}
