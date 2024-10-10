@@ -36,25 +36,29 @@ if(!function_exists('translate')){
 
         $user = Auth::user();
 
-        if($user->language == 'greek'){
-            $translate = 1;
-        }
-        else{
-            $translate = 0;
-        }
+        if($user){
 
-        $myfile = fopen("gr.json", "r") or die("Unable to open file!");
-        $string = fread($myfile,filesize("gr.json"));
-        fclose($myfile);
+            if($user->language == 'greek'){
+                $translate = 1;
+            }
+            else{
+                $translate = 0;
+            }
 
-        $translationArray = json_decode($string, true);
-        
-        if(!isset($translationArray[$str])){
-            return $str;
-        }
+            $myfile = fopen("gr.json", "r") or die("Unable to open file!");
+            $string = fread($myfile,filesize("gr.json"));
+            fclose($myfile);
 
-        if($translate){
-            return $translationArray[$str];
+            $translationArray = json_decode($string, true);
+            
+            if(!isset($translationArray[$str])){
+                return $str;
+            }
+
+            if($translate){
+                return $translationArray[$str];
+            }
+
         }
         
         return $str;
