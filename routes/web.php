@@ -49,8 +49,8 @@ Route::get('/test', function () {
 
     // abort(404);
 
-    // \Mail::to('xrkalix@gmail.com')->send(new \App\Mail\AllMails(['html' => "testing email", 'subject' => 'test email']));
-    // dd('email sent');
+    \Mail::to('xrkalix@gmail.com')->send(new \App\Mail\AllMails(['html' => "testing email", 'subject' => 'test email']));
+    dd('email sent');
 
     // try {
     //     $accountSid = env("TWILIO_SID");
