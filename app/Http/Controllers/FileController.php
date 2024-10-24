@@ -142,11 +142,12 @@ class FileController extends Controller
         if($request->file('events_attachement')){
             $attachment = $request->file('events_attachement');
             $fileName = $attachment->getClientOriginalName();
-            $attachment->move( public_path($file->file_path) ,$fileName);
+            dd($attachment->move( public_path($file->file_path) ,$fileName));
             $file->events_attachement = $fileName;
         }
 
         $file->file_id = $request->file_id;
+        $file->request_file_id = $request->request_file_id;
         $file->save();
         return redirect()->back()->with('success', 'Events note successfully Added!');
     }
