@@ -136,19 +136,23 @@ class FileController extends Controller
             'events_internal_notes' => 'required|max:1024'
         ]);
 
-        $file = new FileInternalEvent();
-        $file->events_internal_notes = $request->events_internal_notes;
+        $file = File::findOrFail($request->file_id);
+
+        $log = new FileInternalEvent();
+        $log->events_internal_notes = $request->events_internal_notes;
        
         if($request->file('events_attachement')){
             $attachment = $request->file('events_attachement');
             $fileName = $attachment->getClientOriginalName();
-            dd($attachment->move( public_path($file->file_path) ,$fileName));
-            $file->events_attachement = $fileName;
+            $attachment->move(public_path($file->file_path),$fileName);
+
+            $log->events_attachement = $fileName;
         }
 
-        $file->file_id = $request->file_id;
-        $file->request_file_id = $request->request_file_id;
-        $file->save();
+        $log->file_id = $request->file_id;
+        $log->request_file_id = $request->request_file_id;
+        $log->save();
+
         return redirect()->back()->with('success', 'Events note successfully Added!');
     }
 
