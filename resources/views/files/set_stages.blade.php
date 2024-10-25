@@ -373,7 +373,7 @@ p.tuning-resume {
                       <div class="stage-option-container">
                         <span class="bl stage-img-box">
                             <input @if($count == 1) checked @endif name="stage" class="with-gap" type="radio" id="tuning-{{$stage['id']}}" value="{{$stage['id']}}" data-name="{{$stage['name']}}" data-price="{{$stage['credits']}}">
-                            <img width="50%" src="{{'https://devback.ecutech.gr/icons/'.$stage['icon']}}" alt="{{$stage['name']}}">
+                            <img width="50%" src="{{'https://backend.ecutech.gr/icons/'.$stage['icon']}}" alt="{{$stage['name']}}">
                         </span>
                         <span class="text-stage">
 
@@ -449,7 +449,7 @@ p.tuning-resume {
                             data-default-price="{{$option['credits']}}"
                             >
                           
-                            <img width="50%" src="{{'https://devback.ecutech.gr/icons/'.$option['icon']}}" alt="{{$option['name']}}">
+                            <img width="50%" src="{{'https://backend.ecutech.gr/icons/'.$option['icon']}}" alt="{{$option['name']}}">
                         </span>
                         <span class="text-stage">
 
