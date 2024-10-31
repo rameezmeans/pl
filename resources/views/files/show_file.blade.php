@@ -800,6 +800,7 @@ div.file-type-buttons label > input + img {
                     <div style="margin-bottom: 20px;">
                       @if(!$file->messages_and_logs()->isEmpty())
                       @foreach($file->messages_and_logs() as $engineersMessage)
+                      @if($engineersMessage->request_file_id == NULL)
                         <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                           <div>
                             @if($engineersMessage->engineer)
@@ -840,6 +841,7 @@ div.file-type-buttons label > input + img {
                           @endif
                           @endif
                         </div>
+                        @endif
                       @endforeach
                         @endif
                       <div class="m-t-10">
@@ -1769,7 +1771,10 @@ div.file-type-buttons label > input + img {
                   <div style="margin-bottom: 20px;">
                     @if(!$file->messages_and_logs()->isEmpty())
                     @foreach($file->messages_and_logs() as $engineersMessage)
+                    @if($engineersMessage->request_file_id == NULL)
+
                       <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
+                        
                         <div>
                           @if($engineersMessage->engineer)
                           <div>
@@ -1809,6 +1814,7 @@ div.file-type-buttons label > input + img {
                         @endif
                         @endif
                       </div>
+                      @endif
                     @endforeach
                       @endif
                     <div class="m-t-10">
