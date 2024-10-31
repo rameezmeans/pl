@@ -1146,9 +1146,9 @@ div.file-type-buttons label > input + img {
 
                 @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
-                  <h4 style="margin-top: 20px;"><i class="fa @if(Session::has('success')) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
+                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
                 </div>
-                  <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if(Session::has('success')) style="display: block;" @endif>
+                  <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if($row->is_latest()) style="display: block;" @endif>
                     @foreach($row->messages_and_logs() as $engineersMessage)
                       <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                         <div>
@@ -1463,9 +1463,9 @@ div.file-type-buttons label > input + img {
 
               @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
-                  <h4 style="margin-top: 20px;"><i class="fa @if(Session::has('success')) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
+                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
                 </div>
-                  <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if(Session::has('success')) style="display: block;" @endif>
+                  <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if($row->is_latest()) style="display: block;" @endif>
                     @foreach($row->messages_and_logs() as $engineersMessage)
                       <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                         <div>
@@ -2098,9 +2098,9 @@ div.file-type-buttons label > input + img {
                 
                 @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
-                  <h4 style="margin-top: 20px;"><i class="fa @if(Session::has('success')) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
+                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
                 </div>
-                  <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if(Session::has('success')) style="display: block;" @endif>
+                  <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if($row->is_latest()) style="display: block;" @endif>
                     @foreach($row->messages_and_logs() as $engineersMessage)
                       <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                         <div>
