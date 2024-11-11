@@ -96,10 +96,10 @@
                     <table class="table table-hover">
                       <thead>
                         <tr>
-                          <th>DATE</th>
-                          <th>CREDITS</th>
-                          <th>NOTES</th>
-                          <th>AMOUNT</th>
+                          <th>{{translate('DATE')}}</th>
+                          <th>{{translate('Credits')}}</th>
+                          <th>{{translate('Notes')}}</th>
+                          <th>{{translate('Amount')}}</th>
                         </tr>
                       </thead>
                       <tbody>
