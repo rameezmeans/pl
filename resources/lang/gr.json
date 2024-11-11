@@ -1588,5 +1588,6 @@
     "AdBlue: AdBlue pump must be disconnected.": "AdBlue: Πρέπει να αποσυνδέσετε την αντλία του Adblue.",
     "NOX: NOx plug must be disconnected.": "NOX: Πρέπει να αποσυνδεθεί το βύσμα NOx",
     "EGR PLUG MUST BE DISCONNECTED!": "Το βύσμα της EGR πρέπει να αποσυνδεθεί",
-    "EGR PLUG MUST BE DISCONNECTED": "Το βυσμα της EGR πρέπει να αποσυνδεθεί"
+    "EGR PLUG MUST BE DISCONNECTED": "Το βυσμα της EGR πρέπει να αποσυνδεθεί",
+    "testing": "testing"
 }
