@@ -7,6 +7,7 @@ use DateTime;
 use ECUApp\SharedCode\Controllers\AuthMainController;
 use ECUApp\SharedCode\Models\Credit;
 use ECUApp\SharedCode\Models\DTCLookup;
+use ECUApp\SharedCode\Models\BoschNumber;
 use ECUApp\SharedCode\Models\File;
 use ECUApp\SharedCode\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class HomeController extends Controller {
     public function bosch() {
 
         $user = Auth::user();
-        $boschRecords = Bosch::all();
+        $boschRecords = BoschNumber::all();
         
         return view('bosch', [
             'boschRecords' => $boschRecords, 'user' => $user]);
