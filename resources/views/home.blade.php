@@ -48,7 +48,7 @@
         @if($frontend->resellers_text != NULL)
 
 
-        <div class="alert @if($feed->type == 'info') info @elseif($feed->type == 'success') success @else danger @endif">
+        <div class="alert @if($frontend->type == 'info') info @elseif($frontend->type == 'success') success @else danger @endif">
           
           
             <p>{{$frontend->resellers_text}}</p>
@@ -70,7 +70,7 @@
           @endif
         </div>
         @endif --}}
-        
+
         <div class="dashboard-header-block fix-header">
             <h1>{{translate('Welcome')}}, {{$user->name}}</h1>
         </div>  
