@@ -169,6 +169,7 @@ Route::post('get_tool_icons', [App\Http\Controllers\AccountController::class, 'g
 
 Route::get('/price-list', [App\Http\Controllers\PricelistController::class, 'index'])->name('price-list');
 Route::get('/dtc_lookup', [App\Http\Controllers\HomeController::class, 'dtcLookup'])->name('dtc-lookup');
+Route::get('/bosch', [App\Http\Controllers\HomeController::class, 'bosch'])->name('bosch');
 
 Route::get('phpinfo', function(){ phpinfo(); });
 // Route::get('language/{locale}', function ($locale) {
