@@ -143,7 +143,7 @@ Route::post('buy_offer', [App\Http\Controllers\PaymentsController::class, 'buyOf
 Route::post('search_zohobooks/{id}', [App\Http\Controllers\PaymentsController::class, 'searchZohobooks'])->name('search-zohobooks');
 // Route::post('create_zohoboos_invoice', [App\Http\Controllers\FileController::class, 'getComments'])->name('get-comments');
 
-Route::get('/bosch-ecu', [App\Http\Controllers\AccountController::class, 'boschECU'])->name('bosch-ecu');
+// Route::get('/bosch-ecu', [App\Http\Controllers\AccountController::class, 'boschECU'])->name('bosch-ecu');
 
 Route::get('/invoices', [App\Http\Controllers\InvoicesController::class, 'index'])->name('invoices');
 
@@ -169,7 +169,7 @@ Route::post('get_tool_icons', [App\Http\Controllers\AccountController::class, 'g
 
 Route::get('/price-list', [App\Http\Controllers\PricelistController::class, 'index'])->name('price-list');
 Route::get('/dtc_lookup', [App\Http\Controllers\HomeController::class, 'dtcLookup'])->name('dtc-lookup');
-Route::get('/bosch', [App\Http\Controllers\HomeController::class, 'bosch'])->name('bosch');
+Route::get('/bosch-ecu', [App\Http\Controllers\HomeController::class, 'bosch'])->name('bosch');
 
 Route::get('phpinfo', function(){ phpinfo(); });
 // Route::get('language/{locale}', function ($locale) {
