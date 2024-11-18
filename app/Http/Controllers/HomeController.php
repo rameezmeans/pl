@@ -25,6 +25,15 @@ class HomeController extends Controller {
         $this->authMainObj = new AuthMainController;
     }
 
+    public function bosch() {
+
+        $user = Auth::user();
+        $boschRecords = Bosch::all();
+        
+        return view('bosch', [
+            'boschRecords' => $boschRecords, 'user' => $user]);
+    }
+
     public function dtcLookup() {
 
         $user = Auth::user();
