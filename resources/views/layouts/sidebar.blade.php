@@ -9,7 +9,15 @@
 	@if(!Auth::user()->is_admin())
 
     @php 
-      $feed = Illuminate\Support\Facades\Session::get('feed');  
+      $feeds = ECUApp\SharedCode\Models\NewsFeed::where('active', 1)
+        ->whereNull('subdealer_group_id')
+        ->where('front_end_id', 1)
+        ->get();
+
+        foreach($feeds as $live){
+			$feed = $live;
+        }
+
 	  $OnlineStatus = ECUApp\SharedCode\Models\IntegerMeta::where('key', 'ecutech_online_status')->first()->value;
     @endphp
 	@if($feed)
