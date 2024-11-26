@@ -103,13 +103,7 @@
 
         <div class="i-content-block">
         <div class="row" style="margin-bottom: 100px;">
-          @if(Session::has('success'))
-            <p class="note-success">{{ Session::get('success') }} <button class="close">x</button></p>
-          @endif
-
-          @if(Session::has('danger'))
-            <p class="note-danger">{{ Session::get('danger') }} <button class="close">x</button></p>
-          @endif
+          
             @if($errors->any())
             {!! implode('', $errors->all('<div class="invalid-feedback">:message</div>')) !!}
             @endif
