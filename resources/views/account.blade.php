@@ -818,6 +818,7 @@ select {
                     <li class="@if(request()->get('tab') == 'tools') active @endif"><a data-toggle="tab" href="#ecu">{{translate('ECU Tools')}}</a></li>
                     <li><a data-toggle="tab" href="#logs">{{translate('Credit Log')}}</a></li>
                     <li><a data-toggle="tab" href="#evclogs">{{translate('EVC Credits Logs')}}</a></li>
+                    <li><a data-toggle="tab" href="#delete">{{translate('Delete Account')}}</a></li>
                   </ul>
                 
                   <div class="tab-content account-tab-content">
@@ -1161,6 +1162,20 @@ select {
                             </div>
                     </div>
                     
+                    <div id="delete" class="tab-pane fade">
+                        <div class="col-xl-12 col-lg-12 col-md-12 m-t-20" >
+                            If You want to delete Your account. Please click the button below.
+                        <form method="post" action="{{ route('delete-account-email') }}" class="m-t-20">
+                            
+                            @csrf
+
+                            <input type="hidden" name="user_id" value="{{$user->id}}">
+
+                            <button type="submit" class="btn btn-danger waves-effect waves-light m-sm">{{__('Delete Account')}}</button>
+                      </form>
+                        </div>
+                    </div>
+
                   </div>
           </div>
         </div>
