@@ -929,7 +929,7 @@ class FileController extends Controller
             $vehicleType = $vehicle->type;
         }
         else{
-            return redirect()->route('upload',['success' => 'There is no vehicle with this specifications.']);
+            return redirect()->route('upload')->with('success', 'There is no Vehilce with Specification you entered.');
         }
 
         $stages = $this->filesMainObj->getStagesForStep3($this->frontendID, $vehicleType);
