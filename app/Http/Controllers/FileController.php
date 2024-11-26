@@ -924,7 +924,13 @@ class FileController extends Controller
 
         $file = TemporaryFile::findOrFail($request->file_id);
         $vehicle = $file->vehicle();
-        $vehicleType = $vehicle->type;
+
+        if($vehicle != NULL){
+            $vehicleType = $vehicle->type;
+        }
+        else{
+            return redirect()->route('upload',['success' => 'There is no vehicle with this specifications.']);
+        }
 
         $stages = $this->filesMainObj->getStagesForStep3($this->frontendID, $vehicleType);
         $options = $this->filesMainObj->getOptionsForStep3($this->frontendID, $vehicleType);
