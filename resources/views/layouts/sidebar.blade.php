@@ -14,6 +14,8 @@
         ->where('front_end_id', 1)
         ->get();
 
+		$feed = NULL;
+
         foreach($feeds as $live){
 			$feed = $live;
         }
