@@ -382,13 +382,27 @@
                                 </div>
                               </div>
 
-                              <div class="col-xl-6 col-lg-6 col-md-6">
+                              <div class="col-xl-6 col-lg-6 col-md-6" id="ecu_box">
                                 <div class="form-group">
                                   <label for="exampleInputCompanyLP1">ECU Type *</label>
                                   
                                 <select name="ecu" id="ecu" class="select-dropdown form-control" disabled>
                                     <option value="ecu" @if(!old('ecu')) selected @endif disabled>{{translate('ECU')}}</option>
                                 </select>
+                                
+                                </div>
+                              </div>
+
+                              <div class="col-xl-6 col-lg-6 col-md-6 hide" id="gearbox_box">
+                                <div class="form-group">
+                                  <label for="exampleInputCompanyLP1">Gear Box ECU Type *</label>
+                                  
+                                  <select name="gearbox_ecu" id="gearbox_ecu" class="select-dropdown-multi form-control">
+									                  <option value=""></option>
+                                    @foreach($gearboxECUs as $ecu)
+                                        <option value="{{$ecu->id}}">{{$ecu->type}}</option>
+                                    @endforeach
+                                  </select>
                                 
                                 </div>
                               </div>
@@ -651,7 +665,18 @@
 
     $(document).ready(function(event) {
     
-    
+      $('input[type=radio][name=file_type]').change(function() {
+            if (this.value == 'ecu_file') {
+                console.log(this.value);
+                $('#ecu_box').removeClass('hide');
+                $('#gearbox_box').addClass('hide');
+            }
+            else if (this.value == 'gearbox_file') {
+                console.log(this.value);
+                $('#ecu_box').addClass('hide');
+                $('#gearbox_box').removeClass('hide');
+            }
+        });
 
         $(document).on('change', '#brand', function(e) {
             let brand = $(this).val();

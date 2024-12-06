@@ -11,6 +11,7 @@ use ECUApp\SharedCode\Models\AlientechFile;
 use ECUApp\SharedCode\Models\Combination;
 use ECUApp\SharedCode\Models\Comment;
 use ECUApp\SharedCode\Models\Credit;
+use ECUApp\SharedCode\Models\ECU;
 use ECUApp\SharedCode\Models\EmailReminder;
 use ECUApp\SharedCode\Models\EngineerFileNote;
 use ECUApp\SharedCode\Models\File;
@@ -763,13 +764,14 @@ class FileController extends Controller
     public function step1(){
 
         $user = Auth::user();
+        $gearboxECUs = ECU::all();
 
         $masterTools = $this->filesMainObj->getMasterTools($user);
         $slaveTools = $this->filesMainObj->getSlaveTools($user);
 
         $brands = $this->filesMainObj->getBrands();
 
-        return view('files.step1', ['user' => $user, 'brands' => $brands,'masterTools' => $masterTools, 'slaveTools' => $slaveTools]);
+        return view('files.step1', ['gearboxECUs' => $gearboxECUs, 'user' => $user, 'brands' => $brands,'masterTools' => $masterTools, 'slaveTools' => $slaveTools]);
     }
 
     /**
