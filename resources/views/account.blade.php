@@ -1124,7 +1124,7 @@ select {
 
                                 <td>@if($credit->credits > 0){{$credit->invoice_id}}@endif</td>
                                 
-                                @if(!$credit->file_id)
+                                @if(!$credit->file_id && $credit->credits > 0)
                                     <td>{{$credit->price_payed}}€</td>
                                 @else
                                     <td></td>
