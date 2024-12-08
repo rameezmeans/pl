@@ -144,7 +144,10 @@ Route::post('buy_offer', [App\Http\Controllers\PaymentsController::class, 'buyOf
 Route::post('search_zohobooks/{id}', [App\Http\Controllers\PaymentsController::class, 'searchZohobooks'])->name('search-zohobooks');
 // Route::post('create_zohoboos_invoice', [App\Http\Controllers\FileController::class, 'getComments'])->name('get-comments');
 
-Route::get('/bosch-ecu', [App\Http\Controllers\AccountController::class, 'boschECU'])->name('bosch-ecu');
+// Route::get('/bosch-ecu', [App\Http\Controllers\AccountController::class, 'boschECU'])->name('bosch-ecu');
+
+Route::get('/bosch_ecu', [App\Http\Controllers\HomeController::class, 'bosch'])->name('bosch-ecu');
+Route::post('/bosch_ecu', [App\Http\Controllers\HomeController::class, 'getBosch'])->name('get-bosch-ecu');
 
 Route::get('/invoices', [App\Http\Controllers\InvoicesController::class, 'index'])->name('invoices');
 
