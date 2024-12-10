@@ -8,15 +8,35 @@
     </header>
 	@if(!Auth::user()->is_admin())
     @php 
-      $feed = Illuminate\Support\Facades\Session::get('feed'); 
-	  
+      $feeds = ECUApp\SharedCode\Models\NewsFeed::where('active', 1)
+        ->whereNull('subdealer_group_id')
+        ->where('front_end_id', 2)
+        ->get();
+		
+		$feed = NULL;
+
+        foreach($feeds as $live){
+			$feed = $live;
+        }
+
+	  $OnlineStatus = ECUApp\SharedCode\Models\IntegerMeta::where('key', 'tuningx_online_status')->first()->value;
     @endphp
 	@if(isset($feed))
-		<div class="box @if($feed->type == 'danger') box-danger @else box-success @endif">
+		<div class="box @if($feed->type == 'danger') box-danger @else box-success @endif" style="height: 130px !important;">
+		<p style="font-size: 10px;">Mon-Fri: ({{ date('h:i A', strtotime($workHours[0]->start))}} - {{ date('h:i A', strtotime($workHours[0]->end)) }})</p>
+		<p style="font-size: 10px;">Sat: ({{ date('h:i A', strtotime($workHours[1]->start))}} - {{ date('h:i A', strtotime($workHours[1]->end)) }}) Sunday: (Closed)</p>
 		<span>{{__('File Service Status')}}:</span>
-		<p style="margin-top: 5px;"><span class="dot @if($feed->type == 'danger') dot-danger @else dot-success @endif""></span> @if($feed->type == 'danger') Offline @else Online @endif - <span id="MyClockDisplay"></span></p>
+		<p style="margin-top: 5px;"><span class="dot @if($feed->type == 'danger') dot-danger @else dot-success @endif"></span> @if($feed->type == 'danger') Offline @else Online @endif - <span id="MyClockDisplay"></span><span style="font-size: 10px;"> (Local Time)</span></p>
 		</div>
 	@endif
+
+	<div class="box @if($OnlineStatus == 0) box-danger @else box-success @endif" style="height: 100px !important;">
+		<p style="font-size: 10px;">24h / 7d</p>
+		
+		<p>{{__('Automatic File Service Status')}}:</p>
+		<span class="dot @if($OnlineStatus == 'danger') dot-danger @else dot-success @endif"></span><span>@if($OnlineStatus == 0) {{'Not Online'}} @else {{'Online'}} @endif</span>
+		
+	</div>
 	
 	<div class="sidebar-section">
 		<ul class="nav sidebar">
