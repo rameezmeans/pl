@@ -791,7 +791,9 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-download top-box top-box-grey"></i>
               </span>
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
+
                 Pre File Support
+
               </h3>
               
               <div style="padding-left: 60px;" class="card-dt">
@@ -800,7 +802,9 @@ div.file-type-buttons label > input + img {
                     <div style="margin-bottom: 20px;">
                       @if(!$file->messages_and_logs()->isEmpty())
                       @foreach($file->messages_and_logs() as $engineersMessage)
-                      @if($engineersMessage->request_file_id == NULL)
+
+						@if($engineersMessage->request_file_id == NULL)
+
                         <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
                           <div>
                             @if($engineersMessage->engineer)
@@ -841,7 +845,10 @@ div.file-type-buttons label > input + img {
                           @endif
                           @endif
                         </div>
+<<<<<<< HEAD
                         @endif
+=======
+>>>>>>> 200a73d (message box)
                       @endforeach
                         @endif
                       <div class="m-t-10">
@@ -850,16 +857,22 @@ div.file-type-buttons label > input + img {
                             <span style="">
                               <h4 style="margin-bottom: 10px;">Support Message</h4>
                               <strong></strong>
+<<<<<<< HEAD
 
                               @if($file->files->isEmpty())
 
+=======
+>>>>>>> 200a73d (message box)
                               <p>
                                 <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                 <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
                               </p>
+<<<<<<< HEAD
 
                              
 
+=======
+>>>>>>> 200a73d (message box)
                               <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12">
                               <form method="POST" action="{{ route('file-engineers-notes') }}" enctype="multipart/form-data">
@@ -885,6 +898,7 @@ div.file-type-buttons label > input + img {
                               </form>
                                 </div>
                               </div>
+<<<<<<< HEAD
 
                               @else
 
@@ -896,6 +910,9 @@ div.file-type-buttons label > input + img {
                               
                               @endif
 
+=======
+                              
+>>>>>>> 200a73d (message box)
                             </span>
                           </div>
                         </div>
@@ -1756,6 +1773,112 @@ div.file-type-buttons label > input + img {
               </div>
             </div>
           </div>
+
+          <div class="main-file-box m-t-40">
+            <span>
+              <i class="fa fa-download top-box top-box-grey"></i>
+            </span>
+            <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
+              File Support
+            </h3>
+            
+            <div style="padding-left: 60px;" class="card-dt">
+              <div class="card m-t-10">
+                <div class="card-header">
+                  <div style="margin-bottom: 20px;">
+                    @if(!$file->messages_and_logs()->isEmpty())
+                    @foreach($file->messages_and_logs() as $engineersMessage)
+                      <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
+                        <div>
+                          @if($engineersMessage->engineer)
+                          <div>
+                            <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
+                            <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
+                            <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
+                          </div>
+                          @else
+                            
+                            <i style="font-size: 24px;" class="fas fa-user-circle"></i>
+                            @if(isset($engineersMessage->egnineers_internal_notes))
+                              <strong style="font-size: 18px;">Help Request</strong>  
+                            @else
+                              <strong style="font-size: 18px;">Log Entry</strong> 
+                            @endif
+                            <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
+                          @endif
+                        <p>
+                          @if(isset($engineersMessage->egnineers_internal_notes))
+                            <p>{!!$engineersMessage->egnineers_internal_notes!!}</p>
+                          @else
+                            <p>{{$engineersMessage->events_internal_notes}}</p>
+                          @endif
+                        </div>
+
+                        @if(isset($engineersMessage->egnineers_internal_notes))
+                        @if($engineersMessage->engineers_attachement)
+                            
+                            <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
+                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                        @endif
+                        @else
+                        @if($engineersMessage->events_attachement)
+                            
+                        <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
+                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                        @endif
+                        @endif
+                      </div>
+                    @endforeach
+                      @endif
+                    <div class="m-t-10">
+                      <div class="card-header">
+                        <div style="margin-bottom: 20px;">
+                          <span style="">
+                            <h4 style="margin-bottom: 10px;">Support Message</h4>
+                            <strong></strong>
+                            <p>
+                              <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                              <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
+                            </p>
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12">
+                            <form method="POST" action="{{ route('file-engineers-notes') }}" enctype="multipart/form-data">
+                              @csrf
+                              <input type="hidden" name="file_id" value="{{$file->id}}">
+      
+                                <div class="form-group m-t-20">
+                                  
+                                  <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Support Message.')}}"></textarea>
+                                  @error('egnineers_internal_notes')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputName1">Attachment</label>
+                                <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
+                                </div>
+      
+                                <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                              
+                            </form>
+                              </div>
+                            </div>
+                            
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </div>
+
+                  
+                </div>
+              </div>
+          </div>
+          
+          </div>
           
           <div class="main-file-box m-t-40">
             <span>
@@ -1985,13 +2108,16 @@ div.file-type-buttons label > input + img {
 
             @endif
 
-            
-
+<<<<<<< HEAD
            {{-- here are are --}}
-           
+           {{-- done --}}
            {{-- again--}}
 
+<<<<<<< HEAD
             {{-- @if(!$file->messages_and_logs()->isEmpty())
+=======
+            
+>>>>>>> e2b3798 (message box)
 
             <div class="main-file-box m-t-40">
               <span>
@@ -2000,7 +2126,7 @@ div.file-type-buttons label > input + img {
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
                 File Support
               </h3>
-  
+              @if(!$file->messages_and_logs()->isEmpty())
               <div style="padding-left: 60px;" class="card-dt">
                 <div class="card m-t-10">
                   <div class="card-header">
@@ -2096,10 +2222,17 @@ div.file-type-buttons label > input + img {
                   </div>
                 </div>
             </div>
+            @endif
             </div>
   
+<<<<<<< HEAD
             @endif --}}
+=======
+           
+>>>>>>> e2b3798 (message box)
 
+=======
+>>>>>>> 817c7ea (message box)
             @if($file->status == 'rejected')
             <div class="main-file-box m-t-40">
               <span>
