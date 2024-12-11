@@ -845,10 +845,7 @@ div.file-type-buttons label > input + img {
                           @endif
                           @endif
                         </div>
-<<<<<<< HEAD
                         @endif
-=======
->>>>>>> 200a73d (message box)
                       @endforeach
                         @endif
                       <div class="m-t-10">
@@ -857,22 +854,16 @@ div.file-type-buttons label > input + img {
                             <span style="">
                               <h4 style="margin-bottom: 10px;">Support Message</h4>
                               <strong></strong>
-<<<<<<< HEAD
 
                               @if($file->files->isEmpty())
 
-=======
->>>>>>> 200a73d (message box)
                               <p>
                                 <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                 <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
                               </p>
-<<<<<<< HEAD
 
                              
 
-=======
->>>>>>> 200a73d (message box)
                               <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12">
                               <form method="POST" action="{{ route('file-engineers-notes') }}" enctype="multipart/form-data">
@@ -898,7 +889,6 @@ div.file-type-buttons label > input + img {
                               </form>
                                 </div>
                               </div>
-<<<<<<< HEAD
 
                               @else
 
@@ -910,9 +900,6 @@ div.file-type-buttons label > input + img {
                               
                               @endif
 
-=======
-                              
->>>>>>> 200a73d (message box)
                             </span>
                           </div>
                         </div>
@@ -2107,17 +2094,10 @@ div.file-type-buttons label > input + img {
             </div>
 
             @endif
-
-<<<<<<< HEAD
+            
            {{-- here are are --}}
            {{-- done --}}
            {{-- again--}}
-
-<<<<<<< HEAD
-            {{-- @if(!$file->messages_and_logs()->isEmpty())
-=======
-            
->>>>>>> e2b3798 (message box)
 
             <div class="main-file-box m-t-40">
               <span>
@@ -2225,14 +2205,9 @@ div.file-type-buttons label > input + img {
             @endif
             </div>
   
-<<<<<<< HEAD
-            @endif --}}
-=======
-           
->>>>>>> e2b3798 (message box)
 
-=======
->>>>>>> 817c7ea (message box)
+            @endif --}}
+
             @if($file->status == 'rejected')
             <div class="main-file-box m-t-40">
               <span>
