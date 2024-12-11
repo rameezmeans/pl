@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use ECUApp\SharedCode\Controllers\AlientechMainController;
 use ECUApp\SharedCode\Controllers\FilesMainController;
+use ECUApp\SharedCode\Controllers\MagicsportsMainController;
 use ECUApp\SharedCode\Controllers\NotificationsMainController;
 use ECUApp\SharedCode\Controllers\PaymentsMainController;
 use ECUApp\SharedCode\Models\AlientechFile;
@@ -47,6 +48,7 @@ class FileController extends Controller
     private $notificationsMainObj;
     private $frontendID;
     private $alientechMainObj;
+    private $magicMainObj;
 
     public function __construct(){
 
@@ -57,6 +59,7 @@ class FileController extends Controller
         $this->paymentMainObj = new PaymentsMainController();
         $this->notificationsMainObj = new NotificationsMainController();
         $this->alientechMainObj = new AlientechMainController();
+        $this->magicMainObj = new MagicsportsMainController();
     }
 
     // public function uploadACMFile(Request $request){
@@ -944,6 +947,15 @@ class FileController extends Controller
 
             $path = $this->filesMainObj->getPath($file);
             $this->alientechMainObj->saveGUIDandSlotIDToDownloadLater($path , $tempFile->id);
+            
+        }
+
+        $flexLabel = Tool::where('label', 'Flex')->where('type', 'slave')->first();
+
+        if($toolType == 'slave' && $tempFile->tool_id == $flexLabel->id){
+            
+            $path = $this->filesMainObj->getPath($file);
+            $this->magicMainObj->magicDecrypt($path , $tempFile->id);
             
         }
 
