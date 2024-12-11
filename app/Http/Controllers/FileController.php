@@ -21,6 +21,7 @@ use ECUApp\SharedCode\Models\FileInternalEvent;
 use ECUApp\SharedCode\Models\FileService;
 use ECUApp\SharedCode\Models\FileUrl;
 use ECUApp\SharedCode\Models\Log;
+use ECUApp\SharedCode\Models\MagicEncryptedFile;
 use ECUApp\SharedCode\Models\Price;
 use ECUApp\SharedCode\Models\ProcessedFile;
 use ECUApp\SharedCode\Models\RequestFile;
@@ -466,14 +467,19 @@ class FileController extends Controller
     }
 
     public function download($id,$fileName) {
+
+        // if($engFileID){
+        //     $engFile = RequestFile::findOrFail($engFileID);
+        // }
         
         $file = File::findOrFail($id); 
 
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
+        $flexLabel = Tool::where('label', 'Flex')->where('type', 'slave')->first();
         
         if($file->tool_type == 'slave' && $file->tool_id == $kess3Label->id){
 
-            if($file->original_file_id == NULL){
+            // if($file->original_file_id == NULL){
 
             $engFile = RequestFile::where('request_file', $fileName)->where('file_id', $file->id)->first();
 
@@ -496,17 +502,30 @@ class FileController extends Controller
             }
             else{
                 $encodedFileNameToBe = $fileName.'_encoded_api';
-                $processedFile = ProcessedFile::where('name', $encodedFileNameToBe)->first();
+                $processedFile = ProcessedFile::where('name', $encodedFileNameToBe)->where('type', 'encoded')->first();
 
                 if($processedFile){
+
+                // if($processedFile->extension != ''){
+                //     $finalFileName = $processedFile->name.'.'.$processedFile->extension;
+                // }
+                // else{
                     $finalFileName = $processedFile->name;
-                
-                }else{
-                    $finalFileName = $fileName;
-                }
+                // }
 
                 $file_path = public_path($file->file_path).$finalFileName;
                 return response()->download($file_path);
+
+                }
+                else{
+                    abort(505);
+                }
+
+                // }else{
+                //     $finalFileName = $fileName;
+                // }
+
+                
 
             }
         }
@@ -514,14 +533,34 @@ class FileController extends Controller
             $file_path = public_path($file->file_path).$fileName;
             return response()->download($file_path);
         }
+    // }
+
+    // else{
+    //     $file_path = public_path($file->file_path).$fileName;
+    //     return response()->download($file_path);
+    // }
+
+    
     }
 
-    else{
-        $file_path = public_path($file->file_path).$fileName;
-        return response()->download($file_path);
-    }
+    else if($file->tool_type == 'slave' && $file->tool_id == $flexLabel->id){
+            
+            $magicFile = MagicEncryptedFile::where('file_id', $file->id)
+            ->where('name', $fileName.'_magic_encrypted.mmf')
+            ->where('downloadable', 1)
+            ->first();
 
+            if($magicFile){
+    
+                $file_path = public_path($file->file_path).$magicFile->name;
+                return response()->download($file_path);
+            }
+            else{
+                $file_path = public_path($file->file_path).$fileName; // quick fix. need to work a bit more.
+                return response()->download($file_path);
+            }
         }
+
         else{
             $file_path = public_path($file->file_path).$fileName;
             return response()->download($file_path);
