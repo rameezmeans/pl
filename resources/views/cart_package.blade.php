@@ -104,7 +104,7 @@ input.qty-input {
                       @endif
                     @endif
                   @endif
-                </div>
+                
 
                 </div>
               </div>
