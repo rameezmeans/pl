@@ -573,11 +573,13 @@
                 console.log('checked');
                 boxcounter++;
                 if (boxcounter == 3) {
+                    $("#register_form_Register_Popup").removeAttr("disabled");
                     $("#register_form_Register").removeAttr("disabled");
                 }
             } else {
                 boxcounter--;
                 if (boxcounter < 3) {
+                    $("#register_form_Register_Popup").attr("disabled", "disabled");
                     $("#register_form_Register").attr("disabled", "disabled");
                 }
             }
