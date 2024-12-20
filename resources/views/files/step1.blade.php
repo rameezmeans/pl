@@ -88,6 +88,21 @@
 </style>
 @endsection
 @section('content')
+
+@php 
+
+	$feeds = ECUApp\SharedCode\Models\NewsFeed::where('active', 1)
+        ->whereNull('subdealer_group_id')
+        ->where('front_end_id', 1)
+        ->get();
+
+		$feed = NULL;
+
+    foreach($feeds as $live){
+			$feed = $live;
+    }
+@endphp
+
 <div id="viewport">
     @include('layouts.sidebar')
     <!-- Content -->
@@ -495,7 +510,11 @@
 
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6">
-                        <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{translate('Next')}}</button>
+                      @if($feed->type == 'danger')
+                        <button type="button" id="register_form_Register_Popup" class="waves-effect waves-light btn btn-red" disabled>{{__('Next Test')}}</button>
+                      @else
+                        <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{__('Next')}}</button>
+                      @endif
                     </div>
                 </div>
 
@@ -666,6 +685,30 @@
     });
 
     $(document).ready(function(event) {
+
+      $("#register_form_Register_Popup").click(function() {
+            
+            Swal.fire({
+              title: {{$cautionText}},
+              showDenyButton: true,
+              confirmButtonText: "Next",
+              denyButtonText: "Cancel"
+            }).then((result) => {
+              
+              if (result.isConfirmed) {
+  
+                document.forms['step2'].submit();
+  
+              } else if (result.isDenied) {
+              
+                window.location.href = "/home";
+  
+              }
+  
+            });
+                
+                
+          });
     
       $('input[type=radio][name=file_type]').change(function() {
             if (this.value == 'ecu_file') {
