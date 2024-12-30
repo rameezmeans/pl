@@ -176,7 +176,7 @@
           </div>
 
           <div id="posting-file" class="@if($errors->any()) show @else hide @endif">
-            <form method="POST" action="{{ route('step2') }}" enctype="multipart/form-data">
+            <form id="step2" name="step2" method="POST" action="{{ route('step2') }}" enctype="multipart/form-data">
                 <input type="hidden" name="temporary_file_id" id="temporary_file_id" value="{{ old('temporary_file_id') }}">
                 {{-- <input type="hidden" name="acm_file_name" id="acm_file_name" value="{{ old('acm_file_name') }}"> --}}
                 @csrf
