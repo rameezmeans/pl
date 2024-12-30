@@ -10,7 +10,7 @@
     @php 
       $feeds = ECUApp\SharedCode\Models\NewsFeed::where('active', 1)
         ->whereNull('subdealer_group_id')
-        ->where('front_end_id', 2)
+        ->where('front_end_id', 1)
         ->get();
 		
 		$feed = NULL;
