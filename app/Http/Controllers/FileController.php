@@ -13,6 +13,7 @@ use ECUApp\SharedCode\Models\Combination;
 use ECUApp\SharedCode\Models\Comment;
 use ECUApp\SharedCode\Models\Credit;
 use ECUApp\SharedCode\Models\ECU;
+use ECUApp\SharedCode\Models\Modification;
 use ECUApp\SharedCode\Models\EmailReminder;
 use ECUApp\SharedCode\Models\EngineerFileNote;
 use ECUApp\SharedCode\Models\File;
@@ -859,6 +860,8 @@ class FileController extends Controller
         $user = Auth::user();
         $gearboxECUs = ECU::all();
 
+        $modifications = Modification::all();
+
         $frontend = FrontEnd::findOrFail($user->front_end_id);
         $cautionText = $frontend->caution_text;
 
@@ -867,7 +870,7 @@ class FileController extends Controller
 
         $brands = $this->filesMainObj->getBrands();
 
-        return view('files.step1', ['cautionText' => $cautionText, 'gearboxECUs' => $gearboxECUs, 'user' => $user, 'brands' => $brands,'masterTools' => $masterTools, 'slaveTools' => $slaveTools]);
+        return view('files.step1', ['modifications' => $modifications, 'cautionText' => $cautionText, 'gearboxECUs' => $gearboxECUs, 'user' => $user, 'brands' => $brands,'masterTools' => $masterTools, 'slaveTools' => $slaveTools]);
     }
 
     /**
