@@ -17,6 +17,9 @@
   .select2-search__field {
     height: 1.8rem !important;
 }
+.select2-container{
+  width: 100% !important;
+}
 
   .border {
     border: 1px #b01321 solid;
