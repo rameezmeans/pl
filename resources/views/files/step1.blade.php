@@ -14,6 +14,10 @@
     
   }
 
+  .select2-search__field {
+    height: 1.8rem !important;
+}
+
   .border {
     border: 1px #b01321 solid;
   }
@@ -439,20 +443,21 @@
                                   <div class="form-group">
                                     <label for="exampleInputCompanyLP1">Modifications</label>
                                     
-                                    <select id="modification" name="modification" class="select-dropdown form-control">
-                                      <option value="" selected disabled>Mention Modification</option>
+                                    <select id="modification" name="modification[]" multiple class="select-dropdown-multi form-control">
+                                      
                                       <option value="stage1">Stage1</option>
                                       <option value="stage2">Stage2</option>
                                       <option value="DPF">DPF</option>
                                       <option value="EGR">EGR</option>
                                       <option value="DTC_OFF">DTC OFF</option>
                                       <option value="other">Other (Please mention)</option>
+
                                     </select>
                                   
                                   </div>
                                 </div>
   
-                                <div class="col-xl-12 col-lg-12 col-md-12 hide" id="mention_area">
+                                <div class="col-xl-12 col-lg-12 col-md-12">
                                   <div class="form-group">
                                       <label for="exampleInputCompanyAC1">Mention Modification</label>
                                       <textarea type="text" id="mention_modification" rows="3" name="mention_modification" class="materialize-textarea form-control @error('mention_modification') is-invalid @enderror" placeholder="{{__('Mention Modification')}} ">{{ old('mention_modification') }}</textarea>
@@ -729,6 +734,14 @@
 
     $(document).ready(function(event) {
 
+      $(".select-dropdown-multi").select2({
+			closeOnSelect : false,
+			placeholder : "{{__('Select Modifications')}}",
+			// allowHtml: true,
+			allowClear: true,
+			tags: true // создает новые опции на лету
+		});
+
       $("input[name='is_original']").click(function() {
         if ($(this).val() === 'yes') {
           console.log('original');
@@ -738,19 +751,7 @@
           $('#original_area').removeClass('hide');
         } 
       });
-
-      $(document).on('change', '#modification', function(e) {
-        
-        if($(this).val() == 'other'){
-          console.log($(this).val());
-          $('#mention_area').removeClass('hide');
-        }
-        else{
-          $('#mention_area').addClass('hide');
-        }
-
-      });
-
+      
       $("#register_form_Register_Popup").click(function() {
             
             Swal.fire({

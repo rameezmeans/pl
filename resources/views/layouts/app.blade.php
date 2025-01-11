@@ -35,11 +35,15 @@
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" type="text/css" /> --}}
     <link rel="stylesheet" href="{{ url('vendor/ecutech-code/css/datatables.css') }}" type="text/css" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
+
     {{-- <script src="https://phpcoder.tech/multiselect/js/jquery.multiselect.js"></script> --}}
     {{-- <link rel="stylesheet" href="https://phpcoder.tech/multiselect/css/jquery.multiselect.css"> --}}
     
     {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
     <script src="{{url('vendor/ecutech-code/js/jquery.dataTables.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     
     <style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style>
     {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
