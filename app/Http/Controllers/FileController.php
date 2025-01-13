@@ -601,6 +601,9 @@ class FileController extends Controller
                 $file_path = public_path($file->file_path).$autotunerFile->name;
                 return response()->download($file_path);
             }
+            else{
+                abort(404);
+            }
 
         }
 
