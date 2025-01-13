@@ -1050,7 +1050,7 @@ class FileController extends Controller
         if($toolType == 'slave' && $tempFile->tool_id == $autoTunerLabel->id){
             
             $path = $this->filesMainObj->getPath($file);
-            $this->autoTunerMainObj->autoturnerDecrypt($path , $tempFile->id);
+            $this->autotunerMainObj->autoturnerDecrypt($path , $tempFile->id);
             
         }
 
