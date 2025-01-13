@@ -497,6 +497,7 @@ class FileController extends Controller
 
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
         $flexLabel = Tool::where('label', 'Flex')->where('type', 'slave')->first();
+        $autoTunerLabel = Tool::where('label', 'Autotuner')->where('type', 'slave')->first();
 
         $engFile = RequestFile::where('request_file', $fileName)->where('file_id', $file->id)->first();
 
