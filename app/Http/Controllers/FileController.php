@@ -547,7 +547,7 @@ class FileController extends Controller
 
                 }
                 else{
-                    abort(505);
+                    abort(404);
                 }
 
                 // }else{
