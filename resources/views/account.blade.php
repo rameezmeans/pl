@@ -811,8 +811,8 @@ select {
       @include('layouts.header')
       <div class="container-fluid">
         <div class="header-block fix-header">  
-            <h1 class="m-t-40">Account Settings</h1>
-            <p>Manage all your account information and settings.</p>
+            <h1 class="m-t-40">{{translate('Account Settings')}}</h1>
+            <p>{{translate('Manage all your account information and settings.')}}</p>
         </div>
         <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12" style="margin-bottom: 100px;">
