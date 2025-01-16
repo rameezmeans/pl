@@ -1000,7 +1000,7 @@ select {
                           <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="form-group">
-                              <label for="exampleInputLanguage1">Current Password</label>
+                              <label for="exampleInputLanguage1">{{translate('Current Password')}}</label>
                               <input type="password" name="current_password" class="form-control">
                             </div>
                             </div>
