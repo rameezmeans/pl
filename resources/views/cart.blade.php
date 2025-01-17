@@ -149,9 +149,9 @@ input.qty-input {
                   <table class="table" id="bagItemsTable">
                     <thead>
                       <tr>
-                        <th>{{__('Item')}}</th>
-                        <th>{{__('Unit price')}}</th>
-                        <th>{{__('Qty')}}</th>
+                        <th>{{translate('Item')}}</th>
+                        <th>{{translate('Unit price')}}</th>
+                        <th>{{translate('Qty')}}</th>
                           <th></th>
                       </tr>
                     </thead>
