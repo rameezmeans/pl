@@ -988,7 +988,7 @@ select {
                         <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                             <div class="heading-column-box">
                                 <h3>{{translate('Password Change')}}</h3>
-                                <p>{{translate('Update your password associated with your account')}}.</p>
+                                <p>{{translate('Update your password associated with your account.')}}.</p>
                             </div>    
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6">
