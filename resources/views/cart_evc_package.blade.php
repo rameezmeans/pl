@@ -126,7 +126,7 @@ input.qty-input {
 
               <div class="card" >
                 <div class="card-header">
-                  <h4>Cart</h4>
+                  <h4>{{translate('Cart')}}</h4>
                   <input type="hidden" id="price_per_unit" value="{{$price}}" />
                   <input type="hidden" id="factor" value="{{$factor}}" />
                   <input type="hidden" id="tax" value="{{$tax}}" />
@@ -136,9 +136,9 @@ input.qty-input {
                   <table class="table" id="bagItemsTable">
                     <thead>
                       <tr>
-                        <th>{{__('Item')}}</th>
-                        <th>{{__('Price')}}</th>
-                        <th>{{__('Qty')}}</th>
+                        <th>{{translate('Item')}}</th>
+                        <th>{{translate('Price')}}</th>
+                        <th>{{translate('Qty')}}</th>
                          
                       </tr>
                     </thead>
