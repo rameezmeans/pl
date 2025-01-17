@@ -191,7 +191,7 @@
                     <div class="row post-row">
                         <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                             <div class="heading-column-box">
-                                <h3>{{translate('Customer Inf')}}'</h3>
+                                <h3>{{translate('Customer Info')}}</h3>
                                 <p>{{translate('Fill your contact information.')}}</p>
                             </div>
                         </div>
