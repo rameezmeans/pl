@@ -191,8 +191,8 @@
                     <div class="row post-row">
                         <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                             <div class="heading-column-box">
-                                <h3>Customer Info</h3>
-                                <p>Fill your contact information.</p>
+                                <h3>{{translate('Customer Inf')}}'</h3>
+                                <p>{{translate('Fill your contact information.')}}</p>
                             </div>
                         </div>
 
@@ -200,7 +200,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 ">
                               <div class="form-group">
-                                <label for="exampleInputCompanyName1">Full Name</label>
+                                <label for="exampleInputCompanyName1">{{translate('Full Name')}}</label>
                                 <input type="text" name="name" class="form-control" value="{{old('name')}}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -212,7 +212,7 @@
 
                             <div class="col-xl-6 col-lg-6 col-md-6">
                               <div class="form-group">
-                                <label for="exampleInputCompanyPhone1">Phone</label>
+                                <label for="exampleInputCompanyPhone1">{{translate('Phone')}}</label>
                                 <input type="text" name="phone" class="form-control" value="{{old('phone')}}">
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -223,7 +223,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
                               <div class="form-group">
-                                <label for="exampleInputCompanyEmail1">Contact Email</label>
+                                <label for="exampleInputCompanyEmail1">{{translate('Contact Email')}}</label>
                                 <input type="text" name="email" class="form-control" value="{{old('email')}}">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -243,8 +243,8 @@
 
                     <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                         <div class="heading-column-box">
-                            <h3>Select File Type</h3>
-                            <p>Fill your contact information.</p>
+                            <h3>{{translate('Select File Type')}}</h3>
+                            <p>{{translate('Fill your contact information.')}}</p>
                         </div>
                     </div>
 
@@ -258,7 +258,7 @@
                                             <img src="{{ url('pictogram.svg') }}">  
                                         </div>
                                         <span>
-                                            ECU file
+                                          {{translate('ECU file')}}
                                         </span>
                                     </label>
                                 </div>
@@ -271,7 +271,7 @@
                                             <img src="{{ url('gearbox.svg') }}">
                                         </div>
                                         <span>
-                                            Gearbox file
+                                          {{translate('Gearbox file')}}
                                         </span>
                                     </label>
                                 </div>
@@ -291,8 +291,8 @@
 
                     <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                         <div class="heading-column-box">
-                            <h3>Vehicle Information</h3>
-                            <p>Fill your vehicle characteristics.</p>
+                            <h3>{{translate('Vehicle Information')}}</h3>
+                            <p>{{translate('Fill your vehicle characteristics.')}}</p>
                         </div>
                     </div>
 
@@ -301,7 +301,7 @@
 
                             <div class="col-xl-4 col-lg-4 col-md-4">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyModelYear1">Model Year</label>
+                                  <label for="exampleInputCompanyModelYear1">{{translate('Model Year')}}</label>
                                   <input type="text" id="model_year" name="model_year" class="@error('model_year') is-invalid @enderror form-control" placeholder="{{translate('Model Year')}} " value="{{ old('model_year') }}">
                                     @error('model_year')
                                     <span class="invalid-feedback" role="alert">
@@ -313,7 +313,7 @@
 
                               <div class="col-xl-4 col-lg-4 col-md-4">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">License Plate *</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('License Plate')}} *</label>
                                   <input type="text" required id="license_plate" name="license_plate" class="@error('license_plate') is-invalid @enderror form-control" placeholder="{{translate('License Year')}} " value="{{ old('license_plate') }}">
                                     @error('license_plate')
                                     <span class="invalid-feedback" role="alert">
@@ -325,7 +325,7 @@
 
                               <div class="col-xl-4 col-lg-4 col-md-4">
                                 <div class="form-group">
-                                  <label for="exampleInputCompanyLP1">Vin Number</label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Vin Number')}}</label>
                                   <input type="text" id="vin_number" name="vin_number" class="@error('vin_number') is-invalid @enderror form-control" placeholder="{{translate('Vin Number')}} " value="{{ old('model_year') }}">
                                     @error('vin_number')
                                     <span class="invalid-feedback" role="alert">
