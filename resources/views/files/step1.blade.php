@@ -512,8 +512,8 @@
 
                     <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                         <div class="heading-column-box">
-                            <h3>Terms & Conditions</h3>
-                            <p>Please check all boxes in order to continue with the upload process</p>
+                            <h3>{{translate('Terms & Conditions')}}</h3>
+                            <p>{{translate('Please check all boxes in order to continue with the upload process')}}</p>
                         </div>
                     </div>
 
