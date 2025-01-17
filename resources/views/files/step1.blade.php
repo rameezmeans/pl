@@ -425,7 +425,7 @@
 
                               <div class="col-xl-6 col-lg-6 col-md-6">
                                 <div class="form-group rd-gp">
-                                  <label for="exampleInputCompanyLP1">{{translate('Is it an Original file')}}? * </label>
+                                  <label for="exampleInputCompanyLP1">{{translate('Is it an Original file?')}} * </label>
                                     <div>
                                       <input type="radio" id="yes" name="is_original" value="yes">
                                       <label for="yes">{{translate('Yes')}}</label>
