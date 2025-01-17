@@ -72,21 +72,21 @@ input.qty-input {
 
                       <tr >
                         <td style="width: 60%; padding-bottom: 10px;">
-                          <strong>Name:</strong>
-                          <span>{{Auth::user()->name}}</span>
+                          <strong>{{translate('Name')}}:</strong>
+                          <span>{{$user->name}}</span>
                         </td>
                         <td style="width: 60%; padding-bottom: 10px;">
-                          <strong>Country:</strong>
+                          <strong>{{translate('Country')}}:</strong>
                           <span>{{code_to_country(Auth::user()->country)}}</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <strong>Email:</strong>
-                          <span>{{Auth::user()->email}}</span>
+                          <strong>{{translate('Email')}}:</strong>
+                          <span>{{$user->email}}</span>
                         </td>
                         <td>
-                          <strong>VAT:</strong>
+                          <strong>{{translate('VAT')}}:</strong>
                           <span>{{$group->name}} ({{$group->tax}}%)</span>
                         </td>
                       </tr>

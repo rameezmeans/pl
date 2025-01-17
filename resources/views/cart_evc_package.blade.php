@@ -51,7 +51,7 @@ input.qty-input {
           <span style="display: inline-flex;" class="m-t-20">
             <button  class="btn btn-white redirect-click" data-redirect="{{route('evc-credits-shop')}}"><i class="fa fa fa-angle-left"></i></button>
             <h3 class="m-t-5 m-l-5">
-              Checkout
+              {{translate('Checkout')}}
             </h3>
           </span>
 
@@ -62,7 +62,7 @@ input.qty-input {
 
             <div class="card" >
               <div class="card-header">
-                <h4>Billing Information</h4>
+                <h4>{{translate('Billing Information')}}</h4>
               </div>
               <div class="card-content">
                 <div class="details-box">
@@ -72,21 +72,21 @@ input.qty-input {
 
                       <tr >
                         <td style="width: 60%; padding-bottom: 10px;">
-                          <strong>Name:</strong>
+                          <strong>{{translate('Name')}}:</strong>
                           <span>{{$user->name}}</span>
                         </td>
                         <td style="width: 60%; padding-bottom: 10px;">
-                          <strong>Country:</strong>
+                          <strong>{{translate('Country')}}:</strong>
                           <span>{{code_to_country(Auth::user()->country)}}</span>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <strong>Email:</strong>
+                          <strong>{{translate('Email')}}:</strong>
                           <span>{{$user->email}}</span>
                         </td>
                         <td>
-                          <strong>VAT:</strong>
+                          <strong>{{translate('VAT')}}:</strong>
                           <span>{{$group->name}} ({{$group->tax}}%)</span>
                         </td>
                       </tr>
@@ -101,7 +101,7 @@ input.qty-input {
 
             <div class="card" >
               <div class="card-header">
-                <h4>Payment Method</h4>
+                <h4>{{translate('Payment Method')}}</h4>
               </div>
               <div class="card-content">
                 <p>{{translate('When validating your payment you will automatically be redirected to the Stripe or Paypal website where you will be able to pay the amount due very easily.')}}</p>

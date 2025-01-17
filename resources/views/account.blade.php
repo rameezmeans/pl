@@ -832,7 +832,7 @@ select {
                             <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                                 <div class="heading-column-box">
                                     <h3>{{translate('Personal Information')}}</h3>
-                                    <p>{{translate('Use a personal address where you can receive email')}}.</p>
+                                    <p>{{translate('Use a personal address where you can receive email.')}}.</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
