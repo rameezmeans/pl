@@ -104,7 +104,7 @@ input.qty-input {
                 <h4>Payment Method</h4>
               </div>
               <div class="card-content">
-                <p>When validating your payment you will automatically be redirected to the Stripe or Paypal website where you will be able to pay the amount due very easily.</p>
+                <p>{{translate('When validating your payment you will automatically be redirected to the Stripe or Paypal website where you will be able to pay the amount due very easily.')}}</p>
               </div>
               <div class="card-footer">
                 <ul class="payments">
