@@ -578,7 +578,7 @@ div.file-type-buttons label > input + img {
                                 {{-- </div> --}}
                                 <div class="input-field m-t-20">
                                     <div class="form-group">
-                                      <label>Tools</label>
+                                      <label>{{translate('Tools')}}</label>
                                         <select class="form-control f-dropdown" name="master_tools" id="master_tools">
                                             @foreach($masterTools as $ma)
                                             <option data-image="{{ get_dropdown_image(trim_str($ma->tool_id)) }}" value="{{$ma->tool_id}}">{{get_tool_name($ma->tool_id).' (master)'}}</option>
@@ -611,7 +611,7 @@ div.file-type-buttons label > input + img {
                                 </div>
                             </div>
                             <div class="tab-footer text-center">
-                              <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Next</button>
+                              <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Next')}}</button>
                             </div>
                             </form>
                         </div>
@@ -632,8 +632,8 @@ div.file-type-buttons label > input + img {
                 <div class="card-header">
                   <div style="margin-bottom: 20px;">
                     <span style="">
-                      <h4 style="margin-bottom: 10px;">ACM File</h4>
-                      <strong>Pleaes upload ACM File and Engineer will get it.</strong>
+                      <h4 style="margin-bottom: 10px;">{{translate('ACM File')}}</h4>
+                      <strong>{{translate('Pleaes upload ACM File and Engineer will get it.')}}</strong>
                       <p>
                         <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <span style="color: darkgray;"></span>
@@ -644,11 +644,11 @@ div.file-type-buttons label > input + img {
                         @csrf
                         <input type="hidden" name="file_id" value="{{$file->id}}">
                           <div class="form-group">
-                            <label for="exampleInputName1">Attachment</label>
+                            <label for="exampleInputName1">{{translate('Attachment')}}</label>
                           <input type="file" name="acm_file" class="form-control" id="acm_file">
                           </div>
 
-                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                         
                       </form>
                         </div>
@@ -666,11 +666,11 @@ div.file-type-buttons label > input + img {
                 <div class="card-header">
                   <div style="margin-bottom: 20px;">
                     <span style="">
-                      <h4 style="margin-bottom: 10px;">Personal Note</h4>
-                      <strong>Add an internal note to the vehicle's timeline</strong>
+                      <h4 style="margin-bottom: 10px;">{{translate('Personal Note')}}</h4>
+                      <strong>{{translate("Add an internal note to the vehicle's timeline")}}</strong>
                       <p>
                         <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                        <span style="color: darkgray;">You only can view this note. Engineers will not be notified.</span>
+                        <span style="color: darkgray;">{{translate('You only can view this note. Engineers will not be notified.')}}</span>
                       </p>
                       <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12">
@@ -688,11 +688,11 @@ div.file-type-buttons label > input + img {
                             @enderror
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputName1">Attachment</label>
+                            <label for="exampleInputName1">{{translate('Attachment')}}</label>
                           <input type="file" name="file_url_attachment" class="form-control" id="file_url_attachment">
                           </div>
 
-                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                         
                       </form>
                         </div>
@@ -710,7 +710,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-download top-box top-box-grey"></i>
               </span>
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-                File Uploaded
+                {{translate('File Uploaded')}}
               </h3>
               
               <span style="float: right; margin-top: 20px;" class="d-label">
@@ -724,8 +724,8 @@ div.file-type-buttons label > input + img {
                   <div class="card-header">
                     <div style="margin-bottom: 20px;">
                       <span style="display: inline-grid;">
-                        <h4 style="margin-bottom: 10px;">File Details:</h4>
-                        <span>This file is sent to the engineer with following details.</span>
+                        <h4 style="margin-bottom: 10px;">{{translate('File Details')}}:</h4>
+                        <span>{{translate('This file is sent to the engineer with following details.')}}</span>
                       </span>
                     
                     </div>
@@ -733,22 +733,22 @@ div.file-type-buttons label > input + img {
                     <span class="file-name-box">
                       
                       <span style="display: inline-grid;">
-                        <strong>File Name:</strong>
+                        <strong>{{translate('File Name')}}:</strong>
                         <span class="f-name">{{$file->file_attached}}</span>
                       </span>
-                    <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                    <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                     </span>
                     @if($file->acm_file)
                     <div class="bt m-t-20 p-t-10">
                       <span style="display: inline-grid;margin-bottom: 20px;" >
-                        <strong>ACM File Name:</strong>
+                        <strong>{{translate('ACM File Name')}}:</strong>
                         <span class="f-name">{{$file->acm_file}}</span>
                       </span>
-                          <a class="btn btn-info" href="{{route('download', [$file->id,$file->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                          <a class="btn btn-info" href="{{route('download', [$file->id,$file->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                     </div>
                     @endif
                     <div class="bt m-t-10 p-t-10">
-                      <span><strong>Stages and Options:</strong></span>
+                      <span><strong>{{translate('Stages and Options')}}:</strong></span>
                     </div>
                     <div class="m-t-10" style="line-height: 2.7;">
                       @if($file->stages_services)
@@ -772,7 +772,7 @@ div.file-type-buttons label > input + img {
                     </div>
                     
                     <div class="bt m-t-20 p-t-10">
-                      <span><strong>Reading Tool:</strong></span>
+                      <span><strong>{{translate('Reading Tool')}}:</strong></span>
                       <div class="m-t-10">
                         <span class="show-stage">
                           <img style="width: 20px;" src="{{ get_dropdown_image($file->tool_id) }}" class="tool-logo-small"> {{ ucfirst($file->tool_type) }}
@@ -792,7 +792,7 @@ div.file-type-buttons label > input + img {
               </span>
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
 
-                Pre File Support
+                {{translate('Pre File Support')}}
 
               </h3>
               
@@ -835,13 +835,13 @@ div.file-type-buttons label > input + img {
                           @if($engineersMessage->engineers_attachement)
                               
                               <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
-                              <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                              <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                           @endif
                           @else
                           @if($engineersMessage->events_attachement)
                               
-                          <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
-                          <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                          <strong class="">{{translate('Filename')}}: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
+                          <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                           @endif
                           @endif
                         </div>
@@ -852,14 +852,14 @@ div.file-type-buttons label > input + img {
                         <div class="card-header">
                           <div style="margin-bottom: 20px;">
                             <span style="">
-                              <h4 style="margin-bottom: 10px;">Support Message</h4>
+                              <h4 style="margin-bottom: 10px;">{{translate('Support Message')}}</h4>
                               <strong></strong>
 
                               @if($file->files->isEmpty())
 
                               <p>
                                 <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
+                                <span style="color: darkgray;">{{translate('You can send Message to Engineer. Engineers will be notified.')}}</span>
                               </p>
 
                              
@@ -880,11 +880,11 @@ div.file-type-buttons label > input + img {
                                     @enderror
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputName1">Attachment</label>
+                                    <label for="exampleInputName1">{{translate('Attachment')}}</label>
                                   <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
                                   </div>
         
-                                  <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                                  <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                                 
                               </form>
                                 </div>
@@ -894,7 +894,7 @@ div.file-type-buttons label > input + img {
 
                               <p>
                                 <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <span style="color: darkgray;">You cannot send support messages here, Please use the respective area below the file you have received</span>
+                                <span style="color: darkgray;">{{translate('You cannot send support messages here, Please use the respective area below the file you have received')}}</span>
                               </p>
                               
                               
@@ -923,7 +923,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-download top-box top-box-grey"></i>
               </span>
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-                Proposed Stage and Option
+                {{translate('Proposed Stage and Option')}}
               </h3>
               <div style="padding-left: 60px;" class="card-dt">
               <div class="card m-t-10">
@@ -931,21 +931,21 @@ div.file-type-buttons label > input + img {
 
                   <div style="margin-bottom: 20px;">
                     <span style="display: inline-grid;">
-                      <h4 style="margin-bottom: 10px;">File Details:</h4>
-                      <span>Engineer proposed following Stage and Options for this file Please confirm or Reject.</span>
+                      <h4 style="margin-bottom: 10px;">{{translate('File Details')}}:</h4>
+                      <span>{{translate('Engineer proposed following Stage and Options for this file Please confirm or Reject.')}}</span>
                     </span>
                   </div>
 
               <span class="file-name-box">
                       
                 <span style="display: inline-grid;">
-                  <strong>File Name:</strong>
+                  <strong>{{translate('File Name')}}:</strong>
                   <span class="f-name">{{$file->file_attached}}</span>
                 </span>
              
               </span>
               <div class="bt m-t-10 p-t-10">
-                <span><strong>Proposed Stages and Options:</strong></span>
+                <span><strong>{{translate('Proposed Stages and Options')}}:</strong></span>
               </div>
               <div class="m-t-10" style="line-height: 2.7;">
                     @if($file->stage_offer)
@@ -988,25 +988,25 @@ div.file-type-buttons label > input + img {
                   <div class="bt m-t-20 p-t-10 text-center">
                     @if( $difference < 0 )
 
-                      <span class="label label-danger">Credits to Pay: {{-1*$difference}}</span>
+                      <span class="label label-danger">{{translate('Credits to Pay')}}: {{-1*$difference}}</span>
                     
                     @elseif($difference > 0)
 
-                      <span class="label label-success">Credits to be saved: {{$difference}}</span>
+                      <span class="label label-success">{{translate('Credits to be saved')}}: {{$difference}}</span>
                     @elseif($difference == 0)
                     
-                      <span class="label label-success">Credits will remain same.</span>
+                      <span class="label label-success">{{translate('Credits will remain same')}}.</span>
 
                     @endif
                   </div>
 
                   <div class="bt m-t-20 p-t-10 text-center">
                     @if($difference >= 0)
-                      <button type="submit" class="btn btn-info" id="btn-accept" data-file_id="{{$file->id}}"><i class="fa fa-check"></i> Accept Options</button>
+                      <button type="submit" class="btn btn-info" id="btn-accept" data-file_id="{{$file->id}}"><i class="fa fa-check"></i> {{translate('Accept Options')}}</button>
                     @else
-                      <a class="btn btn-info" href="{{route('pay-credits-offer', $file->id)}}"><i class="fa fa-check"></i> Pay Credits</a>
+                      <a class="btn btn-info" href="{{route('pay-credits-offer', $file->id)}}"><i class="fa fa-check"></i> {{translate('Pay Credits')}}</a>
                     @endif
-                    <button type="submit" class="btn btn-danger" id="btn-reject" data-file_id="{{$file->id}}><i class="fa fa-close"></i> Reject</button>
+                    <button type="submit" class="btn btn-danger" id="btn-reject" data-file_id="{{$file->id}}><i class="fa fa-close"></i> {{translate('Reject')}}</button>
                   </div>
 
                 </div>
@@ -1023,7 +1023,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-download top-box top-box-red"></i>
               </span>
               <h3 style="display: inline; color: #b01321; margin-left: 20px;">
-                File Canceled
+                {{translate('File Canceled')}}
               </h3>
 
               <span style="float: right; margin-top: 20px;" class="d-label">
@@ -1034,7 +1034,7 @@ div.file-type-buttons label > input + img {
                   <div class="card-header">
                     <div style="margin-bottom: 20px;">
                       <span style="display: inline-grid;">
-                        <h4 style="margin-bottom: 10px;">Reason To Cancel:</h4>
+                        <h4 style="margin-bottom: 10px;">{{translate('Reason To Cancel')}}:</h4>
                         <span class="text-danger">{{$file->reason_to_reject}}</span>
                       </span>
                     
@@ -1062,7 +1062,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-upload top-box top-box-green"></i>
               </span>
               <h3 style="display: inline; color: #237E02; margin-left: 20px;">
-                File Received {{substr($row->request_file, -2)}}
+                {{translate('File Received')}} {{substr($row->request_file, -2)}}
               </h3>
               <span class="r-file-span" style="float: right; margin-top: 15px;">{{ $row->created_at->format('d/m/Y')}} at {{$row->created_at->format('H:i:s')}}</span>
             
@@ -1072,14 +1072,14 @@ div.file-type-buttons label > input + img {
               <div class="card-header">
                 <div style="margin-bottom: 20px;">
                   <span style="display: inline-grid;">
-                    <h4 style="margin-bottom: 10px;">File Received:</h4>
-                    <span>This file is uploaded by the engineer with following details.</span>
+                    <h4 style="margin-bottom: 10px;">{{translate('File Received')}}:</h4>
+                    <span>{{translate('This file is uploaded by the engineer with following details.')}}</span>
                   </span>
                 </div>
 
                 <span class="file-name-box">
                   <span style="display: inline-grid;">
-                    <strong>File Name:</strong>
+                    <strong>{{translate('File Name')}}:</strong>
                     <span class="f-name">{{$row->request_file}}</span>
                   </span>
 
@@ -1088,16 +1088,16 @@ div.file-type-buttons label > input + img {
                   @if($file->showComments())
 
                     @if($row->show_comments())
-                      <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</button>
+                      <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Downloand')}}</button>
                     @else
-                      <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                      <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Downloand')}}</a>
                     @endif
                   @else
-                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Downloand')}}</a>
                   @endif
 
                   @else
-                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Downloand')}}</a>
                   @endif
                 </span>
 
@@ -1106,17 +1106,17 @@ div.file-type-buttons label > input + img {
               @foreach($row->acm_files as $acm)
                 <div class="bt m-t-20 p-t-10">
                   <span style="display: inline-grid;margin-bottom: 20px;" >
-                    <strong>ACM File Name:</strong>
+                    <strong>{{translate('ACM File Name')}}:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
-                      <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                      <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Downloand')}}</a>
                 </div>
               @endforeach
               @endif
               @endif
 
                 <div class="bt m-t-10 p-t-10">
-                  <span><strong>Stages and Options:</strong></span>
+                  <span><strong>{{translate('Stages and Options')}}:</strong></span>
                 </div>
                 <div class="m-t-10">
                   @if($file->stages_services)
@@ -1140,7 +1140,7 @@ div.file-type-buttons label > input + img {
                 </div>
 
                 <div class="bt m-t-20 p-t-10">
-                  <span><strong>Reading Tool:</strong></span>
+                  <span><strong>{{translate('Reading Tool')}}:</strong></span>
                   <div class="m-t-10">
                     <span class="show-stage">
                       <img style="width: 20px;" src="{{ get_dropdown_image($file->tool_id) }}" class="tool-logo-small"> {{ ucfirst($file->tool_type) }}
@@ -1159,16 +1159,16 @@ div.file-type-buttons label > input + img {
                           @if($engineersMessage->engineer)
                           <div>
                             <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
-                            <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
+                            <strong style="font-size: 18px;color: #B01321;">{{translate("Engineer's Reply")}}</strong>
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           </div>
                           @else
                             
                             <i style="font-size: 24px;" class="fas fa-user-circle"></i>
                             @if(isset($engineersMessage->egnineers_internal_notes))
-                              <strong style="font-size: 18px;">Help Request</strong>  
+                              <strong style="font-size: 18px;">{{translate('Help Request')}}</strong>  
                             @else
-                              <strong style="font-size: 18px;">Log Entry</strong> 
+                              <strong style="font-size: 18px;">{{translate('Log Entry')}}</strong> 
                             @endif
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           @endif
@@ -1184,13 +1184,13 @@ div.file-type-buttons label > input + img {
                         @if($engineersMessage->engineers_attachement)
                             
                             <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
-                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @else
                         @if($engineersMessage->events_attachement)
                             
                         <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
-                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @endif
                       </div>
@@ -1207,13 +1207,13 @@ div.file-type-buttons label > input + img {
                         <button class="btn btn-white">
                           <i>
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABXElEQVR4nN2VO0sDQRSFdy0sFIyxtrINWIhYiFgr1oKIWFhraSfYmPwBEUH0J6iNWgmKWFj4FwRNAmkEn/EJfjJwhesyu3OzWogHtjl7zj0zc+cRRf8aQDswC2wDV8CTfFXhZpwmb/ER4JIwLoDhVouPAq+G4l94dh5r8S7gmtZRBzosAYvkx7wl4Mhj3Ac+DAEHloDbhGkTaAMmgXPgLSOgbgl4EfEG0G/Qx8CYeJqWgHcRhxsmALrVLGrAeOSDK6q2Z6dwFeARKCudj9OopgXsqH1dEu5BuHul83HfkBbQlP8lxZWl4EqAMwXsKc26V5SCRP1aVrPWZM+7Ne7JEXAHTITEuyJeTvAVOSdLHs+CeLYsoxlUzR7wNDcLU9Ypr4rBXce9qrlZt+yJ+X2Qx+ZMjA1gDijKWekDhkyFAiFF4DBltG754t8IiYFp4Bi4kbPiXrpToPDjgD+PT0xxfXWFo4ayAAAAAElFTkSuQmCC">
-                          </i> Engineer Support
+                          </i> {{translate('Engineer Support')}}
                         </button>
                       </a>
                     </li>
                     @endif
-                    <li><a style="border: none;" data-toggle="tab" href="#log-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-file" style="transform: rotate(-90deg)"></i> Add Log</button></a></li>
-                    <li><a style="border: none;" data-toggle="tab" href="#star-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-star"></i> Add a Rating</button></a></li>
+                    <li><a style="border: none;" data-toggle="tab" href="#log-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-file" style="transform: rotate(-90deg)"></i> {{translate('Add Log')}}</button></a></li>
+                    <li><a style="border: none;" data-toggle="tab" href="#star-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-star"></i> {{translate('Add a Rating')}}</button></a></li>
                     
                   </ul>
                   
@@ -1229,7 +1229,7 @@ div.file-type-buttons label > input + img {
                           <input type="hidden" name="request_file_id" value="{{$row->id}}">
                             
                             <div class="form-group m-t-20">
-                              <label for="exampleInputName1">Ask Engineer for Support</label>
+                              <label for="exampleInputName1">{{translate('Ask Engineer for Support')}}</label>
                               <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
                               @error('egnineers_internal_notes')
                                   <span class="invalid-feedback" role="alert">
@@ -1238,11 +1238,11 @@ div.file-type-buttons label > input + img {
                               @enderror
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputName1">Attachment</label>
+                              <label for="exampleInputName1">{{translate('Attachment')}}</label>
                             <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
                             </div>
 
-                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                           
                         </form>
                       </div>
@@ -1261,7 +1261,7 @@ div.file-type-buttons label > input + img {
                           <input type="hidden" name="request_file_id" value="{{$row->id}}">
                             
                             <div class="form-group m-t-20">
-                              <label for="exampleInputName1">Attach log file and send to engineer.</label>
+                              <label for="exampleInputName1">{{translate('Attach log file and send to engineer.')}}</label>
                               <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for To save on timeline')}}"></textarea>
                               @error('events_internal_notes')
                                   <span class="invalid-feedback" role="alert">
@@ -1270,11 +1270,11 @@ div.file-type-buttons label > input + img {
                               @enderror
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputName1">Attachment</label>
+                              <label for="exampleInputName1">{{translate('Attachment')}}</label>
                             <input type="file" name="events_attachement" class="form-control" id="events_attachement">
                             </div>
 
-                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                           
                         </form>
                       </div>
@@ -1383,14 +1383,14 @@ div.file-type-buttons label > input + img {
             <div class="card-header">
               <div style="margin-bottom: 20px;">
                 <span style="display: inline-grid;">
-                  <h4 style="margin-bottom: 10px;">File Received:</h4>
-                  <span>This file is uploaded by the engineer with following details.</span>
+                  <h4 style="margin-bottom: 10px;">{{translate('File Received')}}:</h4>
+                  <span>{{translate('This file is uploaded by the engineer with following details.')}}</span>
                 </span>
               </div>
 
               <span class="file-name-box" style="margin-bottom: 20px;">
                 <span style="display: inline-grid;" >
-                  <strong>ECU File Name:</strong>
+                  <strong>{{translate('ECU File Name')}}:</strong>
                   <span class="f-name">{{$row->request_file}}</span>
                 </span>
 
@@ -1399,16 +1399,16 @@ div.file-type-buttons label > input + img {
                 @if($file->showComments())
 
                   @if($row->show_comments())
-                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</button>
+                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</button>
                   @else
-                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                   @endif
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                 @endif
 
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                 @endif
 
               </span>
@@ -1421,10 +1421,10 @@ div.file-type-buttons label > input + img {
                   
                   
                   <span style="display: inline-grid;margin-bottom: 20px;" >
-                    <strong>ACM File Name:</strong>
+                    <strong>{{translate('ACM File Name')}}:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
-                      <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                      <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                     
                   
                 </div>
@@ -1433,7 +1433,7 @@ div.file-type-buttons label > input + img {
               @endif
 
               <div class="bt m-t-10 p-t-10">
-                <span><strong>Stages and Options:</strong></span>
+                <span><strong>{{translate('Stages and Options')}}:</strong></span>
               </div>
               <div class="m-t-10">
                 @if($file->stages_services)
@@ -1530,8 +1530,8 @@ div.file-type-buttons label > input + img {
                   </li>
                   @endif
 
-                  <li><a style="border: none;" data-toggle="tab" href="#log-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-file" style="transform: rotate(-90deg)"></i> Add Log</button></a></li>
-                  <li><a style="border: none;" data-toggle="tab" href="#star-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-star"></i> Add a Rating</button></a></li>
+                  <li><a style="border: none;" data-toggle="tab" href="#log-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-file" style="transform: rotate(-90deg)"></i> {{translate('Add Log')}}</button></a></li>
+                  <li><a style="border: none;" data-toggle="tab" href="#star-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-star"></i> {{translate('Add a Rating')}}</button></a></li>
                   
                 </ul>
                 
@@ -1547,7 +1547,7 @@ div.file-type-buttons label > input + img {
                         <input type="hidden" name="request_file_id" value="{{$row->id}}">
                           
                           <div class="form-group m-t-20">
-                            <label for="exampleInputName1">Ask Engineer for Support</label>
+                            <label for="exampleInputName1">{{translate('Ask Engineer for Support')}}</label>
                             <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
                             @error('egnineers_internal_notes')
                                 <span class="invalid-feedback" role="alert">
@@ -1556,11 +1556,11 @@ div.file-type-buttons label > input + img {
                             @enderror
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputName1">Attachment</label>
+                            <label for="exampleInputName1">{{translate('Attachment')}}</label>
                           <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
                           </div>
 
-                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                         
                       </form>
                     </div>
@@ -1717,13 +1717,13 @@ div.file-type-buttons label > input + img {
                   <span class="file-name-box">
                     
                     <span style="display: inline-grid;">
-                      <strong>ECU File Name:</strong>
+                      <strong>{{translate('ECU File Name')}}:</strong>
                       <span class="f-name">{{$file->file_attached}}</span>
                     </span>
-                  <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                  <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                   </span>
                   <div class="bt m-t-10 p-t-10">
-                    <span><strong>Stages and Options:</strong></span>
+                    <span><strong>{{translate('Stages and Options')}}:</strong></span>
                   </div>
                   <div class="m-t-10" style="line-height: 2.7;">
                     @if($file->stages_services)
@@ -2017,13 +2017,13 @@ div.file-type-buttons label > input + img {
               <span class="">
                       
                 <span style="display: inline-grid;">
-                  <strong>File Name:</strong>
+                  <strong>{{translate('File Name')}}:</strong>
                   <span>{{$file->file_attached}}</span>
                 </span>
              
               </span>
               <div class="bt m-t-10 p-t-10">
-                <span><strong>Proposed Stages and Options:</strong></span>
+                <span><strong>{{translate('Proposed Stages and Options')}}:</strong></span>
               </div>
               <div class="m-t-10" style="line-height: 2.7;">
                     @if($file->stage_offer)
@@ -2080,11 +2080,11 @@ div.file-type-buttons label > input + img {
 
                   <div class="bt m-t-20 p-t-10 text-center">
                     @if($difference >= 0)
-                      <button type="submit" class="btn btn-info" id="btn-accept" data-file_id="{{$file->id}}"><i class="fa fa-check"></i> Accept Options</button>
+                      <button type="submit" class="btn btn-info" id="btn-accept" data-file_id="{{$file->id}}"><i class="fa fa-check"></i> {{translate('Accept Options')}}</button>
                     @else
-                      <a class="btn btn-info" href="{{route('pay-credits-offer', $file->id)}}"><i class="fa fa-check"></i> Pay Credits</a>
+                      <a class="btn btn-info" href="{{route('pay-credits-offer', $file->id)}}"><i class="fa fa-check"></i> {{translate('Pay Credits')}}</a>
                     @endif
-                    <button type="submit" class="btn btn-danger" id="btn-reject" data-file_id="{{$file->id}}><i class="fa fa-close"></i> Reject</button>
+                    <button type="submit" class="btn btn-danger" id="btn-reject" data-file_id="{{$file->id}}><i class="fa fa-close"></i> {{translate('Reject')}}</button>
                   </div>
 
                 </div>
@@ -2217,7 +2217,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-download top-box top-box-red"></i>
               </span>
               <h3 style="display: inline; color: #b01321; margin-left: 20px;">
-                File Canceled
+                {{translate('File Canceled')}}
               </h3>
 
               <span style="float: right; margin-top: 20px;" class="d-label">
@@ -2228,7 +2228,7 @@ div.file-type-buttons label > input + img {
                   <div class="card-header">
                     <div style="margin-bottom: 20px;">
                       <span style="display: inline-grid;">
-                        <h4 style="margin-bottom: 10px;">Reason To Reject:</h4>
+                        <h4 style="margin-bottom: 10px;">{{translate('Reason To Reject')}}:</h4>
                         <span class="text-danger">{{$file->reason_to_reject}}</span>
                       </span>
                     
@@ -2249,7 +2249,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-upload top-box top-box-green"></i>
               </span>
               <h3 style="display: inline; color: #237E02; margin-left: 20px;">
-                File Received {{substr($row->request_file, -2)}}
+                {{translate('File Received')}} {{substr($row->request_file, -2)}}
               </h3>
               <span style="float: right; margin-top: 15px;">{{ $row->created_at->format('d/m/Y')}} at {{$row->created_at->format('H:i:s')}}</span>
             
@@ -2259,14 +2259,14 @@ div.file-type-buttons label > input + img {
               <div class="card-header">
                 <div style="margin-bottom: 20px;">
                   <span style="display: inline-grid;">
-                    <h4 style="margin-bottom: 10px;">File Received:</h4>
-                    <span>This file is uploaded by the engineer with following details.</span>
+                    <h4 style="margin-bottom: 10px;">{{translate('File Received')}}:</h4>
+                    <span>{{translate('This file is uploaded by the engineer with following details.')}}</span>
                   </span>
                 </div>
 
                 <span>
                   <span style="display: inline-grid;">
-                    <strong>ECU File Name:</strong>
+                    <strong>{{translate('ECU File Name')}}:</strong>
                     <span>{{$row->request_file}}</span>
                   </span>
 
@@ -2275,21 +2275,21 @@ div.file-type-buttons label > input + img {
                 @if($file->showComments())
 
                   @if($row->show_comments())
-                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</button>
+                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</button>
                   @else
-                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                   @endif
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                 @endif
 
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> Downloand</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
                 @endif
 
                 </span>
                 <div class="bt m-t-10 p-t-10">
-                  <span><strong>Stages and Options:</strong></span>
+                  <span><strong>{{translate('Stages and Options')}}:</strong></span>
                 </div>
                 <div class="m-t-10">
                   @if($file->stages_services)
@@ -2332,16 +2332,16 @@ div.file-type-buttons label > input + img {
                           @if($engineersMessage->engineer)
                           <div>
                             <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
-                            <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
+                            <strong style="font-size: 18px;color: #B01321;">{{translate("Engineer's Reply")}}</strong>
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           </div>
                           @else
                             
                             <i style="font-size: 24px;" class="fas fa-user-circle"></i>
                             @if(isset($engineersMessage->egnineers_internal_notes))
-                              <strong style="font-size: 18px;">Help Request</strong>  
+                              <strong style="font-size: 18px;">{{translate('Help Request')}}</strong>  
                             @else
-                              <strong style="font-size: 18px;">Log Entry</strong> 
+                              <strong style="font-size: 18px;">{{translate('Log Entry')}}</strong> 
                             @endif
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           @endif
@@ -2357,13 +2357,13 @@ div.file-type-buttons label > input + img {
                         @if($engineersMessage->engineers_attachement)
                             
                             <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
-                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @else
                         @if($engineersMessage->events_attachement)
                             
                         <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
-                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @endif
                       </div>
@@ -2386,8 +2386,8 @@ div.file-type-buttons label > input + img {
                       </a>
                     </li>
                     @endif
-                    <li><a style="border: none;" data-toggle="tab" href="#log-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-file" style="transform: rotate(-90deg)"></i> Add Log</button></a></li>
-                    <li><a style="border: none;" data-toggle="tab" href="#star-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-star"></i> Add a Rating</button></a></li>
+                    <li><a style="border: none;" data-toggle="tab" href="#log-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-file" style="transform: rotate(-90deg)"></i> {{translate('Add Log')}}</button></a></li>
+                    <li><a style="border: none;" data-toggle="tab" href="#star-{{$row->id}}"><button class="btn btn-white"><i class="fa fa-star"></i> {{translate('Add a Rating')}}</button></a></li>
                     
                   </ul>
                   
@@ -2403,7 +2403,7 @@ div.file-type-buttons label > input + img {
                           <input type="hidden" name="request_file_id" value="{{$row->id}}">
                             
                             <div class="form-group m-t-20">
-                              <label for="exampleInputName1">Ask Engineer for Support</label>
+                              <label for="exampleInputName1">{{translate('Ask Engineer for Support')}}</label>
                               <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
                               @error('egnineers_internal_notes')
                                   <span class="invalid-feedback" role="alert">
