@@ -54,6 +54,31 @@ if(!function_exists('translate')){
     }
 }
 
+if(!function_exists('translation')){
+
+    function translation($str){
+
+        $translate = 1;
+
+        $myfile = fopen("gr.json", "r") or die("Unable to open file!");
+        $string = fread($myfile,filesize("gr.json"));
+        fclose($myfile);
+
+        $translationArray = json_decode($string, true);
+        
+        if(!isset($translationArray[$str])){
+            return $str;
+        }
+
+        if($translate){
+            return $translationArray[$str];
+        }
+        
+        return $str;
+
+    }
+}
+
 if(!function_exists('get_dropdown_image')){
 
     function get_dropdown_image( $id ){
