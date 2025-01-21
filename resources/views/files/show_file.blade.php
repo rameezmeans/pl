@@ -503,14 +503,14 @@ div.file-type-buttons label > input + img {
           
           <div class="col-xl-6 col-lg-6 col-md-6 m-t-40" >
             @if($file->status != "rejected")
-            <button class="btn btn-white" id="new-request"><i class="fa fa-code-pull-request"></i> <strong>New Request</strong></button>
+            <button class="btn btn-white" id="new-request"><i class="fa fa-code-pull-request"></i> <strong>{{translate('New Request')}}</strong></button>
             @endif
             
             @if(!$file->acm_file)
-              <button class="btn btn-white" id="acm-file"><i class="fa fa-cloud-upload"></i> <strong>ACM File</strong></button>
+              <button class="btn btn-white" id="acm-file"><i class="fa fa-cloud-upload"></i> <strong>{{translate('ACM File')}}</strong></button>
             @endif
 
-            <button class="btn btn-white" id="note-button"><i class="fa fa-cloud-upload"></i> <strong>Add Personal Note</strong></button>
+            <button class="btn btn-white" id="note-button"><i class="fa fa-cloud-upload"></i> <strong>{{translate('Add Personal Note')}}</strong></button>
             
             @if($file->status != "rejected")
             <div class="main-file-box m-t-40 hide" id="new-request-box">
