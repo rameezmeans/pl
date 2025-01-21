@@ -736,7 +736,7 @@ div.file-type-buttons label > input + img {
                         <strong>{{translate('File Name')}}:</strong>
                         <span class="f-name">{{$file->file_attached}}</span>
                       </span>
-                    <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                    <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                     </span>
                     @if($file->acm_file)
                     <div class="bt m-t-20 p-t-10">
@@ -744,7 +744,7 @@ div.file-type-buttons label > input + img {
                         <strong>{{translate('ACM File Name')}}:</strong>
                         <span class="f-name">{{$file->acm_file}}</span>
                       </span>
-                          <a class="btn btn-info" href="{{route('download', [$file->id,$file->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                          <a class="btn btn-info" href="{{route('download', [$file->id,$file->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                     </div>
                     @endif
                     <div class="bt m-t-10 p-t-10">
@@ -1150,7 +1150,7 @@ div.file-type-buttons label > input + img {
 
                 @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
-                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages {{$row->is_latest()}}</h4>
+                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> {{translate('Support Messages')}}</h4>
                 </div>
                   <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if($row->is_latest()) style="display: block;" @endif>
                     @foreach($row->messages_and_logs() as $engineersMessage)
@@ -1399,16 +1399,16 @@ div.file-type-buttons label > input + img {
                 @if($file->showComments())
 
                   @if($row->show_comments())
-                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</button>
+                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</button>
                   @else
-                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                   @endif
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                 @endif
 
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                 @endif
 
               </span>
@@ -1424,7 +1424,7 @@ div.file-type-buttons label > input + img {
                     <strong>{{translate('ACM File Name')}}:</strong>
                     <span class="f-name">{{$acm->acm_file}}</span>
                   </span>
-                      <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                      <a class="btn btn-info" href="{{route('download', [$file->id,$acm->acm_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                     
                   
                 </div>
@@ -1467,7 +1467,7 @@ div.file-type-buttons label > input + img {
 
               @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
-                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages {{$row->is_latest()}}</h4>
+                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> {{translate('Support Messages')}}</h4>
                 </div>
                   <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if($row->is_latest()) style="display: block;" @endif>
                     @foreach($row->messages_and_logs() as $engineersMessage)
@@ -1476,7 +1476,7 @@ div.file-type-buttons label > input + img {
                           @if($engineersMessage->engineer)
                           <div>
                             <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
-                            <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
+                            <strong style="font-size: 18px;color: #B01321;">{{translate("Engineer's Reply")}}</strong>
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           </div>
                           @else
@@ -1720,7 +1720,7 @@ div.file-type-buttons label > input + img {
                       <strong>{{translate('ECU File Name')}}:</strong>
                       <span class="f-name">{{$file->file_attached}}</span>
                     </span>
-                  <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                  <a href="{{route('download', [$file->id,$file->file_attached])}}" class="btn btn-info" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                   </span>
                   <div class="bt m-t-10 p-t-10">
                     <span><strong>{{translate('Stages and Options')}}:</strong></span>
@@ -2010,7 +2010,7 @@ div.file-type-buttons label > input + img {
                   <div style="margin-bottom: 20px;">
                     <span style="display: inline-grid;">
                       <h4 style="margin-bottom: 10px;">File Details:</h4>
-                      <span>Engineer proposed following Stage and Options for this file Please confirm or Reject.</span>
+                      <span>{{translate('Engineer proposed following Stage and Options for this file Please confirm or Reject.')}}</span>
                     </span>
                   </div>
 
@@ -2275,16 +2275,16 @@ div.file-type-buttons label > input + img {
                 @if($file->showComments())
 
                   @if($row->show_comments())
-                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</button>
+                    <button class="btn btn-info btn-download" data-make="{{$file->brand}}" data-engine="{{$file->engine}}" data-ecu="{{$file->ecu}}" data-model="{{$file->model}}" data-generation="{{$file->version}}" data-file_id="{{$file->id}}" data-path="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</button>
                   @else
-                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                    <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                   @endif
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                 @endif
 
                 @else
-                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translation('Download')}}</a>
+                  <a class="btn btn-info" href="{{route('download', [$row->file_id,$row->request_file])}}" style="float: right;"><i class="fa fa-download"></i> {{translate('Download')}}</a>
                 @endif
 
                 </span>
@@ -2323,7 +2323,7 @@ div.file-type-buttons label > input + img {
                 
                 @if(!$row->messages_and_logs()->isEmpty())
                 <div class="bt m-t-20 text-center collapsible-ecu">
-                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> Support Messages</h4>
+                  <h4 style="margin-top: 20px;"><i class="fa @if($row->is_latest()) fa-chevron-circle-down @else fa-chevron-circle-up @endif" id="arrow-message"></i> {{translate('Support Messages')}}</h4>
                 </div>
                   <div class="bt m-t-20 p-t-10 red-scroll content-ecu" @if($row->is_latest()) style="display: block;" @endif>
                     @foreach($row->messages_and_logs() as $engineersMessage)
@@ -2549,9 +2549,9 @@ div.file-type-buttons label > input + img {
               <div class="">
 
                 <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#car-details">Car Details</a></li>
-                  <li><a data-toggle="tab" href="#contact-details">Contact Details</a></li>
-                  <li><a data-toggle="tab" href="#personal-notes">Personal Notes</a></li>
+                  <li class="active"><a data-toggle="tab" href="#car-details">{{translate('Car Details')}}</a></li>
+                  <li><a data-toggle="tab" href="#contact-details">{{translate('Contact Details')}}</a></li>
+                  <li><a data-toggle="tab" href="#personal-notes">{{translate('Personal Notes')}}</a></li>
                   
                 </ul>
                 
@@ -2734,7 +2734,7 @@ div.file-type-buttons label > input + img {
                               <p>{{$fileUrl->file_url}}</p>
                           </div>
                           @if(isset($fileUrl->file_url_attachment))
-                              <strong class="">Filename: </strong><span class="">{{$fileUrl->file_url_attachment}}</span>
+                              <strong class="">{{translate('Filename')}}: </strong><span class="">{{$fileUrl->file_url_attachment}}</span>
                               <a href="{{route('download', [$file->id,$fileUrl->file_url_attachment])}}" class="btn-sm btn-info" style="float: right;">Download</a>
                           @endif
                         </div>
