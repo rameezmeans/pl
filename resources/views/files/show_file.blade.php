@@ -518,7 +518,7 @@ div.file-type-buttons label > input + img {
                 <div class="card-header">
                   <div style="margin-bottom: 20px;">
                     <span style="">
-                      <h4 style="margin-bottom: 10px;">New Request</h4>
+                      <h4 style="margin-bottom: 10px;">{{translate('New Request')}}</h4>
                       
                       <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12">
@@ -530,21 +530,21 @@ div.file-type-buttons label > input + img {
                                 <input type="hidden" name="file_id" value="{{$file->id}}">
                                 <div class="m-t-5" style="margin-bottom: 10px;">
 
-                                    <h5>{{__('Select File Type')}}</h5>
+                                    <h5>{{translate('Select File Type')}}</h5>
                                     {{-- <div class="input-field col s12" style="margin-left:5px; display:flex;"> --}}
                                     <div class="row file-types file-type-buttons">
                                         <label class="file-type-label col-lg-3">
                                             <input type="radio" value="ecu_file" class="file-selection file_type" name="file_type">
                                             <img src="https://resellers.ecutech.tech/assets/img/OLSx-pictogram-file-02.svg">
                                             <span>
-                                                ECU file
+                                              {{translate('ECU file')}}
                                             </span>
                                         </label>
                                         <label class="file-type-label col-lg-3">
                                             <input type="radio" value="gearbox_file" class="file-selection file_type" name="file_type">
                                             <img src="https://resellers.ecutech.tech/assets/img/OLSxGearBox.svg">
                                             <span>
-                                                Gearbox file
+                                              {{translate('Gearbox file')}}
                                             </span>
                                         </label>
 
@@ -558,9 +558,9 @@ div.file-type-buttons label > input + img {
                                 <div class="col-lg-6" >
                                     <div class="form-group hide" id="ecu_file_select">
                                         <select name="request_type"  class="select-dropdown form-control">
-                                            <option value="status" selected disabled>{{__('Request Type')}} </option>
-                                            <option value="new_upload">{{__('New upload')}}</option>
-                                            <option value="tuning_evolution">{{__('Tuning Evolution - I want to make a new tuning request.')}}</option>
+                                            <option value="status" selected disabled>{{translate('Request Type')}} </option>
+                                            <option value="new_upload">{{translate('New upload')}}</option>
+                                            <option value="tuning_evolution">{{translate('Tuning Evolution - I want to make a new tuning request.')}}</option>
                                             {{-- <option value="back_to_tuned">{{__('Back to tuned - The car has been updated by the dealer, please renew the tuning.')}}</option>
                                             <option value="back_to_stock">{{__('Back to stock - Send me back the original version.')}}</option>
                                             <option value="back_to_stock_with_virtual_read">{{__('Back to stock with virtual read - Its a virtual read, can you send me this file back to flash the car in stock mode?')}}</option>
@@ -569,8 +569,8 @@ div.file-type-buttons label > input + img {
                                     </div>
                                     <div class="form-group hide" id="gearbox_file_select">
                                         <select name="request_type" class="select-dropdown  form-control">
-                                            <option value="status" selected disabled>{{__('Request Type')}} </option>
-                                            <option value="new_upload">{{__('New Upload')}}</option>
+                                            <option value="status" selected disabled>{{translate('Request Type')}} </option>
+                                            <option value="new_upload">{{translate('New Upload')}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -680,7 +680,7 @@ div.file-type-buttons label > input + img {
 
                           <div class="form-group m-t-20">
                             
-                            <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="file_url" class="materialize-textarea" placeholder="{{__('Personal Note.')}}"></textarea>
+                            <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="file_url" class="materialize-textarea" placeholder="{{translate('Personal Note')}}"></textarea>
                             @error('file_url')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -872,7 +872,7 @@ div.file-type-buttons label > input + img {
         
                                   <div class="form-group m-t-20">
                                     
-                                    <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Support Message.')}}"></textarea>
+                                    <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Support Message')}}"></textarea>
                                     @error('egnineers_internal_notes')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -1230,7 +1230,7 @@ div.file-type-buttons label > input + img {
                             
                             <div class="form-group m-t-20">
                               <label for="exampleInputName1">Ask Engineer for Support</label>
-                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Internal note for Engineers.')}}"></textarea>
+                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
                               @error('egnineers_internal_notes')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -1262,7 +1262,7 @@ div.file-type-buttons label > input + img {
                             
                             <div class="form-group m-t-20">
                               <label for="exampleInputName1">Attach log file and send to engineer.</label>
-                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{__('Internal note for To save on timeline.')}}"></textarea>
+                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for To save on timeline')}}"></textarea>
                               @error('events_internal_notes')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -1548,7 +1548,7 @@ div.file-type-buttons label > input + img {
                           
                           <div class="form-group m-t-20">
                             <label for="exampleInputName1">Ask Engineer for Support</label>
-                            <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Internal note for Engineers.')}}"></textarea>
+                            <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
                             @error('egnineers_internal_notes')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -1581,7 +1581,7 @@ div.file-type-buttons label > input + img {
                           
                           <div class="form-group m-t-20">
                             <label for="exampleInputName1">Attach log file and send to engineer.</label>
-                            <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{__('Internal note for To save on timeline.')}}"></textarea>
+                            <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for To save on timeline')}}"></textarea>
                             @error('events_internal_notes')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -1835,7 +1835,7 @@ div.file-type-buttons label > input + img {
       
                                 <div class="form-group m-t-20">
                                   
-                                  <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Support Message.')}}"></textarea>
+                                  <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Support Message')}}"></textarea>
                                   @error('egnineers_internal_notes')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -1950,7 +1950,7 @@ div.file-type-buttons label > input + img {
       
                                 <div class="form-group m-t-20">
                                   
-                                  <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Support Message.')}}"></textarea>
+                                  <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Support Message')}}"></textarea>
                                   @error('egnineers_internal_notes')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -2404,7 +2404,7 @@ div.file-type-buttons label > input + img {
                             
                             <div class="form-group m-t-20">
                               <label for="exampleInputName1">Ask Engineer for Support</label>
-                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Internal note for Engineers.')}}"></textarea>
+                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
                               @error('egnineers_internal_notes')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -2436,7 +2436,7 @@ div.file-type-buttons label > input + img {
                             
                             <div class="form-group m-t-20">
                               <label for="exampleInputName1">Attach log file and send to engineer.</label>
-                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{__('Internal note for To save on timeline.')}}"></textarea>
+                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for To save on timeline')}}"></textarea>
                               @error('events_internal_notes')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -2563,31 +2563,31 @@ div.file-type-buttons label > input + img {
                         <tbody>
                           <tr >
                             <td style="width: 40%; padding-bottom: 10px;">
-                              <strong>*Brand Group:</strong>
+                              <strong>*{{translate('Brand Group')}}:</strong>
                               <img alt="" class="" style="width: 10%;" src="{{ get_image_from_brand($file->brand) }}">
                             </td>
                             <td style="width: 40%; padding-bottom: 10px;">
-                              <strong>Brand Name:</strong>
+                              <strong>{{translate('Brand Name')}}:</strong>
                               <span>{{$file->brand}}</span>
                             </td>
                           </tr>
                           <tr>
                             <td style="width: 40%; padding-bottom: 15px;">
-                              <strong>Model:</strong>
+                              <strong>{{translate('Model')}}:</strong>
                               <span>{{$file->model}}</span>
                             </td>
                             <td style="width: 40%; padding-bottom: 15px;">
-                              <strong>Engine:</strong>
+                              <strong>{{translate('Engine')}}:</strong>
                               <span>{{$file->engine}}</span>
                             </td>
                           </tr>
                           <tr>
                             <td style="width: 40%; padding-bottom: 10px;">
-                              <strong>ECU:</strong>
+                              <strong>{{translate('ECU')}}:</strong>
                               <span>{{$file->ecu}}</span>
                             </td>
                             <td style="width: 40%; padding-bottom: 10px;">
-                              <strong>Gear Box:</strong>
+                              <strong>{{translate('Gear Box')}}:</strong>
                               <span>{{ucfirst(str_replace("_"," ",$file->gear_box))}}</span>
                             </td>
                           </tr>
@@ -2602,7 +2602,7 @@ div.file-type-buttons label > input + img {
                       <input type="hidden" name="id" value="{{$file->id}}">
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
-                          <label for="exampleInputName1">Vin</label>
+                          <label for="exampleInputName1">{{translate('Vin')}}</label>
                           <input type="text" value="{{$file->vin_number}}" class="form-control @error('vin_number') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Name" name="vin_number">
                           @error('vin_number')
                               <span class="invalid-feedback" role="alert">
@@ -2613,7 +2613,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
-                          <label for="exampleInputName1">Plate *</label>
+                          <label for="exampleInputName1">{{translate('Plate')}} *</label>
                           <input type="text" value="{{$file->license_plate}}" class="form-control @error('license_plate') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Name" name="license_plate" required>
                           @error('license_plate')
                               <span class="invalid-feedback" role="alert">
@@ -2624,7 +2624,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
-                          <label for="exampleInputName1">Fuel</label>
+                          <label for="exampleInputName1">{{translate('Fuel')}}</label>
                           <input type="text" value="{{ $vehicle->Type_of_fuel }}" disabled class="form-control" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Name" name="type_of_fuel">
                           @error('type_of_fuel')
                               <span class="invalid-feedback" role="alert">
@@ -2635,7 +2635,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
-                          <label for="exampleInputName1">First Registration Number</label>
+                          <label for="exampleInputName1">{{translate('First Registration Number')}}</label>
                           <input type="text" value="{{$file->first_registration}}" class="form-control @error('first_registration') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter First Reegistration Number" name="first_registration">
                           @error('first_registration')
                               <span class="invalid-feedback" role="alert">
@@ -2646,7 +2646,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="form-group">
-                          <label for="exampleInputName1">Milage</label>
+                          <label for="exampleInputName1">{{translate('Milage')}}</label>
                           <input type="number" value="{{$file->kilometrage}}" class="form-control @error('kilometrage') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Milage" name="kilometrage">
                           @error('kilometrage')
                               <span class="invalid-feedback" role="alert">
@@ -2658,7 +2658,7 @@ div.file-type-buttons label > input + img {
                       
                       <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="form-group">
-                          <label for="exampleInputName1">Internal Note</label>
+                          <label for="exampleInputName1">{{translate('Internal Note')}}</label>
                           <textarea class="form-control @error('vehicle_internal_notes') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Note" name="vehicle_internal_notes">{{$file->vehicle_internal_notes}}</textarea>
                           @error('vehicle_internal_notes')
                               <span class="invalid-feedback" role="alert">
@@ -2667,7 +2667,7 @@ div.file-type-buttons label > input + img {
                           @enderror
                       </div>
 
-                      <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Save Changes</button>
+                      <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> {{translate('Save Changes')}}</button>
                       </div>
                     </form>
                     </div>
@@ -2684,7 +2684,7 @@ div.file-type-buttons label > input + img {
 
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
-                          <label for="exampleInputName1">Customer Name</label>
+                          <label for="exampleInputName1">{{translate('Customer Name')}}</label>
                           <input type="text" value="{{$file->name}}" class="form-control @error('vin_number') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Name" name="name">
                           @error('name')
                               <span class="invalid-feedback" role="alert">
@@ -2695,7 +2695,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
-                          <label for="exampleInputName1">Email</label>
+                          <label for="exampleInputName1">{{translate('Email')}}</label>
                           <input type="text" value="{{$file->email}}" class="form-control @error('email') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Email" name="email">
                           @error('email')
                               <span class="invalid-feedback" role="alert">
@@ -2706,7 +2706,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="form-group">
-                          <label for="exampleInputName1">Phone</label>
+                          <label for="exampleInputName1">{{translate('Phone')}}</label>
                           <input type="text" value="{{$file->phone}}" class="form-control @error('phone') is-invalid @enderror" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Phone" name="phone">
                           @error('phone')
                               <span class="invalid-feedback" role="alert">
@@ -2729,7 +2729,7 @@ div.file-type-buttons label > input + img {
                         <div class="row bb-light" style="padding: 10px 30px 10px 30px; margin-left: 1px; margin-right: 1px;">
                           <div>
                               <i style="font-size: 24px;" class="fas fa-user-circle"></i>
-                              <strong style="font-size: 18px;">Personal Message</strong>
+                              <strong style="font-size: 18px;">{{translate('Personal Message')}}</strong>
                               <p style="float: right;">{{ $fileUrl->created_at->format('d/m/Y')}} at {{$fileUrl->created_at->format('H:i:s')}}</p>
                               <p>{{$fileUrl->file_url}}</p>
                           </div>
@@ -2763,14 +2763,14 @@ div.file-type-buttons label > input + img {
                     <img class="modal-loading" src="https://i.gifer.com/VAyR.gif" width="10%;">
                 </div>
                 <div>
-                    <h3 class="modal-information">{{__('Important Information')}}</h3>
-                    <div class="modal-comments">{{__('Please click on Confirm button to download the file.')}}</div>
+                    <h3 class="modal-information">{{translate('Important Information')}}</h3>
+                    <div class="modal-comments">{{translate('Please click on Confirm button to download the file')}}</div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <a href="#" @disabled(true) class="btn btn-success download-path-original modal-confirm" style="">{{__('Confirm')}}</a>
-                <button @disabled(true) type="button" class="btn btn-white close-modal m-t-10" style="width: 100%; margin-left:0px;">{{__('Cancel')}}</button>
+                <a href="#" @disabled(true) class="btn btn-success download-path-original modal-confirm" style="">{{translate('Confirm')}}</a>
+                <button @disabled(true) type="button" class="btn btn-white close-modal m-t-10" style="width: 100%; margin-left:0px;">{{translate('Cancel')}}</button>
             </div>
         </div>
     </div>
