@@ -1580,7 +1580,7 @@ div.file-type-buttons label > input + img {
                         <input type="hidden" name="request_file_id" value="{{$row->id}}">
                           
                           <div class="form-group m-t-20">
-                            <label for="exampleInputName1">Attach log file and send to engineer.</label>
+                            <label for="exampleInputName1">{{translate('Attach log file and send to engineer.')}}</label>
                             <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="events_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for To save on timeline')}}"></textarea>
                             @error('events_internal_notes')
                                 <span class="invalid-feedback" role="alert">
@@ -1589,11 +1589,11 @@ div.file-type-buttons label > input + img {
                             @enderror
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputName1">Attachment</label>
+                            <label for="exampleInputName1">{{translate('Attachment')}}</label>
                           <input type="file" name="events_attachement" class="form-control" id="events_attachement">
                           </div>
 
-                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                          <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                         
                       </form>
                     </div>
@@ -1694,7 +1694,7 @@ div.file-type-buttons label > input + img {
               <i class="fa fa-download top-box top-box-grey"></i>
             </span>
             <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-              File Uploaded
+              {{translate('File Uploaded')}}
             </h3>
             
             <span style="float: right; margin-top: 20px;" class="d-label">
@@ -1708,8 +1708,8 @@ div.file-type-buttons label > input + img {
                 <div class="card-header">
                   <div style="margin-bottom: 20px;">
                     <span style="display: inline-grid;">
-                      <h4 style="margin-bottom: 10px;">File Details:</h4>
-                      <span>This file is sent to the engineer with following details.</span>
+                      <h4 style="margin-bottom: 10px;">{{translate('File Details')}}:</h4>
+                      <span>{{translate('This file is sent to the engineer with following details.')}}</span>
                     </span>
                   
                   </div>
@@ -1747,7 +1747,7 @@ div.file-type-buttons label > input + img {
                   </div>
                   
                   <div class="bt m-t-20 p-t-10">
-                    <span><strong>Reading Tool:</strong></span>
+                    <span><strong>{{translate('Reading Tool')}}:</strong></span>
                     <div class="m-t-10">
                       <span class="show-stage">
                         <img style="width: 20px;" src="{{ get_dropdown_image($file->tool_id) }}" class="tool-logo-small"> {{ ucfirst($file->tool_type) }}
@@ -1766,7 +1766,7 @@ div.file-type-buttons label > input + img {
               <i class="fa fa-download top-box top-box-grey"></i>
             </span>
             <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-              File Support
+              {{translate('File Support')}}
             </h3>
             
             <div style="padding-left: 60px;" class="card-dt">
@@ -1780,16 +1780,16 @@ div.file-type-buttons label > input + img {
                           @if($engineersMessage->engineer)
                           <div>
                             <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
-                            <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
+                            <strong style="font-size: 18px;color: #B01321;">{{translate("Engineer's Reply")}}</strong>
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           </div>
                           @else
                             
                             <i style="font-size: 24px;" class="fas fa-user-circle"></i>
                             @if(isset($engineersMessage->egnineers_internal_notes))
-                              <strong style="font-size: 18px;">Help Request</strong>  
+                              <strong style="font-size: 18px;">{{translate('Help Request')}}</strong>  
                             @else
-                              <strong style="font-size: 18px;">Log Entry</strong> 
+                              <strong style="font-size: 18px;">{{translate('Log Entry')}}</strong> 
                             @endif
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           @endif
@@ -1805,13 +1805,13 @@ div.file-type-buttons label > input + img {
                         @if($engineersMessage->engineers_attachement)
                             
                             <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
-                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @else
                         @if($engineersMessage->events_attachement)
                             
                         <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
-                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @endif
                       </div>
@@ -1821,11 +1821,11 @@ div.file-type-buttons label > input + img {
                       <div class="card-header">
                         <div style="margin-bottom: 20px;">
                           <span style="">
-                            <h4 style="margin-bottom: 10px;">Support Message</h4>
+                            <h4 style="margin-bottom: 10px;">{{translate('Support Message')}}</h4>
                             <strong></strong>
                             <p>
                               <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                              <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
+                              <span style="color: darkgray;">{{translate('You can send Message to Engineer. Engineers will be notified.')}}</span>
                             </p>
                             <div class="row">
                               <div class="col-xl-12 col-lg-12 col-md-12">
@@ -1843,11 +1843,11 @@ div.file-type-buttons label > input + img {
                                   @enderror
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleInputName1">Attachment</label>
+                                  <label for="exampleInputName1">{{translate('Attachment')}}</label>
                                 <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
                                 </div>
       
-                                <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                                <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                               
                             </form>
                               </div>
@@ -1872,7 +1872,7 @@ div.file-type-buttons label > input + img {
               <i class="fa fa-download top-box top-box-grey"></i>
             </span>
             <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-              Pre File Support
+              {{translate('Pre File Support')}}
             </h3>
             
             <div style="padding-left: 60px;" class="card-dt">
@@ -1889,16 +1889,16 @@ div.file-type-buttons label > input + img {
                           @if($engineersMessage->engineer)
                           <div>
                             <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
-                            <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
+                            <strong style="font-size: 18px;color: #B01321;">{{translate("Engineer's Reply")}}</strong>
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           </div>
                           @else
                             
                             <i style="font-size: 24px;" class="fas fa-user-circle"></i>
                             @if(isset($engineersMessage->egnineers_internal_notes))
-                              <strong style="font-size: 18px;">Help Request</strong>  
+                              <strong style="font-size: 18px;">{{translate('Help Request')}}</strong>  
                             @else
-                              <strong style="font-size: 18px;">Log Entry</strong> 
+                              <strong style="font-size: 18px;">{{translate('Log Entry')}}</strong> 
                             @endif
                             <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
                           @endif
@@ -1914,13 +1914,13 @@ div.file-type-buttons label > input + img {
                         @if($engineersMessage->engineers_attachement)
                             
                             <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
-                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                            <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @else
                         @if($engineersMessage->events_attachement)
                             
                         <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
-                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                        <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @endif
                       </div>
@@ -1931,14 +1931,14 @@ div.file-type-buttons label > input + img {
                       <div class="card-header">
                         <div style="margin-bottom: 20px;">
                           <span style="">
-                            <h4 style="margin-bottom: 10px;">Support Message</h4>
+                            <h4 style="margin-bottom: 10px;">{{translate('Support Message')}}</h4>
                             <strong></strong>
 
                             @if($file->files->isEmpty())
 
                             <p>
                               <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                              <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
+                              <span style="color: darkgray;">{{translate('You can send Message to Engineer. Engineers will be notified.')}}</span>
                             </p>
 
                             
@@ -1962,7 +1962,7 @@ div.file-type-buttons label > input + img {
                                 <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
                                 </div>
       
-                                <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                                <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                               
                             </form>
                               </div>
@@ -1972,7 +1972,7 @@ div.file-type-buttons label > input + img {
 
                             <p>
                               <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                              <span style="color: darkgray;">You cannot send support messages here, Please use the respective area below the file you have received.</span>
+                              <span style="color: darkgray;">{{translate('You cannot send support messages here, Please use the respective area below the file you have received.')}}</span>
                             </p>
                             
 
@@ -2001,7 +2001,7 @@ div.file-type-buttons label > input + img {
                 <i class="fa fa-download top-box top-box-grey"></i>
               </span>
               <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-                Proposed Stage and Option
+                {{translate('Proposed Stage and Option')}}
               </h3>
               <div style="padding-left: 60px;" class="card-dt">
               <div class="card m-t-10">
@@ -2009,7 +2009,7 @@ div.file-type-buttons label > input + img {
 
                   <div style="margin-bottom: 20px;">
                     <span style="display: inline-grid;">
-                      <h4 style="margin-bottom: 10px;">File Details:</h4>
+                      <h4 style="margin-bottom: 10px;">{{translate('File Details')}}:</h4>
                       <span>{{translate('Engineer proposed following Stage and Options for this file Please confirm or Reject.')}}</span>
                     </span>
                   </div>
@@ -2095,122 +2095,6 @@ div.file-type-buttons label > input + img {
 
             @endif
 
-           {{-- here are are --}}
-           {{-- done --}}
-           {{-- again--}}
-
-
-            {{-- @if(!$file->messages_and_logs()->isEmpty())
-
-            <div class="main-file-box m-t-40">
-              <span>
-                <i class="fa fa-download top-box top-box-grey"></i>
-              </span>
-              <h3 style="display: inline; color: #021F7E; margin-left: 20px;">
-                File Support
-              </h3>
-              @if(!$file->messages_and_logs()->isEmpty())
-              <div style="padding-left: 60px;" class="card-dt">
-                <div class="card m-t-10">
-                  <div class="card-header">
-                    <div style="margin-bottom: 20px;">
-                      
-                      @foreach($file->messages_and_logs() as $engineersMessage)
-                        <div class="row bb-light" style="padding: 10px 30px 10px 30px;">
-                          <div>
-                            @if($engineersMessage->engineer)
-                            <div>
-                              <i style="font-size: 24px; color: #B01321;" class="fas fa-user-circle"></i>
-                              <strong style="font-size: 18px;color: #B01321;">Engineer's Reply</strong>
-                              <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
-                            </div>
-                            @else
-                              
-                              <i style="font-size: 24px;" class="fas fa-user-circle"></i>
-                              @if(isset($engineersMessage->egnineers_internal_notes))
-                                <strong style="font-size: 18px;">Help Request</strong>  
-                              @else
-                                <strong style="font-size: 18px;">Log Entry</strong> 
-                              @endif
-                              <p style="float: right;">{{ $engineersMessage->created_at->format('d/m/Y')}} at {{$engineersMessage->created_at->format('H:i:s')}}</p>
-                            @endif
-                          <p>
-                            @if(isset($engineersMessage->egnineers_internal_notes))
-                              <p>{!!$engineersMessage->egnineers_internal_notes!!}</p>
-                            @else
-                              <p>{{$engineersMessage->events_internal_notes}}</p>
-                            @endif
-                          </div>
-  
-                          @if(isset($engineersMessage->egnineers_internal_notes))
-                          @if($engineersMessage->engineers_attachement)
-                              
-                              <strong class="">Filename: </strong><span class="">{{$engineersMessage->engineers_attachement}}</span>
-                              <a href="{{route('download', [$file->id,$engineersMessage->engineers_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
-                          @endif
-                          @else
-                          @if($engineersMessage->events_attachement)
-                              
-                          <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
-                          <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">Download</a>
-                          @endif
-                          @endif
-                        </div>
-                      @endforeach
-  
-                      <div class="m-t-10">
-                        <div class="card-header">
-                          <div style="margin-bottom: 20px;">
-                            <span style="">
-                              <h4 style="margin-bottom: 10px;">Support Message</h4>
-                              <strong></strong>
-                              <p>
-                                <i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <span style="color: darkgray;">You can send Message to Engineer. Engineers will be notified.</span>
-                              </p>
-                              <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12">
-                              <form method="POST" action="{{ route('file-engineers-notes') }}" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="file_id" value="{{$file->id}}">
-        
-                                  <div class="form-group m-t-20">
-                                    
-                                    <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{__('Support Message.')}}"></textarea>
-                                    @error('egnineers_internal_notes')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleInputName1">Attachment</label>
-                                  <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
-                                  </div>
-        
-                                  <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
-                                
-                              </form>
-                                </div>
-                              </div>
-                              
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    
-                    </div>
-  
-                    
-                  </div>
-                </div>
-            </div>
-            @endif
-            </div>
-  
-
-            @endif --}}
-
             @if($file->status == 'rejected')
             <div class="main-file-box m-t-40">
               <span>
@@ -2240,9 +2124,7 @@ div.file-type-buttons label > input + img {
             </div>
             </div>
             @endif
-
             
-
             @foreach($file->files as $row)
             <div class="main-file-box m-t-40">
               <span>
@@ -2362,7 +2244,7 @@ div.file-type-buttons label > input + img {
                         @else
                         @if($engineersMessage->events_attachement)
                             
-                        <strong class="">Filename: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
+                        <strong class="">{{translate('Filename')}}: </strong><span class="">{{$engineersMessage->events_attachement}}</span>
                         <a href="{{route('download', [$file->id,$engineersMessage->events_attachement])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                         @endif
                         @endif
@@ -2381,7 +2263,7 @@ div.file-type-buttons label > input + img {
                         <button class="btn btn-white">
                           <i>
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABXElEQVR4nN2VO0sDQRSFdy0sFIyxtrINWIhYiFgr1oKIWFhraSfYmPwBEUH0J6iNWgmKWFj4FwRNAmkEn/EJfjJwhesyu3OzWogHtjl7zj0zc+cRRf8aQDswC2wDV8CTfFXhZpwmb/ER4JIwLoDhVouPAq+G4l94dh5r8S7gmtZRBzosAYvkx7wl4Mhj3Ac+DAEHloDbhGkTaAMmgXPgLSOgbgl4EfEG0G/Qx8CYeJqWgHcRhxsmALrVLGrAeOSDK6q2Z6dwFeARKCudj9OopgXsqH1dEu5BuHul83HfkBbQlP8lxZWl4EqAMwXsKc26V5SCRP1aVrPWZM+7Ne7JEXAHTITEuyJeTvAVOSdLHs+CeLYsoxlUzR7wNDcLU9Ypr4rBXce9qrlZt+yJ+X2Qx+ZMjA1gDijKWekDhkyFAiFF4DBltG754t8IiYFp4Bi4kbPiXrpToPDjgD+PT0xxfXWFo4ayAAAAAElFTkSuQmCC">
-                          </i> Engineer Support
+                          </i> {{translate('Engineer Support')}}
                         </button>
                       </a>
                     </li>
@@ -2412,7 +2294,7 @@ div.file-type-buttons label > input + img {
                               @enderror
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputName1">Attachment</label>
+                              <label for="exampleInputName1">{{translate('Attachment')}}</label>
                             <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
                             </div>
 
@@ -2444,11 +2326,11 @@ div.file-type-buttons label > input + img {
                               @enderror
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputName1">Attachment</label>
+                              <label for="exampleInputName1">{{translate('Attachment')}}</label>
                             <input type="file" name="events_attachement" class="form-control" id="events_attachement">
                             </div>
 
-                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> Submit</button>
+                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
                           
                         </form>
                       </div>
@@ -2715,7 +2597,7 @@ div.file-type-buttons label > input + img {
                           @enderror
                       </div>
                       </div>
-                      <button type="submit" class="btn btn-info m-l-20" style="margin-bottom:10px"><i class="fa fa-save"></i> Save Changes</button>
+                      <button type="submit" class="btn btn-info m-l-20" style="margin-bottom:10px"><i class="fa fa-save"></i> {{translate('Save Changes')}}</button>
                     </form>
 
                     </div>
@@ -2735,7 +2617,7 @@ div.file-type-buttons label > input + img {
                           </div>
                           @if(isset($fileUrl->file_url_attachment))
                               <strong class="">{{translate('Filename')}}: </strong><span class="">{{$fileUrl->file_url_attachment}}</span>
-                              <a href="{{route('download', [$file->id,$fileUrl->file_url_attachment])}}" class="btn-sm btn-info" style="float: right;">Download</a>
+                              <a href="{{route('download', [$file->id,$fileUrl->file_url_attachment])}}" class="btn-sm btn-info" style="float: right;">{{translate('Download')}}</a>
                           @endif
                         </div>
                       @endforeach
