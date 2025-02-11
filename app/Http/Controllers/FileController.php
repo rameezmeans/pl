@@ -564,8 +564,11 @@ class FileController extends Controller
             }
         }
         else{
-            $file_path = public_path($file->file_path).$fileName;
-            return response()->download($file_path);
+
+            abort(404);
+
+            // $file_path = public_path($file->file_path).$fileName;
+            // return response()->download($file_path);
         }
     // }
 
