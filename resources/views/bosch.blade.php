@@ -9,7 +9,7 @@
         <div class="bb-light fix-header">
             <div class="header-block header-block-w-p">
                 <h1>{{translate('Bosch ECU Number')}}</h1>
-                <p>Please search Bosch numbers for ECUs.</p>
+                <p>{{translate('Please search Bosch numbers for ECUs.')}}</p>
             </div>
         </div>
 
@@ -17,9 +17,9 @@
             
             <form action="{{route('get-bosch-ecu')}}" method="POST" class="text-center">
               @csrf
-              <input type="text" name="manufacturer_number" value="" class="form-control text-center" placeholder="Enter Bosch manufacturer number">
+              <input type="text" name="manufacturer_number" value="" class="form-control text-center" placeholder="{{translate('Enter Bosch manufacturer number')}}">
               <div>
-                <button class="btn btn-red btn-red-full text-center m-t-10" type="submit">GET ECU</button>
+                <button class="btn btn-red btn-red-full text-center m-t-10" type="submit">{{translate('GET ECU')}}</button>
               </div>
             </form>
   
@@ -40,14 +40,14 @@
                     </div>
                   </div>
                   <div class="card-content">
-                    Manufacturer Number: {{$record->manufacturer_number}}
+                    {{translate('Manufacturer Number')}}: {{$record->manufacturer_number}}
                   </div>
   
                   @elseif(is_string($record))
   
                     <div class="card-header">
                       <div style="display: inline-flex;">
-                        <h4>No Record Found!</h4>
+                        <h4>{{translate('No Record Found!')}}</h4>
                       </div>
                     </div>
   
