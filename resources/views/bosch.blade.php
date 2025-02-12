@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="bb-light fix-header">
             <div class="header-block header-block-w-p">
-                <h1>{{translate('Bosch ECU Number')}}</h1>
+                <h1>{{translate('Bosch ECU Numbers')}}</h1>
                 <p>{{translate('Please search Bosch numbers for ECUs.')}}</p>
             </div>
         </div>
