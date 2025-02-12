@@ -9,7 +9,7 @@
         <div class="bb-light fix-header">
                 <div class="header-block header-block-w-p">
                     <h1>{{translate('Invoices')}}</h1>
-                    <p>{{translate('Here are details of Your all transations')}}.</p>
+                    <p>{{translate('Here are details of Your all transations.')}}.</p>
                 </div>
             </div>
         
