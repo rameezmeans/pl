@@ -195,10 +195,10 @@
                  Swal.fire({
                  icon: 'success',
                  title: '1 Tuning credit (reseller)',
-                 text: '{{__('Successfully added to Cart')}}',
+                 text: '{{translate('Successfully added to Cart')}}',
                  showDenyButton: true,
-                 denyButtonText: '{{__('Continue Shopping')}}',
-                 confirmButtonText: '{{__('Go to Cart')}}',
+                 denyButtonText: '{{translate('Continue Shopping')}}',
+                 confirmButtonText: '{{translate('Go to Cart')}}',
                  }).then((result) => {
                  /* Read more about isConfirmed, isDenied below */
                  if (result.isConfirmed) {
