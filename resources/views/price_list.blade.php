@@ -243,12 +243,12 @@ strong {
                 <a href="?type=slave" class="btn @if($type == 'slave') btn-info @else btn-white @endif">Slave</a>
               </div> --}}
               <div class="text-center form-group" style="margin-top: 20px;">
-               <label>Vehicle type</label>
+               <label>{{translate('Vehicle type')}}</label>
                <select id="vehicle_type" class="select-dropdown form-control" style="width: 20%; display: inline;">
-                 <option value="car" @if($vehicleType == 'car') selected @endif>Car</option>
-                 <option value="truck" @if($vehicleType == 'truck') selected @endif>Truck</option>
-                 <option value="machine" @if($vehicleType == 'machine') selected @endif>Machine</option>
-                 <option value="agri" @if($vehicleType == 'agri') selected @endif>Agriculture</option>
+                 <option value="car" @if($vehicleType == 'car') selected @endif>{{translate('Car')}}</option>
+                 <option value="truck" @if($vehicleType == 'truck') selected @endif>{{translate('Truck')}}</option>
+                 <option value="machine" @if($vehicleType == 'machine') selected @endif>{{translate('Machine')}}</option>
+                 <option value="agri" @if($vehicleType == 'agri') selected @endif>{{translate('Agriculture')}}</option>
                </select>
               </div>
             </div>
