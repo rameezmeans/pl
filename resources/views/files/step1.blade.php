@@ -192,7 +192,7 @@
                         <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                             <div class="heading-column-box">
                                 <h3>{{translate('Customer Info')}}</h3>
-                                <p>{{translate('Fill your contact information.')}}</p>
+                                <p>{{translate('Προαιρετικά, αν θέλετε μπορείτε να συμπληρώσετε τα στοιχεία του πελάτη σας.')}}</p>
                             </div>
                         </div>
 
@@ -244,7 +244,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                         <div class="heading-column-box">
                             <h3>{{translate('Select File Type')}}</h3>
-                            <p>{{translate('Fill your contact information.')}}</p>
+                            <p>{{translate('Επιλέξτε εάν το αρχείο που στέλνετε είναι απο εγκέφαλο μηχανής ή εγκέφαλο σασμάν.')}}</p>
                         </div>
                     </div>
 
@@ -551,14 +551,14 @@
                       @if(isset($feed))
 
                         @if($feed->type == 'danger')
-                          <button type="button" id="register_form_Register_Popup" class="waves-effect waves-light btn btn-red" disabled>{{__('Next')}}</button>
+                          <button type="button" id="register_form_Register_Popup" class="waves-effect waves-light btn btn-red" disabled>{{translate('Next')}}</button>
                         @else
-                          <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{__('Next')}}</button>
+                          <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{translate('Next')}}</button>
                         @endif
 
                       @else
 
-                        <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{__('Next')}}</button>
+                        <button type="submit" id="register_form_Register" class="waves-effect waves-light btn btn-red" disabled>{{translate('Next')}}</button>
 
                       @endif
                     </div>
