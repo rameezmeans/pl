@@ -236,7 +236,7 @@ strong {
               <input type="hidden" id="type" value="@if($type == 'slave'){{'slave'}}@else{{'master'}}@endif">
               <div>
               <h1>{{translate('Price List')}}</h1>
-              <p>{{translate('Here are detailed pricelist of our services')}}. </p>
+              <p>{{translate('Here are detailed pricelist of our services.')}}. </p>
               </div>
               {{-- <div class="text-center">
                 <a href="?type=master" class="btn @if($type == 'master' || $type == null) btn-info @else btn-white @endif">Master</a>
@@ -258,8 +258,8 @@ strong {
             <div class="row post-row">
               <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                 <div class="heading-column-box">  
-                  <h3>{{translate('Tuning')}}</h3>
-                  <p>{{translate('These are tuning stages')}}.</p>
+                  <h3>{{translate('Stages')}}</h3>
+                  <p>{{translate('These are tuning stages.')}}.</p>
                 </div>
               </div>
 
@@ -295,7 +295,7 @@ strong {
               <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                 <div class="heading-column-box">
                     <h3>{{translate('Options')}}</h3>
-                    <p>{{translate('These are tuning options')}}.</p>
+                    <p>{{translate('These are tuning options.')}}.</p>
                 </div>
               </div>
 
