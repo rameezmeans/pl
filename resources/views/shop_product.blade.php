@@ -101,7 +101,7 @@
           <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
               <div class="heading-column-box">
                 <h3>{{translate('Single Credit')}}</h3>
-                <p>{{translate('Buy and single credit')}}.</p>
+                <p>{{translate('Buy and single credit.')}}.</p>
             </div>
           </div>
 
@@ -137,7 +137,7 @@
           <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
               <div class="heading-column-box">
               <h3>{{translate('Packages')}}</h3>
-              <p>{{translate('Buy package of credits')}}.</p>
+              <p>{{translate('Buy package of credits.')}}</p>
           </div>
           </div>
 
