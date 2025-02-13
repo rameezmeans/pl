@@ -492,7 +492,7 @@ div.file-type-buttons label > input + img {
                   <img alt="" class="img-circle-car-history" src="{{ get_image_from_brand($file->brand) }}">
                   <div>
                     <h3 class="m-t-5">
-                        {{$file->vehicle()->Name}} {{ $file->engine }} {{ $file->vehicle()->TORQUE_standard }}
+                        @if($file->vehicle()) {{$file->vehicle()->Name}} @endif {{ $file->engine }}
                         <span class="label @if($file->status == 'rejected') label-red @elseif($file->status == 'completed') label-green @elseif($file->status == 'submitted') label-grey @else label-orange @endif"> @if($file->status == 'rejected') Canceled @elseif($file->status == 'ready_to_send') Submitted @else {{ucfirst($file->status)}} @endif <i class="fa @if( $file->status == 'accepted') fa-check @elseif($file->status == 'rejected') fa-close @endif "></i></span>
                     </h3>
                     <p style="display: block;">{{ $file->engine }} {{ $file->vehicle()->TORQUE_standard }}</p>
@@ -2514,6 +2514,7 @@ div.file-type-buttons label > input + img {
                       </div>
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6">
+                        @if($vehicle)
                         <div class="form-group">
                           <label for="exampleInputName1">{{translate('Fuel')}}</label>
                           <input type="text" value="{{ $vehicle->Type_of_fuel }}" disabled class="form-control" id="exampleInputName1" aria-describedby="emailHelp" placeholder="Enter Name" name="type_of_fuel">
@@ -2522,7 +2523,8 @@ div.file-type-buttons label > input + img {
                                   <strong>{{ $message }}</strong>
                               </span>
                           @enderror
-                      </div>
+                        </div>
+                      @endif
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="form-group">
