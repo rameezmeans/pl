@@ -119,8 +119,8 @@
                   <h3>1 Credit</h3>
                   <strong>10Є</strong>
                 
-                  <p class="m-t-20">{{translate('Using this service only once')}}.</p>
-                  <button class="btn btn-cart" id="addToCart"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+                  <p class="m-t-20">{{translate('Using this service only once.')}}.</p>
+                  <button class="btn btn-cart" id="addToCart"><i class="fa fa-shopping-cart"></i> {{translate('Add To Cart')}}</button>
   
   
                 </div>
