@@ -578,7 +578,7 @@
           <div class="col-xl-3 col-lg-3 col-md-3 m-t-40 heading-column">
               <div class="heading-column-box">
                 <h3>{{translate('Upload File')}}</h3>
-                <p>{{translate('Drop your file or click to select a file from your device')}}.</p>
+                <p>{{translate('Drop your file or click to select a file from your device.')}}</p>
             </div>
           </div>
           <div class="col-xl-8 col-lg-8 col-md-8 m-t-20">
