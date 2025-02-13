@@ -276,7 +276,7 @@ strong {
                         <span class="text-stage">
 
                           <span style="display: inline-grid;">
-                            <strong>{{translate($stage['name'])}} @if(isset($vehicleType)){{' ('.ucfirst($vehicleType).')'}}@endif </strong>
+                            <strong>{{translate($stage['name'])}} @if(isset($vehicleType)){{' ('.translate(ucfirst($vehicleType)).')'}}@endif </strong>
                             <span class="text-danger">  {{$stage['credits']}} Credits </span>
                           </span>
 
@@ -311,7 +311,7 @@ strong {
                         <span class="text-stage">
 
                           <span style="display: inline-grid;">
-                            <strong>{{translate($option['name'])}} @if(isset($vehicleType)){{' ('.ucfirst($vehicleType).')'}}@endif</strong>
+                            <strong>{{translate($option['name'])}} @if(isset($vehicleType)){{' ('.translate(ucfirst($vehicleType)).')'}}@endif</strong>
                             <span class="text-danger"> <span id="option-credits-{{$option['id']}}"> {{$option['credits']}} </span> Credits </span>
                           </span>
 
