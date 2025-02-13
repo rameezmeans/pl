@@ -92,7 +92,7 @@
         <div class="bb-light fix-header">
                 <div class="header-block header-block-w-p">
                     <h1>{{translate('Credits Shop')}}</h1>
-                    <p>{{translate('Shop credits and packages')}}.</p>
+                    <p>{{translate('Shop credits and packages.')}}</p>
                 </div>
         </div>
 
