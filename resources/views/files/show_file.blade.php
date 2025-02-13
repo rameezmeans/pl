@@ -2610,6 +2610,9 @@ div.file-type-buttons label > input + img {
                   </div>
                   <div id="personal-notes" class="tab-pane fade">
                     <div>
+                      @php
+                          dd($file);
+                      @endphp
                     <div class="bt m-t-20 p-t-10 red-scroll" @if(Session::has('success')) style="display: block;" @endif>
                       @if(!$file->file_urls->isEmpty())
                       @foreach($file->file_urls as $fileUrl)
