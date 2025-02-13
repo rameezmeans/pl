@@ -348,8 +348,8 @@ p.tuning-resume {
              <div class="row post-row">
                 <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                     <div class="heading-column-box">  
-                        <h3>{{translate('Tunings')}}</h3>
-                        <p>{{translate('These are tuning stages')}}.</p>
+                        <h3>{{translate('Stages')}}</h3>
+                        <p>{{translate('These are tuning stages.')}}.</p>
                     </div>
               </div>
 
@@ -418,13 +418,13 @@ p.tuning-resume {
               <div class="col-xl-3 col-lg-3 col-md-3 heading-column">
                 <div class="heading-column-box">
                   <h3>{{translate('Options')}}</h3>
-                  <p>{{translate('These are tuning options')}}.</p>
+                  <p>{{translate('These are tuning options.')}}.</p>
                 </div>
               </div>
 
               <div class="col-xl-4 col-lg-4 col-md-4">
                 <div class="loader hide"></div>
-                <label class="account-label">Options</label>
+                <label class="account-label">{{translate('Options')}}</label>
                 <div class="row">
                   @foreach ($options as $option)
                     <div class="col-xl-12 col-lg-12 col-md-12">
@@ -472,24 +472,6 @@ p.tuning-resume {
                             @endif
                           @endif
                       @endif
-
-                        {{-- @if($option['name'] == 'DTC OFF')
-                          <div class="stage-option-container dtc-off-textarea hide">
-                                <div class="col-xl-12 col-md-12 " style="padding: 5px;">
-                                    <textarea placeholder="Please write DTF OFF comment here." name="dtc_off_comments" style="background: white;  height:100%; width:100%;"></textarea>
-                                </div>
-                          </div>
-                        @elseif($option['name'] == 'Vmax OFF')
-                            
-                              @if($file->vehicle()->type == 'agri')
-                              <div class="stage-option-container vmax-off-textarea hide" >
-                                  <div class="col-xl-12 col-md-12 " style="padding: 5px;">
-                                      <textarea name="vmax_off_comments" style="background: white;height:100%; width:100%;"></textarea>
-                                  </div>
-                              </div>
-                          @endif
-                        @endif --}}
-  
                     </div>
                   @endforeach
                 </div>
