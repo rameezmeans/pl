@@ -206,3 +206,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/dtc_lookup', [App\Http\Controllers\HomeController::class, 'dtcLookup'])->name('dtc-lookup');
 Route::post('/dtc_lookup', [App\Http\Controllers\HomeController::class, 'getDTCDesc'])->name('get-dtc-desc');
+
+$ecutechMaintenanceMode = ECUApp\SharedCode\Models\IntegerMeta::where('key', 'ecutech_maintenance_mode')->first()->value;
+
+if($ecutechMaintenanceMode){
+    return redirect('login')->with(Auth::logout());
+}
+						
