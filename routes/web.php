@@ -123,6 +123,9 @@ Route::post('auth_pusher', [App\Http\Controllers\FileController::class, 'authPus
 Route::post('get_comments', [App\Http\Controllers\FileController::class, 'getComments'])->name('get-comments');
 Route::post('acm_file_upload', [App\Http\Controllers\FileController::class, 'acmFileUpload'])->name('acm-file-upload');
 
+Route::post('get-brand-ecu-comment', [App\Http\Controllers\FileController::class, 'getCommentByBrandEcuUploadType'])->name('get-brand-ecu-comment');
+Route::post('get-brand-ecu-comment-download', [App\Http\Controllers\FileController::class, 'getCommentByBrandEcuDownloadType'])->name('get-brand-ecu-comment-download');
+
 // Route::post('upload_acm_file', [App\Http\Controllers\FileController::class, 'uploadACMFile'])->name('upload-acm-file');
 
 Route::post('/new_request', [App\Http\Controllers\FileController::class, 'createNewrequest'])->name('request-file');
