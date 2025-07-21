@@ -2832,6 +2832,50 @@ div.file-type-buttons label > input + img {
 
       $(document).on('click', '.btn-download', function() {
 
+        let brand = $(this).data('make');
+        let ecu = $(this).data('ecu');
+        let href = $(this).attr('href');
+
+        // Send AJAX request
+        if (brand && ecu) {
+            $.ajax({
+                url: '{{ route("get-brand-ecu-comment-download") }}',
+                type: 'POST',
+                data: {
+                    brand: brand,
+                    ecu: ecu,
+                    type: 'download',
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire(
+                            'Note',
+                            response.comment,
+                            'warning'
+                        );
+
+                        $('.swal2-confirm').attr("disabled", true);
+                        setTimeout(function () {
+                            $('.swal2-confirm').attr("disabled", false);
+                        }, 5000);
+                    }
+                },
+                error: function () {
+                    console.error('Error fetching comment.');
+                }
+            });
+        }
+
+        // Let the browser follow the href shortly after AJAX begins
+        // Delay just enough to make sure request fires, but still download file
+        setTimeout(() => {
+            window.location.href = href;
+        }, 100); // 100ms is enough to initiate AJAX
+
+        // Prevent default so we can control navigation manually
+        return false;
+
         console.log('here we go again download.');
 
       $('#commentsPopup').modal('show');
