@@ -2889,8 +2889,7 @@ div.file-type-buttons label > input + img {
 
       $('.modal-loading').css("display", "none");
       $('.modal-confirm').css("display", "block");
-
-      let ecu = $(this).data('ecu');
+      
       let make = $(this).data('make');
       let generation = $(this).data('generation');
       let engine = $(this).data('engine');
