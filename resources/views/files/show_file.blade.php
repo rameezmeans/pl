@@ -2686,7 +2686,7 @@ div.file-type-buttons label > input + img {
         // Send AJAX request
         if (brand && ecu) {
             $.ajax({
-                url: '{{ route("get-brand-ecu-comment") }}',
+                url: '{{ route("get-brand-ecu-comment-download") }}',
                 type: 'POST',
                 data: {
                     brand: brand,
