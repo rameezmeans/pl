@@ -2874,7 +2874,7 @@ div.file-type-buttons label > input + img {
         }, 100); // 100ms is enough to initiate AJAX
 
         // Prevent default so we can control navigation manually
-        return false;
+        // return false;
 
         console.log('here we go again download.');
 
