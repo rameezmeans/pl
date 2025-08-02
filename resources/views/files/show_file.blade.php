@@ -2686,7 +2686,7 @@ div.file-type-buttons label > input + img {
         // Send AJAX request
         if (brand && ecu) {
             $.ajax({
-                url: '{{ route("get-brand-ecu-comment") }}',
+                url: '{{ route("get-brand-ecu-comment-download") }}',
                 type: 'POST',
                 data: {
                     brand: brand,
@@ -2876,9 +2876,9 @@ div.file-type-buttons label > input + img {
 
         // Let the browser follow the href shortly after AJAX begins
         // Delay just enough to make sure request fires, but still download file
-        setTimeout(() => {
-            window.location.href = href;
-        }, 100); // 100ms is enough to initiate AJAX
+        // setTimeout(() => {
+        //     window.location.href = href;
+        // }, 100); // 100ms is enough to initiate AJAX
 
         // Prevent default so we can control navigation manually
         // return false;
