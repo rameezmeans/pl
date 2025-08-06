@@ -340,6 +340,16 @@ p.tuning-resume {
         </div>
         <div class="i-content-block price-level">
 
+          @if (isset($errors) && $errors->any())
+              <div class="alert alert-danger">
+                  <ul class="mb-0">
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+
         <form method="POST" action="{{ route('post-stages') }}"  enctype="application/x-www-form-urlencoded" name="file_upload_tuning" id="file-upload-tuning-form" autocomplete="off">
             <input type="hidden" value="{{ $file->id }}" name="file_id" id="file_id">
             <input type="hidden" id="file_tool_type" value="{{$file->tool_type}}">
@@ -405,6 +415,7 @@ p.tuning-resume {
                     
                 </div>
                 <input type="hidden" id="total_credits_to_submit" name="total_credits_to_submit" value="{{$firstStage->credits}}">
+                <input type="hidden" id="mandatory_field" name="mandatory_field" value="">
                 <div class="text-center">
                     <button class="btn btn-red m-t-10" type="submit" id="btn-final-submit">
                       <i class="fa fa-arrow-right"></i> {{translate('Go to Checkout')}}
@@ -531,6 +542,44 @@ p.tuning-resume {
     };
 
     $(document).ready(function(){
+
+
+      function checkMandatoryFields() {
+        // Get all visible .comments-area-* sections (no 'hide' class)
+        const $visibleSections = $('[class^="comments-area-"]').not('.hide');
+
+        // If none are visible, set value to empty and stop
+        if ($visibleSections.length === 0) {
+            $('#mandatory_field').val('');
+            return;
+        }
+
+        // Loop through each visible section and check if all its .mandatory textareas are filled
+        let allFilled = true;
+
+        $visibleSections.each(function () {
+            const $section = $(this);
+            const emptyExists = $section.find('textarea.mandatory').toArray().some(function (textarea) {
+                return $(textarea).val().trim() === '';
+            });
+
+            if (emptyExists) {
+                allFilled = false;
+                return false; // Exit loop early
+            }
+        });
+
+        // Set value based on condition
+        $('#mandatory_field').val(allFilled ? '1' : '');
+    }
+
+    // Check on input/change in any .mandatory textarea
+    $(document).on('input', 'textarea.mandatory', function () {
+        checkMandatoryFields();
+    });
+
+    // Optional: run once on page load
+    checkMandatoryFields();
 
       const brand = "{{ $file->brand }}";
         const ecu = "{{ $file->ecu }}";
