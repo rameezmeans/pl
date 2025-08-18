@@ -488,7 +488,9 @@ class PaymentsController extends Controller
             else{
 
                 if($request->packageID == 0){
-
+                    if (!isset($request->credits) || $request->credits <= 0) {
+                        return redirect()->route('shop-product')->with('error', 'Credits amount is required.');
+                    }
                     $credits = $request->credits;
                     $invoice = $this->paymenttMainObj->addCredits($user, $sessionID, $credits, $type);
                 }
