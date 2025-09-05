@@ -1163,20 +1163,26 @@ class FileController extends Controller
 
         // must have a file
         $file = $request->file('file');
-        if (!$file) {
-            return response()->json(['error' => 'No file provided.'], 400);
-        }
 
-        // ===== Security: block PHP/JS by extension and MIME =====
-        $forbiddenExtensions = ['php', 'js'];
-        $ext = strtolower($file->getClientOriginalExtension());
+        // Validate file extension
+        $allowedExtensions = ['bin', 'ori', 'zip', 'rar', 'txt']; 
+        $extension = strtolower($file->getClientOriginalExtension());
 
-        // Block if extension forbidden
-        if (in_array($ext, $forbiddenExtensions, true)) {
+        // Block PHP and JS explicitly
+        if (in_array($extension, ['php', 'js'])) {
             return response()->json([
                 'error' => 'Invalid file type. PHP and JS files are not allowed.'
-            ], 422);
+            ], 400);
         }
+
+        // Allow if (1) no extension OR (2) extension is in allowed list
+        if ($extension !== '' && !in_array($extension, $allowedExtensions)) {
+            return response()->json([
+                'error' => 'Invalid file type. Allowed types: ' . implode(', ', $allowedExtensions) . ' or files without extension.'
+            ], 400);
+        }
+
+        // ✅ Safe to continue
 
         // Block common PHP/JS MIME types (both client-reported and server-guessed)
         $clientMime = strtolower((string) $file->getClientMimeType());
