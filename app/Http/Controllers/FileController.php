@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Darryldecode\Cart\Validators\Validator;
 use ECUApp\SharedCode\Controllers\AlientechMainController;
 use ECUApp\SharedCode\Controllers\AutotunerMainController;
 use ECUApp\SharedCode\Controllers\FilesMainController;
@@ -138,23 +139,62 @@ class FileController extends Controller
     public function fileEventsNotes(Request $request)
     {
 
-        $validated = $request->validate([
-            'events_internal_notes' => 'required|max:1024'
-        ]);
+        // Validate inputs
+    $validated = $request->validate([
+        'events_internal_notes' => [
+            'required',
+            'max:1024',
+            // Prevent PHP or JS code in notes
+            'not_regex:/<\s*script/i',
+            'not_regex:/<\?php/i',
+        ],
+        'events_attachement' => [
+            'nullable',
+            'file',
+            'max:20480', // 20 MB
+            'mimes:bin,ori,zip,rar,txt,pdf,jpg,jpeg,png',
+        ],
+    ]);
 
-        $file = new FileInternalEvent();
-        $file->events_internal_notes = $request->events_internal_notes;
-       
-        if($request->file('events_attachement')){
-            $attachment = $request->file('events_attachement');
-            $fileName = $attachment->getClientOriginalName();
-            $attachment->move( public_path($file->file_path) ,$fileName);
-            $file->events_attachement = $fileName;
+    $event = new FileInternalEvent();
+    $event->events_internal_notes = $request->events_internal_notes;
+
+    // Handle file attachment if present
+    if ($request->hasFile('events_attachement')) {
+        $attachment = $request->file('events_attachement');
+
+        // Block dangerous extensions explicitly
+        $badExt = ['php','phtml','phar','js'];
+        $ext = strtolower($attachment->getClientOriginalExtension());
+        if (in_array($ext, $badExt, true)) {
+            return back()
+                ->withErrors(['events_attachement' => 'This file type is not allowed.'])
+                ->withInput();
         }
 
-        $file->file_id = $request->file_id;
-        $file->save();
-        return redirect()->back()->with('success', 'Events note successfully Added!');
+        // Sanitize original name
+        $originalName = $attachment->getClientOriginalName();
+        $sanitizedName = str_replace(['/', '\\', '#', ' '], ['', '', '', '_'], $originalName);
+
+        // Add timestamp to make it unique
+        $timestamp = time();
+        $nameWithoutExt = pathinfo($sanitizedName, PATHINFO_FILENAME);
+        $fileName = $nameWithoutExt . '_' . $timestamp . '.' . $ext;
+
+        // Save to public/uploads/events/[file_id]/
+        $path = public_path('uploads/events/' . $request->file_id);
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $attachment->move($path, $fileName);
+        $event->events_attachement = $fileName;
+    }
+
+    $event->file_id = $request->file_id;
+    $event->save();
+
+    return redirect()->back()->with('success', 'Event note successfully added!');
     }
 
     public function authPusher(Request $request){
@@ -259,10 +299,26 @@ class FileController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function fileEngineersNotes(Request $request)
-    {
-        $validated = $request->validate([
-            'egnineers_internal_notes' => 'required|max:1024'
+    {   
+        // 1) Base validation (includes file rule)
+        $validator = Validator::make($request->all(), [
+            'egnineers_internal_notes' => [
+                'required',
+                'max:1024',
+                'not_regex:/<\s*script/i',
+                'not_regex:/<\?php/i',
+            ],
+            'engineers_attachement' => [
+                'nullable',
+                'file',
+                'max:20480', // 20 MB
+                'mimes:bin,ori,zip,rar,txt,pdf,jpg,jpeg,png',
+            ],
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
         $file = File::findOrFail($request->file_id);
 
@@ -271,17 +327,36 @@ class FileController extends Controller
         $reply = new EngineerFileNote();
         $reply->egnineers_internal_notes = $request->egnineers_internal_notes;
 
-        if ($request->file('engineers_attachement')) {
+        if ($request->hasFile('engineers_attachement')) {
             $attachment = $request->file('engineers_attachement');
-            $originalName = $attachment->getClientOriginalName();
 
+            // Block bad extensions even if user renames file
+            $badExt = ['php','phtml','phar','js'];
+            $ext = strtolower($attachment->getClientOriginalExtension());
+            if (in_array($ext, $badExt, true)) {
+                return back()->withErrors(['engineers_attachement' => 'This file type is not allowed.']);
+            }
+
+            // Block by MIME (client + server guessed)
+            $badMimes = [
+                // PHP
+                'application/x-php','text/x-php','application/php','text/php',
+                'application/x-httpd-php',
+                // JS
+                'application/javascript','text/javascript','application/x-javascript',
+            ];
+            $clientMime = strtolower((string) $attachment->getClientMimeType());
+            $trueMime   = strtolower((string) $attachment->getMimeType());
+            if (in_array($clientMime, $badMimes, true) || in_array($trueMime, $badMimes, true)) {
+                return back()->withErrors(['engineers_attachement' => 'This file content type is not allowed.']);
+            }
+
+            // Now safe to store
+            $originalName  = $attachment->getClientOriginalName();
             $sanitizedName = str_replace(['/', '\\', '#', ' '], ['', '', '', '_'], $originalName);
-
-            // Add timestamp before file extension
-            $timestamp = time();
-            $extension = $attachment->getClientOriginalExtension();
-            $nameWithoutExt = pathinfo($sanitizedName, PATHINFO_FILENAME);
-            $fileName = $nameWithoutExt . '_' . $timestamp . '.' . $extension;
+            $timestamp     = time();
+            $nameNoExt     = pathinfo($sanitizedName, PATHINFO_FILENAME);
+            $fileName      = $nameNoExt . '_' . $timestamp . '.' . $ext;
 
             $attachment->move(public_path($file->file_path), $fileName);
             $reply->engineers_attachement = $fileName;
@@ -1088,38 +1163,64 @@ class FileController extends Controller
     public function createTempFile(Request $request) {
 
         $user = Auth::user();
+
+        // must have a file
         $file = $request->file('file');
+        if (!$file) {
+            return response()->json(['error' => 'No file provided.'], 400);
+        }
+
+        // ===== Security: block PHP/JS by extension and MIME =====
+        $forbiddenExtensions = ['php', 'js'];
+        $ext = strtolower($file->getClientOriginalExtension());
+
+        // Block if extension forbidden
+        if (in_array($ext, $forbiddenExtensions, true)) {
+            return response()->json([
+                'error' => 'Invalid file type. PHP and JS files are not allowed.'
+            ], 422);
+        }
+
+        // Block common PHP/JS MIME types (both client-reported and server-guessed)
+        $clientMime = strtolower((string) $file->getClientMimeType());
+        $trueMime   = strtolower((string) $file->getMimeType()); // uses server-side mime guessing
+
+        $forbiddenMimes = [
+            // PHP
+            'application/x-php', 'text/x-php', 'application/php', 'text/php',
+            // JS
+            'application/javascript', 'text/javascript', 'application/x-javascript'
+        ];
+
+        if (in_array($clientMime, $forbiddenMimes, true) || in_array($trueMime, $forbiddenMimes, true)) {
+            return response()->json([
+                'error' => 'Invalid file content type. PHP and JS files are not allowed.'
+            ], 422);
+        }
+        // ===== end security block =====
 
         $toolType = $request->tool_type_for_dropzone;
-        $toolID = $request->tool_for_dropzone;
-        
+        $toolID   = $request->tool_for_dropzone;
+
         $tempFile = $this->filesMainObj->createTemporaryFile($user, $file, $toolType, $toolID, $this->frontendID);
 
         $kess3Label = Tool::where('label', 'Kess_V3')->where('type', 'slave')->first();
-
-        if($toolType == 'slave' && $tempFile->tool_id == $kess3Label->id){
-
+        if ($toolType === 'slave' && $tempFile->tool_id == $kess3Label->id) {
             $path = $this->filesMainObj->getPath($file, $tempFile);
-            $this->alientechMainObj->saveGUIDandSlotIDToDownloadLater($path , $tempFile->id);
-            
+            $this->alientechMainObj->saveGUIDandSlotIDToDownloadLater($path, $tempFile->id);
         }
 
         $flexLabel = Tool::where('label', 'Flex')->where('type', 'slave')->first();
-
-        if($toolType == 'slave' && $tempFile->tool_id == $flexLabel->id){
-            
+        if ($toolType === 'slave' && $tempFile->tool_id == $flexLabel->id) {
             $path = $this->filesMainObj->getPath($file, $tempFile);
-            $this->magicMainObj->magicDecrypt($path , $tempFile->id);
-            
+            $this->magicMainObj->magicDecrypt($path, $tempFile->id);
         }
 
         $autoTunerLabel = Tool::where('label', 'Autotuner')->where('type', 'slave')->first();
-
-        if($toolType == 'slave' && $tempFile->tool_id == $autoTunerLabel->id){
-            
+        if ($toolType === 'slave' && $tempFile->tool_id == $autoTunerLabel->id) {
             $path = $this->filesMainObj->getPath($file, $tempFile);
-            $this->autotunerMainObj->autoturnerDecrypt($path , $tempFile->id);
-            
+            // keep your existing service/method names
+            $this->autotunerMainObj->autoturnerDecrypt($path, $tempFile->id);
         }
 
         return response()->json(['tempFileID' => $tempFile->id]);

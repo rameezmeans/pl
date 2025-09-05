@@ -1226,27 +1226,59 @@ div.file-type-buttons label > input + img {
                       <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12">
                         <form method="POST" action="{{ route('file-engineers-notes') }}" enctype="multipart/form-data">
-                          @csrf
-                          <input type="hidden" name="file_id" value="{{$file->id}}">
-                          <input type="hidden" name="request_file_id" value="{{$row->id}}">
-                            
-                            <div class="form-group m-t-20">
-                              <label for="exampleInputName1">{{translate('Ask Engineer for Support')}}</label>
-                              <textarea class="form-control" style="width: 100%; height: 100px;" id="car-info-memo" name="egnineers_internal_notes" class="materialize-textarea" placeholder="{{translate('Internal note for Engineers')}}"></textarea>
-                              @error('egnineers_internal_notes')
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $message }}</strong>
-                                  </span>
-                              @enderror
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputName1">{{translate('Attachment')}}</label>
-                            <input type="file" name="engineers_attachement" class="form-control" id="engineers_attachement">
-                            </div>
+    @csrf
+    <input type="hidden" name="file_id" value="{{ $file->id }}">
+    <input type="hidden" name="request_file_id" value="{{ $row->id }}">
 
-                            <button type="submit" class="btn btn-info"><i class="fa fa-submit"></i> {{translate('Submit')}}</button>
-                          
-                        </form>
+        @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul class="mb-0">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
+    {{-- Notes --}}
+    <div class="form-group m-t-20">
+        <label for="car-info-memo">{{ translate('Ask Engineer for Support') }}</label>
+        <textarea 
+            id="car-info-memo"
+            name="egnineers_internal_notes"
+            class="form-control materialize-textarea @error('egnineers_internal_notes') is-invalid @enderror"
+            style="width: 100%; height: 100px;"
+            placeholder="{{ translate('Internal note for Engineers') }}"
+        >{{ old('egnineers_internal_notes') }}</textarea>
+
+        @error('egnineers_internal_notes')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+    {{-- Attachment --}}
+    <div class="form-group">
+        <label for="engineers_attachement">{{ translate('Attachment') }}</label>
+        <input 
+            type="file" 
+            name="engineers_attachement" 
+            id="engineers_attachement"
+            class="form-control @error('engineers_attachement') is-invalid @enderror"
+        >
+
+        @error('engineers_attachement')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+    <button type="submit" class="btn btn-info">
+        <i class="fa fa-submit"></i> {{ translate('Submit') }}
+    </button>
+</form>
                       </div>
                       </div>
 
