@@ -141,20 +141,27 @@ class FileController extends Controller
 
         // Validate inputs
     $validated = $request->validate([
-        'events_internal_notes' => [
-            'required',
-            'max:1024',
-            // Prevent PHP or JS code in notes
-            'not_regex:/<\s*script/i',
-            'not_regex:/<\?php/i',
-        ],
-        'events_attachement' => [
-            'nullable',
-            'file',
-            'max:20480', // 20 MB
-            'mimes:bin,ori,zip,rar,txt,pdf,jpg,jpeg,png',
-        ],
-    ]);
+            'events_internal_notes' => [
+                'required',
+                'max:1024',
+                // Prevent PHP or JS code in notes
+                'not_regex:/<\s*script/i',
+                'not_regex:/<\?php/i',
+            ],
+            'events_attachement' => [
+                'nullable',
+                'file',
+                'max:20480', // 20 MB
+                function ($attribute, $value, $fail) {
+                    $extension = strtolower($value->getClientOriginalExtension());
+
+                    // Block only PHP and JS extensions
+                    if (in_array($extension, ['php', 'js'])) {
+                        $fail("The {$attribute} must not be a PHP or JS file.");
+                    }
+                },
+            ],
+        ]);
 
     $event = new FileInternalEvent();
     $event->events_internal_notes = $request->events_internal_notes;
@@ -300,22 +307,29 @@ class FileController extends Controller
      */
     public function fileEngineersNotes(Request $request)
     {   
-       // Validate inputs
-        $validated = $request->validate([
-            'events_internal_notes' => [
+       $validated = $request->validate([
+            'egnineers_internal_notes' => [
                 'required',
                 'max:1024',
                 // Prevent PHP or JS code in notes
                 'not_regex:/<\s*script/i',
                 'not_regex:/<\?php/i',
             ],
-            'events_attachement' => [
+            'engineers_attachement' => [
                 'nullable',
                 'file',
                 'max:20480', // 20 MB
-                'mimes:bin,ori,zip,rar,txt,pdf,jpg,jpeg,png',
+                function ($attribute, $value, $fail) {
+                    $extension = strtolower($value->getClientOriginalExtension());
+
+                    // Block only PHP and JS extensions
+                    if (in_array($extension, ['php', 'js'])) {
+                        $fail("The {$attribute} must not be a PHP or JS file.");
+                    }
+                },
             ],
         ]);
+
 
         $file = File::findOrFail($request->file_id);
 
