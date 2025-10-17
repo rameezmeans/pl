@@ -52,29 +52,29 @@ Route::get('/test', function () {
     // \Mail::to('xrkalix@gmail.com')->send(new \App\Mail\AllMails(['html' => "testing email", 'subject' => 'test email']));
     // dd('email sent');
 
-    try {
-        $accountSid = env("TWILIO_SID");
-        $authToken = env("TWILIO_AUTH_TOKEN");
-        $twilioNumber = env("TWILIO_NUMBER"); 
+    // try {
+    //     $accountSid = env("TWILIO_SID");
+    //     $authToken = env("TWILIO_AUTH_TOKEN");
+    //     $twilioNumber = env("TWILIO_NUMBER"); 
 
-        // dd($authToken);
+    //     // dd($authToken);
 
-        $client = new Client($accountSid, $authToken);
+    //     $client = new Client($accountSid, $authToken);
 
-        // dd($client);
+    //     // dd($client);
 
-        $message = $client->messages
-            ->create("+923218612198", 
-                ["body" => 'test message', "from" => "Tuning-X"]
-        );
+    //     $message = $client->messages
+    //         ->create("+923218612198", 
+    //             ["body" => 'test message', "from" => "Tuning-X"]
+    //     );
 
-        dd($message);
+    //     dd($message);
 
-        \Log::info('message sent to:'.'+923218612198');
+    //     \Log::info('message sent to:'.'+923218612198');
 
-    } catch (\Exception $e) {
-        dd($e->getMessage());
-    }
+    // } catch (\Exception $e) {
+    //     dd($e->getMessage());
+    // }
 
 });
 
