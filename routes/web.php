@@ -176,7 +176,7 @@ Route::post('get_tool_icons', [App\Http\Controllers\AccountController::class, 'g
 
 Route::get('/price-list', [App\Http\Controllers\PricelistController::class, 'index'])->name('price-list');
 
-Route::get('phpinfo', function(){ phpinfo(); });
+// Route::get('phpinfo', function(){ phpinfo(); });
 // Route::get('language/{locale}', function ($locale) {
     
 //     $user = Auth::user();
